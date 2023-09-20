@@ -11,14 +11,14 @@ import { Error } from "../../components/Error";
 import { Container, Content, Infos } from "./styles";
 
 export function SignIn() {
+  const { signIn } = useAuth();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({
     email: false,
     password: false,
   });
-
-  const { signIn } = useAuth();
 
   function handleSignIn() {
     signIn({ email, password });

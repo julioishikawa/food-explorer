@@ -35,8 +35,9 @@ export function SignUp() {
       setErrors((prevState) => ({ ...prevState, email: false }));
     }
 
-    if (!password) {
+    if (!password || password.length < 6) {
       setErrors((prevState) => ({ ...prevState, password: true }));
+      return;
     } else {
       setErrors((prevState) => ({ ...prevState, password: false }));
     }
@@ -102,7 +103,7 @@ export function SignUp() {
             />
 
             {errors.password && (
-              <Error title="Você precisa adicionar uma senha para criar a conta" />
+              <Error title="Você precisa adicionar uma senha maior que 6 dígitos para criar a conta" />
             )}
           </div>
         </Infos>
