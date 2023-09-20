@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import jwtDecode from "jwt-decode";
 
 import { api } from "../services/api";
 
@@ -15,13 +16,18 @@ function AuthProvider({ children }) {
       localStorage.setItem("@food-explorer:user", JSON.stringify(user));
       localStorage.setItem("@food-explorer:token", token);
 
+      const { isAdmin } = jwtDecode(token);
+
+      setData({ user, token, isAdmin: !!isAdmin });
+
       api.defaults.headers.authorization = `Bearer ${token}`;
-      setData({ user, token });
+
+      return user;
     } catch (e) {
       if (e.response) {
-        alert(e.response.data.message);
+        throw new Error(e.response.data.message);
       } else {
-        alert("Não foi possível entrar.");
+        throw new Error("Não foi possível entrar.");
       }
     }
   }
@@ -29,6 +35,7 @@ function AuthProvider({ children }) {
   function signOut() {
     localStorage.removeItem("@food-explorer:user");
     localStorage.removeItem("@food-explorer:token");
+    localStorage.removeItem("@food-explorer:cart");
 
     setData({});
   }
@@ -37,15 +44,21 @@ function AuthProvider({ children }) {
     const user = localStorage.getItem("@food-explorer:user");
     const token = localStorage.getItem("@food-explorer:token");
 
-    if (token && user) {
-      api.defaults.headers.authorization = `Bearer ${token}`;
+    if (!user || !token) {
+      localStorage.removeItem("@food-explorer:user");
+      localStorage.removeItem("@food-explorer:token");
+      return;
     }
 
-    setData({ user: JSON.parse(user), token });
+    api.defaults.headers.authorization = `Bearer ${token}`;
+
+    setData({ user: JSON.parse(user), token, isAdmin: !!isAdmin });
   }, []);
 
   return (
-    <AuthContext.Provider value={{ signIn, signOut, user: data.user }}>
+    <AuthContext.Provider
+      value={{ signIn, signOut, user: data.user, isAdmin: data.isAdmin }}
+    >
       {children}
     </AuthContext.Provider>
   );
