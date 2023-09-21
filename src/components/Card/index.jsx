@@ -1,91 +1,84 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { FiMinus, FiPlus } from "react-icons/fi";
+import { Link, useNavigate } from "react-router-dom";
+import { FiMinus, FiPlus, FiEdit2 } from "react-icons/fi";
 
 import { api } from "../../services/api";
 import { useAuth } from "../../hooks/auth";
+import { useFavorites } from "../../hooks/favorites";
+
+import { Button } from "../Button";
+import { Heart } from "../Heart";
+import { QuantityCounter } from "../QuantityCounter";
 
 import { Container, Content } from "./styles";
-import { Button } from "../Button";
 
-import favorite from "../../assets/favorite.svg";
-// import favoriteSelected from "../../assets/favorite-selected.svg";
-import edit from "../../assets/edit.svg";
+export function Card({ id, title, description, price, image }) {
+  const { isAdmin } = useAuth();
 
-export function Card({ data, ...rest }) {
-  const { user } = useAuth();
+  const { favorites, addFavorite, removeFavorite } = useFavorites();
 
-  const cardImage = `${api.defaults.baseURL}/files/${data.image}`;
+  const cardImage = `${api.defaults.baseURL}/files/${image}`;
 
-  // const [favorites, setFavorites] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [isFavorited, setIsFavorited] = useState(false);
 
-  function addQuantity() {
-    setQuantity((prevState) => prevState + 1);
-  }
+  const navigate = useNavigate();
 
-  function subQuantity() {
-    if (quantity > 1) {
-      setQuantity((prevState) => prevState - 1);
-      return;
+  async function handleFavorite() {
+    if (isFavorited) {
+      await removeFavorite(id);
+    } else {
+      await addFavorite(id);
     }
   }
 
-  function numberMapper(number) {
-    if (number < 10) {
-      return `0${number}`;
-    }
-
-    return number;
-  }
+  useEffect(() => {
+    favorites.find((favorite) => favorite.id === id)
+      ? setIsFavorited(true)
+      : setIsFavorited(false);
+  }, [favorites]);
 
   return (
     <Container {...rest}>
       <Content>
         <div className="card">
           <div className="tools">
-            {user.isAdmin === 0 && (
-              <div>
-                <img
-                  className="favorite"
-                  src={favorite}
-                  alt="Imagem de um coração"
-                />
-
-                {/* <img
-                  className="favorite"
-                  src={favoriteSelected}
-                  alt="Imagem de um coração vermelho"
-                /> */}
-              </div>
-            )}
-
-            {user.isAdmin === 1 && (
-              <Link to={`/editorder/${data.id}`}>
-                <img className="edit" src={edit} alt="Imagem de um lápis" />
-              </Link>
+            {!isAdmin ? (
+              <FiEdit2
+                role="button"
+                onClick={() => navigate(`/editdish/${id}`)}
+              />
+            ) : (
+              <Heart onClick={handleFavorite} checked={isFavorited} />
             )}
           </div>
 
           <div className="meal">
-            <img src={cardImage} alt="card image" />
+            <img src={cardImage} alt={`Imagem de ${title}`} role="button" />
 
-            <Link to={`/details/${data.id}`}>
-              <h2>{`${data.name} >`}</h2>
+            <Link to={`/details/${id}`}>
+              <h2>{`${title} >`}</h2>
             </Link>
 
-            <p className="description">{data.description}</p>
+            <p
+              className="description"
+              role="button"
+              onClick={() => navigate(`/details/${id}`)}
+            >
+              {description}
+            </p>
 
-            <span>R$ {data.price}</span>
+            <span>
+              {new Intl.NumberFormat("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              }).format(price * quantity)}
+            </span>
 
-            {user.isAdmin === 0 && (
+            {!isAdmin && (
               <div className="wrapper">
                 <div className="quantity">
-                  <FiMinus onClick={subQuantity} />
-
-                  <p>{numberMapper(quantity)}</p>
-
-                  <FiPlus onClick={addQuantity} />
+                  <QuantityCounter onUpdate={setQuantity} />
                 </div>
 
                 <Link to="/shoppingcart">

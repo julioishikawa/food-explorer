@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { FiMenu, FiX, FiSearch, FiGithub, FiLogOut } from "react-icons/fi";
 
-import { api } from "../../services/api";
 import { useAuth } from "../../hooks/auth";
+import { useDishes } from "../../hooks/dishes";
 
 import { Input } from "../Input";
 import { Note } from "../Note";
@@ -16,13 +15,13 @@ import messages from "../../assets/Messages.png";
 import { Container, Menu, Logo, Messages } from "./styles";
 
 export function Header() {
-  const { user, signOut } = useAuth();
+  const { isAdmin, signOut } = useAuth();
+  const { getAllDishes, searchDishes } = useDishes();
 
   const navigate = useNavigate();
 
-  const [search, setSearch] = useState("");
-  const [ingredients, setIngredients] = useState([]);
-  const [orders, setOrders] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [dishes, setDishes] = useState([]);
   const [click, setClick] = useState(false);
   const [notification, setNotification] = useState(false);
 
@@ -35,15 +34,18 @@ export function Header() {
     navigate(`/details/${id}`);
   }
 
-  useEffect(() => {
-    async function fetchOrders() {
-      const res = await api.get(`/orders?name=${search}&title=${ingredients}`);
-
-      setOrders(res.data);
+  function handleSearch(event) {
+    if (event.key === "Enter") {
+      searchDishes(searchText);
+      setSearchText("");
+      event.target.value = "";
     }
+  }
 
-    fetchOrders();
-  }, [search, ingredients]);
+  async function handleBackHome() {
+    await getAllDishes();
+    navigate("/");
+  }
 
   return (
     <Container>
@@ -70,19 +72,19 @@ export function Header() {
               />
             </li>
 
-            {search.length > 0 && search != "" && (
+            {searchText.length > 0 && searchText != "" && (
               <li className="nav-item">
-                {orders.map((order) => (
+                {dishes.map((dish) => (
                   <Note
-                    key={String(order.id)}
-                    data={order}
-                    onClick={() => handleDetails(order.id)}
+                    key={String(dish.id)}
+                    data={dish}
+                    onClick={() => handleDetails(dish.id)}
                   />
                 ))}
               </li>
             )}
 
-            {user.isAdmin === 1 && (
+            {isAdmin && (
               <li className="nav-item">
                 <Link
                   to="/neworder"
@@ -123,12 +125,12 @@ export function Header() {
       </Menu>
 
       <Logo className>
-        <div className="logo">
+        <div className="logo" onClick={handleBackHome}>
           <img src={polygon} alt="food explorer logo" />
           <h1>food explorer</h1>
         </div>
 
-        {user.isAdmin === 1 && <p>admin</p>}
+        {isAdmin && <p>admin</p>}
       </Logo>
 
       <div className="search-wrapper">
@@ -137,18 +139,19 @@ export function Header() {
           placeholder="Busque por pratos ou ingredientes"
           icon={FiSearch}
           onChange={(e) => {
-            setSearch(e.target.value), setIngredients(e.target.value);
+            setSearchText(e.target.value);
           }}
+          onKeyUp={handleSearch}
         />
 
-        {search.length > 0 && (
+        {searchText.length > 0 && (
           <div className="notes-wrapper">
             <div className="notes">
-              {orders.map((order) => (
+              {dishes.map((dish) => (
                 <Note
-                  key={String(order.id)}
-                  data={order}
-                  onClick={() => handleDetails(order.id)}
+                  key={String(dish.id)}
+                  data={dish}
+                  onClick={() => handleDetails(dish.id)}
                 />
               ))}
             </div>
@@ -157,23 +160,23 @@ export function Header() {
       </div>
 
       <Messages>
-        {user.isAdmin === 1 && (
+        {isAdmin && (
           <Link to="/neworder">
             <button className="new-order">Novo prato</button>
           </Link>
         )}
 
-        {user.isAdmin === 0 && (
+        {!isAdmin && (
           <div className="menu-orders" onClick={handleClickNotifications}>
             <img src={messages} alt="Imagem ilustrativa de uma comanda" />
             <span className="notifications">0</span>
           </div>
         )}
 
-        {user.isAdmin === 0 && (
+        {!isAdmin && (
           <button className="orders" onClick={handleClickNotifications}>
             <img src={messages} alt="Imagem ilustrativa de uma comanda" />
-            Pedidos ({orders.quantity})
+            Pedidos ({dishes.quantity})
           </button>
         )}
 
