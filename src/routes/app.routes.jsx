@@ -2,8 +2,8 @@ import { Routes, Route } from "react-router-dom";
 
 import { Home } from "../pages/Home";
 import { Details } from "../pages/Details";
-import { NewOrder } from "../pages/NewOrder";
-import { EditOrder } from "../pages/EditOrder";
+import { NewDish } from "../pages/NewDish";
+import { EditDish } from "../pages/EditDish";
 import { Cart } from "../pages/Cart";
 
 export function AppRoutes() {
@@ -11,8 +11,8 @@ export function AppRoutes() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/details/:id" element={<Details />} />
-      <Route path="/neworder" element={<NewOrder />} />
-      <Route path="/editorder/:id" element={<EditOrder />} />
+      <Route path="/newdish" element={<NewDish />} />
+      <Route path="/editdish/:id" element={<EditDish />} />
       <Route path="/shoppingcart" element={<Cart />} />
     </Routes>
   );

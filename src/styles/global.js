@@ -5,12 +5,23 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+  }
 
+  :root {
     font-size: 62.5%;
   }
 
   .hide {
     display: none;
+  }
+
+  .sr-only {
+    position: absolute ;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    top: auto;
+    overflow: hidden;
   }
 
   body {

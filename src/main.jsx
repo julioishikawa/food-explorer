@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { ThemeProvider } from "styled-components";
 
 import { AuthProvider } from "./hooks/auth";
-import { OrdersProvider } from "./hooks/orders";
+import { DishesProvider } from "./hooks/dishes";
 
 import GlobalStyles from "./styles/global";
 import theme from "./styles/theme";
@@ -24,7 +24,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 function Provider({ children }) {
   return (
     <AuthProvider>
-      <OrdersProvider>{children}</OrdersProvider>
+      <DishesProvider>{children}</DishesProvider>
     </AuthProvider>
   );
 }
