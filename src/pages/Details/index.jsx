@@ -42,7 +42,7 @@ export function Details() {
 
   useEffect(() => {
     async function fetchOrder() {
-      const res = await api.get(`/orders/${params.id}`);
+      const res = await api.get(`/dishes/${params.id}`);
       const orderImage = `${api.defaults.baseURL}/files/${res.data.image}`;
 
       setImage(orderImage);

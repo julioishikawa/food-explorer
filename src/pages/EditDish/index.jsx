@@ -4,7 +4,7 @@ import { FiChevronLeft } from "react-icons/fi";
 
 import { api } from "../../services/api";
 
-import { useOrder } from "../../hooks/orders";
+import { useDishes } from "../../hooks/dishes";
 
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
@@ -24,22 +24,19 @@ import {
 
 import upload from "../../assets/upload.svg";
 
-export function EditOrder() {
+export function EditDish() {
   const params = useParams();
 
-  const { orders } = useOrder();
+  const { dishes } = useDishes();
 
-  const [order, setOrder] = useState(orders);
+  const [dish, setDish] = useState(dishes);
 
-  console.log(order.name);
-  console.log(order.image);
-
-  const imageURL = `${api.defaults.baseURL}/files/${order.image}`;
+  const imageURL = `${api.defaults.baseURL}/files/${dish.image}`;
   // ARRUMAR AQUI
   const [image, setImage] = useState(imageURL);
   const [imageFile, setImageFile] = useState(null);
 
-  const [name, setName] = useState(order.name);
+  const [name, setName] = useState(dish.name);
   const [category, setCategory] = useState("");
   const [ingredients, setIngredients] = useState([]);
   const [newIngredient, setNewIngredient] = useState("");
@@ -86,7 +83,7 @@ export function EditOrder() {
     );
   }
 
-  async function handleEditOrder() {
+  async function handleEditDish() {
     if (!imageFile) {
       setErrors((prevState) => ({ ...prevState, image: true }));
 
@@ -143,7 +140,7 @@ export function EditOrder() {
       setErrors((prevState) => ({ ...prevState, description: false }));
     }
 
-    const order_id = await api.put(`/orders/${params.id}`, {
+    const dish_id = await api.put(`/dishes/${params.id}`, {
       name,
       category,
       price,
@@ -154,20 +151,20 @@ export function EditOrder() {
     const fileUploadForm = new FormData();
     fileUploadForm.append("image", imageFile);
 
-    await api.patch(`/orders/image/${order_id.data.id}`, fileUploadForm);
+    await api.patch(`/dishes/image/${dish_id.data.id}`, fileUploadForm);
 
     alert("Prato atualizado com sucesso!");
     navigate("/");
   }
 
   // useEffect(() => {
-  //   async function fetchOrders() {
-  //     const res = await api.get(`/orders/${params.id}`);
+  //   async function fetchDishes() {
+  //     const res = await api.get(`/dishes/${params.id}`);
 
-  //     setOrder(res.data);
+  //     setDish(res.data);
   //   }
 
-  //   fetchOrders();
+  //   fetchDishes();
   // }, [params.id]);
 
   return (
@@ -202,7 +199,7 @@ export function EditOrder() {
                   <Error title="Você precisa adicionar uma imagem do prato" />
                 )}
 
-                <img className="image" src={image} alt={order.name} />
+                <img className="image" src={image} alt={dish.name} />
               </OrderImage>
 
               <div className="name">
@@ -311,7 +308,7 @@ export function EditOrder() {
             <Button
               className="button"
               title="Salvar alterações"
-              onClick={handleEditOrder}
+              onClick={handleEditDish}
             />
           </div>
         </Section>

@@ -23,7 +23,7 @@ import {
 
 import upload from "../../assets/upload.svg";
 
-export function NewOrder() {
+export function NewDish() {
   const imageURL = `${api.defaults.baseURL}/files/${null}`;
   const [image, setImage] = useState(imageURL);
   const [imageFile, setImageFile] = useState(null);
@@ -82,7 +82,7 @@ export function NewOrder() {
     );
   }
 
-  async function handleNewOrder() {
+  async function handleNewDish() {
     if (!imageFile) {
       setErrors((prevState) => ({ ...prevState, image: true }));
 
@@ -139,7 +139,7 @@ export function NewOrder() {
       setErrors((prevState) => ({ ...prevState, description: false }));
     }
 
-    const order = await api.post("/orders", {
+    const dish = await api.post("/dishes", {
       name,
       category,
       price,
@@ -150,7 +150,7 @@ export function NewOrder() {
     const fileUploadForm = new FormData();
     fileUploadForm.append("image", imageFile);
 
-    await api.patch(`/orders/image/${order.data.id}`, fileUploadForm);
+    await api.patch(`/dishes/image/${dish.data.id}`, fileUploadForm);
 
     alert("Prato criado com sucesso!");
     navigate("/");
@@ -298,7 +298,7 @@ export function NewOrder() {
             <Button
               className="button"
               title="Salvar alterações"
-              onClick={handleNewOrder}
+              onClick={handleNewDish}
             />
           </div>
         </Section>
