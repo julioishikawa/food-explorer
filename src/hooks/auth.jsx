@@ -52,6 +52,8 @@ function AuthProvider({ children }) {
 
     api.defaults.headers.authorization = `Bearer ${token}`;
 
+    const { isAdmin } = jwtDecode(token);
+
     setData({ user: JSON.parse(user), token, isAdmin: !!isAdmin });
   }, []);
 
