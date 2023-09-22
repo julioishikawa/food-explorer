@@ -16,8 +16,8 @@ export function Heart({ onClick, ...rest }) {
           Favorite Button
         </label>
         <input
-          type="checkbox"
           id={id}
+          type="checkbox"
           className="checkbox"
           readOnly
           {...rest}

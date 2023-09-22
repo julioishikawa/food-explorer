@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FiMinus, FiPlus, FiEdit2 } from "react-icons/fi";
+import { FiEdit2 } from "react-icons/fi";
 
 import { api } from "../../services/api";
 import { useAuth } from "../../hooks/auth";
@@ -33,17 +33,17 @@ export function Card({ id, title, description, price, image }) {
   }
 
   useEffect(() => {
-    favorites.find((favorite) => favorite.id === id)
+    favorites && favorites.find((favorite) => favorite.id === id)
       ? setIsFavorited(true)
       : setIsFavorited(false);
   }, [favorites]);
 
   return (
-    <Container {...rest}>
+    <Container>
       <Content>
         <div className="card">
           <div className="tools">
-            {!isAdmin ? (
+            {isAdmin ? (
               <FiEdit2
                 role="button"
                 onClick={() => navigate(`/editdish/${id}`)}

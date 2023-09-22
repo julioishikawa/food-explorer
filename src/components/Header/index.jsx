@@ -84,10 +84,16 @@ export function Header() {
               </li>
             )}
 
+            {!isAdmin && (
+              <Link to="/favorites" className="favorites-btn">
+                Meus favoritos
+              </Link>
+            )}
+
             {isAdmin && (
               <li className="nav-item">
                 <Link
-                  to="/neworder"
+                  to="/newdish"
                   className="nav-links"
                   onClick={closeMobileMenu}
                 >
@@ -161,7 +167,7 @@ export function Header() {
 
       <Messages>
         {isAdmin && (
-          <Link to="/neworder">
+          <Link to="/newdish">
             <button className="new-order">Novo prato</button>
           </Link>
         )}
