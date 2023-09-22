@@ -10,8 +10,8 @@ function AuthProvider({ children }) {
 
   async function signIn({ email, password }) {
     try {
-      const response = await api.post("/sessions", { email, password });
-      const { user, token } = response.data;
+      const res = await api.post("/sessions", { email, password });
+      const { user, token } = res.data;
 
       localStorage.setItem("@food-explorer:user", JSON.stringify(user));
       localStorage.setItem("@food-explorer:token", token);
@@ -24,8 +24,8 @@ function AuthProvider({ children }) {
 
       return user;
     } catch (e) {
-      if (e.response) {
-        throw new Error(e.response.data.message);
+      if (e.res) {
+        throw new Error(e.res.data.message);
       } else {
         throw new Error("Não foi possível entrar.");
       }

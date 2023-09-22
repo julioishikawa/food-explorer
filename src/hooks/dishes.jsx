@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 import { api } from "../services/api";
 
@@ -29,6 +29,10 @@ function DishesProvider({ children }) {
     await api.get(`/dishes?searchText=${searchText}`);
     setDishes(data);
   }
+
+  useEffect(() => {
+    getAllDishes();
+  }, []);
 
   return (
     <DishesContext.Provider value={{ getAllDishes, searchDishes, dishes }}>
