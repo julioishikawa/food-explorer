@@ -1,12 +1,10 @@
-import { useState, useEffect, useRef } from "react";
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { useState, useEffect } from "react";
 
 import { useDishes } from "../../hooks/dishes";
 
 import { Header } from "../../components/Header";
-
 import { Footer } from "../../components/Footer";
-import { Card } from "../../components/Card";
+import { Category } from "../../components/Category";
 
 import { Banner, Container, Meals, Wrapper, Scrollbar } from "./styles";
 
@@ -50,13 +48,21 @@ export function Home() {
 
           <Meals>
             <div className="meals">
-              <h3>Testando</h3>
+              {meals.length > 0 && (
+                <Category title="Refeições" dishes={meals} />
+              )}
+            </div>
 
-              <div className="carousel">
-                {dishes.map((order) => (
-                  <Card key={String(order.id)} data={order} />
-                ))}
-              </div>
+            <div className="meals">
+              {desserts.length > 0 && (
+                <Category title="Sobremesas" dishes={desserts} />
+              )}
+            </div>
+
+            <div className="meals">
+              {drinks.length > 0 && (
+                <Category title="Bebidas" dishes={drinks} />
+              )}
             </div>
           </Meals>
         </Wrapper>

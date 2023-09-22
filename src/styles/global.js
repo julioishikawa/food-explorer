@@ -58,6 +58,10 @@ export default createGlobalStyle`
     text-decoration: none;
   }
 
+  *[role="button"] {
+    cursor: pointer;
+  }
+
   button, 
   a {
     cursor: pointer;

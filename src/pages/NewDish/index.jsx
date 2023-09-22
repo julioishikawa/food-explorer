@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiChevronLeft } from "react-icons/fi";
 
 import { api } from "../../services/api";
+import { useDishes } from "../../hooks/dishes";
 
 import { Header } from "../../components/Header";
+import { FileInput } from "../../components/FileInput";
 import { Input } from "../../components/Input";
 import { Footer } from "../../components/Footer";
 import { NoteItem } from "../../components/NoteItem";
@@ -22,18 +24,18 @@ import {
 } from "./styles";
 
 import upload from "../../assets/upload.svg";
+import { Select } from "../../components/Select";
 
 export function NewDish() {
-  const imageURL = `${api.defaults.baseURL}/files/${null}`;
-  const [image, setImage] = useState(imageURL);
-  const [imageFile, setImageFile] = useState(null);
+  const { getAllDishes } = useDishes();
 
+  const [image, setImage] = useState(null);
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
-  const [price, setPrice] = useState("");
-  const [description, setDescription] = useState("");
   const [ingredients, setIngredients] = useState([]);
   const [newIngredient, setNewIngredient] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
 
   const [errors, setErrors] = useState({
     imageFile: false,
@@ -46,22 +48,10 @@ export function NewDish() {
 
   const navigate = useNavigate();
 
-  function handlePreviewImage() {
-    const uploadButton = document.getElementById("image");
-
-    const image = document.querySelector(".image");
-
-    uploadButton.addEventListener("change", () => {
-      image.classList.remove("hide");
-    });
-  }
-
-  function handleChangeImage(e) {
-    const file = e.target.files[0];
-    setImageFile(file);
-
-    const imagePreview = URL.createObjectURL(file);
-    setImage(imagePreview);
+  function handleImage() {
+    const formData = new FormData();
+    formData.append("image", image);
+    return formData;
   }
 
   function handleAddIngredient() {
@@ -82,51 +72,44 @@ export function NewDish() {
     );
   }
 
-  async function handleNewDish() {
-    if (!imageFile) {
-      setErrors((prevState) => ({ ...prevState, image: true }));
+  async function handleBackHome() {
+    await getAllDishes();
+    navigate("/");
+  }
 
-      return;
+  function handleNewDish() {
+    if (!image) {
+      setErrors((prevState) => ({ ...prevState, image: true }));
     } else {
       setErrors((prevState) => ({ ...prevState, image: false }));
     }
 
     if (!name) {
       setErrors((prevState) => ({ ...prevState, name: true }));
-
-      return;
     } else {
       setErrors((prevState) => ({ ...prevState, name: false }));
     }
 
     if (!category) {
       setErrors((prevState) => ({ ...prevState, category: true }));
-
-      return;
     } else {
       setErrors((prevState) => ({ ...prevState, category: false }));
     }
 
     if (ingredients.length === 0) {
       setErrors((prevState) => ({ ...prevState, ingredients: true }));
-
-      return;
     } else {
       setErrors((prevState) => ({ ...prevState, ingredients: false }));
     }
 
     if (newIngredient) {
       setErrors((prevState) => ({ ...prevState, newIngredient: true }));
-
-      return;
     } else {
       setErrors((prevState) => ({ ...prevState, newIngredient: false }));
     }
 
     if (!price) {
       setErrors((prevState) => ({ ...prevState, price: true }));
-
-      return;
     } else {
       setErrors((prevState) => ({ ...prevState, price: false }));
     }
@@ -139,21 +122,26 @@ export function NewDish() {
       setErrors((prevState) => ({ ...prevState, description: false }));
     }
 
-    const dish = await api.post("/dishes", {
-      name,
-      category,
-      price,
-      ingredients,
-      description,
-    });
+    api
+      .post("/dishes", {
+        name,
+        category,
+        price,
+        ingredients,
+        description,
+      })
+      .then(({ data }) => {
+        if (image) {
+          const imageFormData = handleImage();
+          api
+            .patch(`/dishes/${data.dish_id}`, imageFormData)
+            .then(() => handleBackHome());
+        } else {
+          handleBackHome();
+        }
 
-    const fileUploadForm = new FormData();
-    fileUploadForm.append("image", imageFile);
-
-    await api.patch(`/dishes/image/${dish.data.id}`, fileUploadForm);
-
-    alert("Prato criado com sucesso!");
-    navigate("/");
+        alert("Prato criado com sucesso!");
+      });
   }
 
   return (
@@ -171,25 +159,18 @@ export function NewDish() {
             <h1 className="new-order-desktop">Adicionar prato</h1>
             <Wrapper>
               <OrderImage>
-                <p>Imagem do prato</p>
-                <label
-                  htmlFor="image"
-                  style={{ border: errors.image ? "1px solid red" : "" }}
-                >
-                  <input
-                    type="file"
-                    id="image"
-                    onClick={handlePreviewImage}
-                    onChange={handleChangeImage}
-                  />
-                  <img src={upload} alt="imagem selecionada" />
-                  Selecione imagem
-                </label>
+                <FileInput
+                  id="image"
+                  label="Imagem do prato"
+                  mouseOverText={image ? image.name : "Selecionar imagem"}
+                  placeholder={image ? image.name : "Selecione uma imagem"}
+                  onChange={(event) => setImage(event.target.files[0])}
+                />
                 {errors.image && (
                   <Error title="Você precisa adicionar uma imagem do prato" />
                 )}
 
-                <img className="image hide" src={image} alt="imagem do prato" />
+                {/* <img className="image hide" src={image} alt="imagem do prato" /> */}
               </OrderImage>
 
               <div className="name">
@@ -208,25 +189,28 @@ export function NewDish() {
               </div>
 
               <div className="category">
-                <p>Categoria</p>
-                <div className="select">
-                  <select
-                    id="standard-select"
-                    onChange={(e) => setCategory(e.target.value)}
-                    style={{ border: errors.category ? "1px solid red" : "" }}
-                  >
-                    <option value="" className="hide">
-                      Selecione a categoria
-                    </option>
-                    <option value="Entradas">Entradas</option>
-                    <option value="Pratos principais">Pratos Principais</option>
-                    <option value="Bebidas">Bebidas</option>
-                  </select>
-
-                  {errors.category && (
-                    <Error title="Você precisa selecionar uma categoria" />
-                  )}
-                </div>
+                <Select
+                  id="category"
+                  label="Categoria"
+                  options={[
+                    {
+                      title: "Refeições",
+                      value: "meal",
+                    },
+                    {
+                      title: "Sobremesas",
+                      value: "dessert",
+                    },
+                    {
+                      title: "Bebidas",
+                      value: "drink",
+                    },
+                  ]}
+                  onSelect={setCategory}
+                />
+                {errors.category && (
+                  <Error title="Você precisa selecionar uma categoria" />
+                )}
               </div>
             </Wrapper>
 
