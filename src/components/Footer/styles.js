@@ -4,6 +4,7 @@ export const Container = styled.div`
   width: 100%;
   height: 7.7rem;
 
+  margin-top: 2.4rem;
   padding: 2.9rem 2.3rem;
 
   display: flex;
@@ -20,6 +21,8 @@ export const Container = styled.div`
   }
 
   @media (min-width: 1368px) {
+    margin-top: 4.8rem;
+
     justify-content: space-between;
 
     padding: 2.8rem 12.3rem;

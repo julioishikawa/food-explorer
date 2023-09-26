@@ -24,7 +24,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 function Provider({ children }) {
   return (
     <AuthProvider>
-      <DishesProvider>{children}</DishesProvider>
+      <Routes>{children}</Routes>
     </AuthProvider>
   );
 }

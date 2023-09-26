@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  padding-left: 1rem;
-
   display: flex;
   flex-direction: column;
   gap: 2.4rem;
@@ -42,7 +40,7 @@ export const Container = styled.div`
   .swiper-button-prev {
     display: none;
 
-    color: ${({ theme }) => theme.COLORS.WHITE};
+    color: ${({ theme }) => theme.COLORS.LIGHT_100};
     height: 100%;
     width: 8%;
     top: 2.2rem;
@@ -53,6 +51,8 @@ export const Container = styled.div`
   }
 
   > h2 {
+    margin-top: 2.4rem;
+
     font-size: 1.8rem;
     font-weight: 500;
     line-height: 140%;
@@ -69,6 +69,8 @@ export const Container = styled.div`
     }
 
     > h2 {
+      margin-top: 4.8rem;
+
       font-size: 3rem;
     }
   }

@@ -5,22 +5,24 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  width: 8rem;
+  width: 10rem;
 
   button {
     display: grid;
     place-items: center;
     background: transparent;
     border: none;
+
+    svg {
+      color: white;
+    }
   }
 
   p {
     font-family: Roboto;
   }
 
-  @media screen and (min-width: 1024px) {
-    width: 9rem;
-
+  @media screen and (min-width: 1368px) {
     p {
       font-weight: 700;
       font-size: 2rem;

@@ -39,8 +39,6 @@ export const Container = styled.div`
 
   @media (min-width: 1368px) {
     width: 100%;
-
-    margin-bottom: 2.4rem;
   }
 `;
 
@@ -83,7 +81,7 @@ export const Content = styled.div`
 
       .edit {
         width: 2.4rem;
-        height: 2.4rem;
+        height: 2.2rem;
 
         margin-bottom: 3rem;
       }
@@ -137,29 +135,13 @@ export const Content = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
+        gap: 1.6rem;
 
-        .quantity {
-          display: flex;
-          align-items: center;
-          gap: 1.4rem;
-
-          cursor: pointer;
-
-          svg {
-            width: 2.4rem;
-            height: 2.4rem;
-          }
-
-          p {
-            font-size: 1.6rem;
-            font-family: "Roboto", sans-serif;
-            color: ${({ theme }) => theme.COLORS.LIGHT_300};
-          }
+        p {
+          margin: 0 1.4rem;
         }
 
         button {
-          margin-top: 1.6rem;
-
           width: 16.2rem;
           height: 3.2rem;
 
@@ -237,8 +219,6 @@ export const Content = styled.div`
           }
 
           button {
-            margin: 0 0 0 1.6rem;
-
             width: 9.2rem;
             height: 4.8rem;
           }

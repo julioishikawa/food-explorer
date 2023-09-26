@@ -5,8 +5,8 @@ import { FiMenu, FiX, FiSearch, FiGithub, FiLogOut } from "react-icons/fi";
 import { useAuth } from "../../hooks/auth";
 import { useDishes } from "../../hooks/dishes";
 
-import { Input } from "../Input";
 import { Note } from "../Note";
+import { InputSearch } from "../InputSearch";
 
 import polygon from "../../assets/Polygon.svg";
 import footerLogo from "../../assets/Polygon-footer.svg";
@@ -62,7 +62,7 @@ export function Header() {
             </li>
 
             <li className="nav-item">
-              <Input
+              <InputSearch
                 id="search-mobile"
                 placeholder="Busque por pratos ou ingredientes"
                 icon={FiSearch}
@@ -85,9 +85,11 @@ export function Header() {
             )}
 
             {!isAdmin && (
-              <Link to="/favorites" className="favorites-btn">
-                Meus favoritos
-              </Link>
+              <li className="nav-item">
+                <Link to="/favorites" className="nav-links">
+                  Meus favoritos
+                </Link>
+              </li>
             )}
 
             {isAdmin && (
@@ -130,8 +132,8 @@ export function Header() {
         </div>
       </Menu>
 
-      <Logo className>
-        <div className="logo" onClick={handleBackHome}>
+      <Logo onClick={handleBackHome}>
+        <div className="logo">
           <img src={polygon} alt="food explorer logo" />
           <h1>food explorer</h1>
         </div>
@@ -140,7 +142,7 @@ export function Header() {
       </Logo>
 
       <div className="search-wrapper">
-        <Input
+        <InputSearch
           id="search"
           placeholder="Busque por pratos ou ingredientes"
           icon={FiSearch}
@@ -164,6 +166,12 @@ export function Header() {
           </div>
         )}
       </div>
+
+      {!isAdmin && (
+        <Link to="/favorites" className="favorites-btn">
+          Meus favoritos
+        </Link>
+      )}
 
       <Messages>
         {isAdmin && (

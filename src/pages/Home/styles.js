@@ -36,7 +36,7 @@ export const Banner = styled.div`
   align-items: flex-end;
   justify-content: flex-end;
 
-  margin: 4.4rem 1.6rem 6.2rem 3.6rem;
+  margin: 4.4rem 1.6rem 3.8rem 3.6rem;
 
   padding: 0 2.2rem 2.2rem 0;
 
@@ -72,7 +72,7 @@ export const Banner = styled.div`
     width: 100%;
     height: 26rem;
 
-    margin: 17.2rem 0 6.2rem 0;
+    margin: 17.2rem 0 1.4rem 0;
 
     padding: 0 0 2.2rem 0;
 

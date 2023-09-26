@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Container } from "./styles";
 import { FiChevronDown } from "react-icons/fi";
 
-export function Select({ startSelected, label, options, onSelect }) {
+export function Select({ startSelected, options, onSelect }) {
   const [active, setActive] = useState(false);
   const [selected, setSelected] = useState(options[0]);
 
@@ -29,8 +29,6 @@ export function Select({ startSelected, label, options, onSelect }) {
 
   return (
     <Container>
-      <label onClick={toggleSelect}>{label}</label>
-
       <div className={active ? "active" : ""} onClick={toggleSelect}>
         <span>{selected.title}</span>
         <FiChevronDown size={20} />

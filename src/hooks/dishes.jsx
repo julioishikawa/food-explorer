@@ -26,8 +26,8 @@ function DishesProvider({ children }) {
   }
 
   async function searchDishes(searchText) {
-    await api.get(`/dishes?searchText=${searchText}`);
-    setDishes(data);
+    const res = await api.get(`/dishes?searchText=${searchText}`);
+    setDishes(res.data);
   }
 
   useEffect(() => {

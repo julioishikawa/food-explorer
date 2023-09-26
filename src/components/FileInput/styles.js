@@ -1,9 +1,8 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
   width: 100%;
 
   > label:nth-of-type(1) {
@@ -22,9 +21,9 @@ export const Container = styled.div`
     cursor: pointer;
 
     padding: 1.2rem 2rem;
-    
+
     width: 100%;
-    
+
     border-radius: 8px;
 
     font-size: 1.4rem;

@@ -45,6 +45,7 @@ export function Card({ id, title, description, price, image }) {
           <div className="tools">
             {isAdmin ? (
               <FiEdit2
+                className="edit"
                 role="button"
                 onClick={() => navigate(`/editdish/${id}`)}
               />

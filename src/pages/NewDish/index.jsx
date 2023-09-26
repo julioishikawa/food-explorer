@@ -13,18 +13,17 @@ import { NoteItem } from "../../components/NoteItem";
 import { Textarea } from "../../components/Textarea";
 import { Button } from "../../components/Button";
 import { Error } from "../../components/Error";
+import { Select } from "../../components/Select";
+import { CurrencyInput } from "../../components/CurrencyInput";
 
 import {
   Container,
   Form,
   Section,
-  OrderImage,
   Wrapper,
   Scrollbar,
+  DishImage,
 } from "./styles";
-
-import upload from "../../assets/upload.svg";
-import { Select } from "../../components/Select";
 
 export function NewDish() {
   const { getAllDishes } = useDishes();
@@ -34,13 +33,12 @@ export function NewDish() {
   const [category, setCategory] = useState("");
   const [ingredients, setIngredients] = useState([]);
   const [newIngredient, setNewIngredient] = useState("");
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
 
   const [errors, setErrors] = useState({
-    imageFile: false,
+    image: false,
     name: false,
-    category: false,
     ingredients: false,
     price: false,
     description: false,
@@ -88,12 +86,6 @@ export function NewDish() {
       setErrors((prevState) => ({ ...prevState, name: true }));
     } else {
       setErrors((prevState) => ({ ...prevState, name: false }));
-    }
-
-    if (!category) {
-      setErrors((prevState) => ({ ...prevState, category: true }));
-    } else {
-      setErrors((prevState) => ({ ...prevState, category: false }));
     }
 
     if (ingredients.length === 0) {
@@ -158,20 +150,25 @@ export function NewDish() {
             <h1 className="new-order-mobile">Novo prato</h1>
             <h1 className="new-order-desktop">Adicionar prato</h1>
             <Wrapper>
-              <OrderImage>
-                <FileInput
-                  id="image"
-                  label="Imagem do prato"
-                  mouseOverText={image ? image.name : "Selecionar imagem"}
-                  placeholder={image ? image.name : "Selecione uma imagem"}
-                  onChange={(event) => setImage(event.target.files[0])}
-                />
+              <DishImage>
+                <p>Imagem do prato</p>
+                <div
+                  className="dish-image"
+                  style={{
+                    border: errors.image ? "1px solid red" : "",
+                  }}
+                >
+                  <FileInput
+                    id="image"
+                    mouseOverText={image ? image.name : "Selecionar imagem"}
+                    placeholder={image ? image.name : "Selecione uma imagem"}
+                    onChange={(event) => setImage(event.target.files[0])}
+                  />
+                </div>
                 {errors.image && (
                   <Error title="Você precisa adicionar uma imagem do prato" />
                 )}
-
-                {/* <img className="image hide" src={image} alt="imagem do prato" /> */}
-              </OrderImage>
+              </DishImage>
 
               <div className="name">
                 <p>Nome</p>
@@ -189,9 +186,9 @@ export function NewDish() {
               </div>
 
               <div className="category">
+                <p>Categoria</p>
                 <Select
                   id="category"
-                  label="Categoria"
                   options={[
                     {
                       title: "Refeições",
@@ -208,9 +205,6 @@ export function NewDish() {
                   ]}
                   onSelect={setCategory}
                 />
-                {errors.category && (
-                  <Error title="Você precisa selecionar uma categoria" />
-                )}
               </div>
             </Wrapper>
 
@@ -251,9 +245,9 @@ export function NewDish() {
               <div className="price">
                 <p>Preço</p>
                 <div className="box">
-                  <Input
+                  <CurrencyInput
                     placeholder="R$ 00,00"
-                    onChange={(e) => setPrice(e.target.value)}
+                    onValueChange={(value, _, values) => setPrice(values.float)}
                     error={errors.price}
                   />
 

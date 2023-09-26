@@ -225,12 +225,12 @@ export const Wrapper = styled.div`
     width: 100%;
 
     flex-direction: row;
-    align-items: flex-start;
+
     gap: 3.2rem;
   }
 `;
 
-export const OrderImage = styled.div`
+export const DishImage = styled.div`
   max-width: 36.4rem;
   display: flex;
   flex-direction: column;
@@ -239,35 +239,8 @@ export const OrderImage = styled.div`
     display: none;
   }
 
-  label {
-    padding: 1.6rem 3.2rem;
-
-    max-width: 36.4rem;
-    height: 4.8rem;
-
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 8px;
-
-    font-size: 1.4rem;
-    font-weight: 500;
-
-    color: ${({ theme }) => theme.COLORS.LIGHT_100};
-    background-color: ${({ theme }) => theme.COLORS.DARK_800};
-    border-radius: 8px;
-
-    cursor: pointer;
-  }
-
-  svg {
-    width: 20%;
-  }
-
-  .image {
-    width: 100%;
-
-    margin-top: 2rem;
+  .dish-image {
+    border-radius: 0.8rem;
   }
 
   @media (min-width: 1368px) {

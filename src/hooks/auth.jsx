@@ -24,10 +24,10 @@ function AuthProvider({ children }) {
 
       return user;
     } catch (e) {
-      if (e.res) {
-        throw new Error(e.res.data.message);
+      if (e.response) {
+        alert(e.response.data.message);
       } else {
-        throw new Error("Não foi possível entrar.");
+        alert("Não foi possível entrar.");
       }
     }
   }

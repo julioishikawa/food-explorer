@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { useAuth } from "../../hooks/auth";
@@ -38,6 +38,12 @@ export function SignIn() {
     }
   }
 
+  function handleKeyDown(e) {
+    if (e.key === "Enter") {
+      handleSignIn();
+    }
+  }
+
   return (
     <Container>
       <div className="logo">
@@ -52,6 +58,7 @@ export function SignIn() {
               placeholder="Exemplo: exemplo@exemplo.com.br"
               type="text"
               onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={handleKeyDown}
               error={errors.email}
             />
 
@@ -66,6 +73,7 @@ export function SignIn() {
               placeholder="No mínimo 6 caracteres"
               type="password"
               onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={handleKeyDown}
               error={errors.password}
             />
 

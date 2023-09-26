@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { FiChevronLeft, FiMinus, FiPlus } from "react-icons/fi";
 
 import { api } from "../../services/api";
@@ -7,6 +7,7 @@ import { useAuth } from "../../hooks/auth";
 
 import { Header } from "../../components/Header";
 import { Ingredients } from "../../components/Ingredients";
+import { QuantityCounter } from "../../components/QuantityCounter";
 import { Footer } from "../../components/Footer";
 
 import { Container, Wrapper } from "./styles";
@@ -14,42 +15,22 @@ import { Container, Wrapper } from "./styles";
 import messages from "../../assets/Messages.png";
 
 export function Details() {
-  const { user } = useAuth();
+  const params = useParams();
+  const navigate = useNavigate();
+
+  const { isAdmin } = useAuth();
 
   const [data, setData] = useState(null);
-  const [image, setImage] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const params = useParams();
-
-  function addQuantity() {
-    setQuantity((prevState) => prevState + 1);
-  }
-
-  function subQuantity() {
-    if (quantity > 1) {
-      setQuantity((prevState) => prevState - 1);
-      return;
-    }
-  }
-
-  function numberMapper(number) {
-    if (number < 10) {
-      return `0${number}`;
-    }
-
-    return number;
-  }
 
   useEffect(() => {
-    async function fetchOrder() {
+    async function fetchData() {
       const res = await api.get(`/dishes/${params.id}`);
-      const orderImage = `${api.defaults.baseURL}/files/${res.data.image}`;
 
-      setImage(orderImage);
       setData(res.data);
     }
 
-    fetchOrder();
+    fetchData();
   }, []);
 
   return (
@@ -65,8 +46,8 @@ export function Details() {
           <Wrapper>
             <img
               className="order-image"
-              src={image}
-              alt="Imagem de uma Salada Ravanello"
+              src={`${api.defaults.baseURL}/files/${data.image}`}
+              alt={`Imagem do prato ${data.name}`}
             />
 
             <div className="order-wrapper">
@@ -74,41 +55,48 @@ export function Details() {
 
               <p>{data.description}</p>
 
-              {data.ingredients && (
-                <div className="tags">
-                  {data.ingredients.map((ingredient) => (
-                    <Ingredients
-                      key={String(ingredient.id)}
-                      title={ingredient.title}
-                    />
-                  ))}
-                </div>
-              )}
+              <div className="tags">
+                {data.ingredients.map((ingredient, index) => (
+                  <Ingredients key={index} title={ingredient} />
+                ))}
+              </div>
 
               <div className="order">
-                {user.isAdmin === 0 && (
+                {!isAdmin && (
                   <div className="quantity">
-                    <FiMinus onClick={subQuantity} />
-                    <p>{numberMapper(quantity)}</p>
-                    <FiPlus onClick={addQuantity} />
+                    <QuantityCounter onUpdate={setQuantity} />
                   </div>
                 )}
 
-                {user.isAdmin === 0 && (
-                  <button>
+                {!isAdmin && (
+                  <button className="order-button">
                     <img
                       className="button-mobile"
                       src={messages}
                       alt="Imagem ilustrativa de uma comanda"
                     />
-                    <p className="button-mobile">pedir ∙ R$ {data.price}</p>
-                    <p className="button-desktop">incluir ∙ R$ {data.price}</p>
+
+                    <p className="button-mobile">
+                      pedir ∙{" "}
+                      {new Intl.NumberFormat("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      }).format(data.price * quantity)}
+                    </p>
+
+                    <p className="button-desktop">
+                      incluir ∙{" "}
+                      {new Intl.NumberFormat("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      }).format(data.price * quantity)}
+                    </p>
                   </button>
                 )}
 
-                {user.isAdmin === 1 && (
-                  <Link to={`/editorder/${data.id}`}>
-                    <button className="edit">Editar prato</button>
+                {isAdmin && (
+                  <Link to={`/editdish/${data.id}`}>
+                    <button className="edit-button">Editar prato</button>
                   </Link>
                 )}
               </div>

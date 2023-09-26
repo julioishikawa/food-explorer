@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
 
   width: 100%;
 
@@ -27,7 +26,7 @@ export const Container = styled.div`
 
     border: 1px solid transparent;
     border-radius: 5px;
-    background: ${({ theme }) => theme.COLORS.DARK_900};
+    background: ${({ theme }) => theme.COLORS.DARK_800};
 
     > svg {
       transition: 0.3s;
@@ -52,7 +51,7 @@ export const Container = styled.div`
 
       border: 1px solid transparent;
       border-top: none;
-      background: ${({ theme }) => theme.COLORS.DARK_900};
+      background: ${({ theme }) => theme.COLORS.DARK_800};
 
       width: calc(100% + 2px);
 

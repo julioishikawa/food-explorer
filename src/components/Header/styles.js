@@ -16,7 +16,8 @@ export const Container = styled.div`
 
   #search,
   .search-wrapper,
-  .logout {
+  .logout,
+  .favorites-btn {
     display: none;
   }
 
@@ -97,7 +98,8 @@ export const Container = styled.div`
     }
 
     #search,
-    .logout {
+    .logout,
+    .favorites-btn {
       display: flex;
     }
 
@@ -108,6 +110,29 @@ export const Container = styled.div`
         margin-right: 12.3rem;
       }
     }
+  }
+`;
+
+export const InputSearch = styled.div`
+  width: 100%;
+  height: 4.8rem;
+  padding: 1.6rem 1.4rem;
+
+  color: ${({ theme }) => theme.COLORS.LIGHT_100};
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+
+  &::placeholder {
+    color: ${({ theme }) => theme.COLORS.LIGHT_500};
+  }
+
+  &:focus {
+    border: 1px solid ${({ theme }) => theme.COLORS.CAKE_200};
+  }
+
+  > svg {
+    margin-left: 1.4rem;
   }
 `;
 
@@ -152,7 +177,7 @@ export const Menu = styled.div`
 
     opacity: 1;
     transition: all 0.5s ease;
-    z-index: 1;
+    z-index: 2;
   }
 
   ul {
@@ -213,7 +238,7 @@ export const Menu = styled.div`
 
   .nav-links:hover {
     background-color: ${({ theme }) => theme.COLORS.DARK_1000};
-    border-radius: 1rem;
+    border-radius: 0 0 1rem 1rem;
 
     cursor: pointer;
   }
@@ -288,6 +313,8 @@ export const Logo = styled.div`
     justify-content: flex-end;
     gap: 0;
 
+    cursor: pointer;
+
     .logo {
       width: 20.4rem;
     }
@@ -317,6 +344,10 @@ export const Messages = styled.div`
   img {
     width: 2.6rem;
     height: 2.2rem;
+  }
+
+  .menu-orders {
+    cursor: pointer;
   }
 
   .notifications {
@@ -370,7 +401,7 @@ export const Messages = styled.div`
 
     opacity: 1;
     transition: all 0.5s ease;
-    z-index: 1;
+    z-index: 2;
   }
 
   .notification-logo {

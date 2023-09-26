@@ -107,12 +107,11 @@ export const Wrapper = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 1.4rem;
+      gap: 2.2rem;
 
       .quantity {
         display: flex;
         align-items: center;
-        gap: 1.4rem;
 
         cursor: pointer;
 
@@ -122,7 +121,7 @@ export const Wrapper = styled.div`
         }
 
         p {
-          margin: 0;
+          margin: 0 1.4rem;
 
           font-size: 2.2rem;
           font-weight: bold;
@@ -150,15 +149,17 @@ export const Wrapper = styled.div`
         }
       }
 
-      button {
+      .order-button,
+      .edit-button {
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 6px;
 
         width: 100%;
-
         height: 3.8rem;
+
+        padding: 0 2.4rem;
 
         border: 0;
         border-radius: 0.5rem;
@@ -181,7 +182,7 @@ export const Wrapper = styled.div`
         }
       }
 
-      .edit {
+      .edit-button {
         width: 31.6rem;
         height: 4.8rem;
 
@@ -255,8 +256,8 @@ export const Wrapper = styled.div`
           height: 2.4rem;
         }
 
-        button {
-          width: 16.2rem;
+        .order-button {
+          min-width: 16.2rem;
           height: 4.8rem;
 
           .button-desktop {
@@ -268,7 +269,7 @@ export const Wrapper = styled.div`
           }
         }
 
-        .edit {
+        .edit-button {
           width: 13.1rem;
         }
       }

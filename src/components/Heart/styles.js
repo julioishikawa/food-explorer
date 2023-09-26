@@ -1,14 +1,10 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  position: absolute;
-  top: 1.6rem;
-  right: 1.6rem;
-
   .heart-container {
     --heart-color: rgb(255, 91, 137);
 
-    width: 2.2rem;
+    width: 2.4rem;
     height: 2.2rem;
     transition: 0.3s;
   }
