@@ -7,74 +7,65 @@ import { api } from "../../services/api";
 import { useDishes } from "../../hooks/dishes";
 
 import { Header } from "../../components/Header";
+import { Error } from "../../components/Error";
+import { FileInput } from "../../components/FileInput";
 import { Input } from "../../components/Input";
-import { Footer } from "../../components/Footer";
+import { Select } from "../../components/Select";
 import { NoteItem } from "../../components/NoteItem";
+import { CurrencyInput } from "../../components/CurrencyInput";
 import { Textarea } from "../../components/Textarea";
 import { Button } from "../../components/Button";
+import { Footer } from "../../components/Footer";
 
 import {
   Container,
   Form,
   Section,
-  OrderImage,
+  DishImage,
   Wrapper,
   Scrollbar,
 } from "./styles";
 
-import upload from "../../assets/upload.svg";
-
 export function EditDish() {
   const params = useParams();
 
-  const { dishes } = useDishes();
+  const navigate = useNavigate();
 
-  const [dish, setDish] = useState(dishes);
+  const { getAllDishes } = useDishes();
 
-  const imageURL = `${api.defaults.baseURL}/files/${dish.image}`;
-  // ARRUMAR AQUI
-  const [image, setImage] = useState(imageURL);
-  const [imageFile, setImageFile] = useState(null);
-
-  const [name, setName] = useState(dish.name);
+  const [imageFile, setImageFile] = useState("");
+  const [image, setImage] = useState(null);
+  const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [ingredients, setIngredients] = useState([]);
   const [newIngredient, setNewIngredient] = useState("");
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
+  const [startSelected, setStartSelected] = useState("");
 
   const [errors, setErrors] = useState({
-    imageFile: false,
     name: false,
-    category: false,
     ingredients: false,
     price: false,
     description: false,
   });
 
-  const navigate = useNavigate();
-
-  function handlePreviewImage() {
-    const uploadButton = document.getElementById("image");
-
-    const image = document.querySelector(".image");
-
-    uploadButton.addEventListener("change", () => {
-      image.classList.remove("hide");
-    });
-  }
-
-  function handleChangeImage(e) {
-    const file = e.target.files[0];
-    setImageFile(file);
-
-    const imagePreview = URL.createObjectURL(file);
-    setImage(imagePreview);
+  function handleImage() {
+    const formData = new FormData();
+    formData.append("image", image);
+    return formData;
   }
 
   function handleAddIngredient() {
     setIngredients((prevState) => [...prevState, newIngredient]);
     setNewIngredient("");
+  }
+
+  function handleAddIngredientKeyDown(e) {
+    if (e.key === "Enter") {
+      setIngredients((prevState) => [...prevState, newIngredient]);
+      setNewIngredient("");
+    }
   }
 
   function handleRemoveIngredient(deleted) {
@@ -83,51 +74,32 @@ export function EditDish() {
     );
   }
 
-  async function handleEditDish() {
-    if (!imageFile) {
-      setErrors((prevState) => ({ ...prevState, image: true }));
+  async function handleBackHome() {
+    await getAllDishes();
+    navigate("/");
+  }
 
-      return;
-    } else {
-      setErrors((prevState) => ({ ...prevState, image: false }));
-    }
-
+  function handleEditDish() {
     if (!name) {
       setErrors((prevState) => ({ ...prevState, name: true }));
-
-      return;
     } else {
       setErrors((prevState) => ({ ...prevState, name: false }));
     }
 
-    if (!category) {
-      setErrors((prevState) => ({ ...prevState, category: true }));
-
-      return;
-    } else {
-      setErrors((prevState) => ({ ...prevState, category: false }));
-    }
-
     if (ingredients.length === 0) {
       setErrors((prevState) => ({ ...prevState, ingredients: true }));
-
-      return;
     } else {
       setErrors((prevState) => ({ ...prevState, ingredients: false }));
     }
 
     if (newIngredient) {
       setErrors((prevState) => ({ ...prevState, newIngredient: true }));
-
-      return;
     } else {
       setErrors((prevState) => ({ ...prevState, newIngredient: false }));
     }
 
     if (!price) {
       setErrors((prevState) => ({ ...prevState, price: true }));
-
-      return;
     } else {
       setErrors((prevState) => ({ ...prevState, price: false }));
     }
@@ -140,32 +112,59 @@ export function EditDish() {
       setErrors((prevState) => ({ ...prevState, description: false }));
     }
 
-    const dish_id = await api.put(`/dishes/${params.id}`, {
-      name,
-      category,
-      price,
-      ingredients,
-      description,
-    });
+    api
+      .put(`/dishes/${params.id}`, {
+        name,
+        category,
+        price,
+        ingredients,
+        description,
+      })
+      .then(({ data }) => {
+        if (image) {
+          const imageFormData = handleImage();
+          api
+            .patch(`/dishes/${data.id}`, imageFormData)
+            .then(() => handleBackHome());
+        } else {
+          handleBackHome();
+        }
 
-    const fileUploadForm = new FormData();
-    fileUploadForm.append("image", imageFile);
-
-    await api.patch(`/dishes/image/${dish_id.data.id}`, fileUploadForm);
-
-    alert("Prato atualizado com sucesso!");
-    navigate("/");
+        alert("Prato atualizado com sucesso!");
+      });
   }
 
-  // useEffect(() => {
-  //   async function fetchDishes() {
-  //     const res = await api.get(`/dishes/${params.id}`);
+  function handleDeleteDish() {
+    const confirmed = window.confirm(
+      "Você tem certeza que quer excluir este prato?"
+    );
 
-  //     setDish(res.data);
-  //   }
+    if (confirmed) {
+      api.delete(`/dishes/${params.id}`);
+      alert("Prato excluido com sucesso!");
 
-  //   fetchDishes();
-  // }, [params.id]);
+      handleBackHome();
+    } else {
+      return;
+    }
+  }
+
+  useEffect(() => {
+    async function fetchDishes() {
+      const dish_id = params.id;
+      const { data } = await api.get(`/dishes/${dish_id}`);
+
+      setImageFile(data.image);
+      setName(data.name);
+      setCategory(data.category);
+      setStartSelected(data.category);
+      setIngredients(data.ingredients);
+      setPrice(data.price);
+      setDescription(data.description);
+    }
+
+    fetchDishes();
+  }, []);
 
   return (
     <Container>
@@ -180,27 +179,28 @@ export function EditDish() {
           <Form>
             <h1 className="edit-order-desktop">Editar prato</h1>
             <Wrapper>
-              <OrderImage>
+              <DishImage>
                 <p>Imagem do prato</p>
-                <label
-                  htmlFor="image"
-                  style={{ border: errors.image ? "1px solid red" : "" }}
+                <div
+                  className="dish-image"
+                  style={{
+                    border: errors.image ? "1px solid red" : "",
+                  }}
                 >
-                  <input
-                    type="file"
+                  <FileInput
                     id="image"
-                    onClick={handlePreviewImage}
-                    onChange={handleChangeImage}
+                    mouseOverText={imageFile}
+                    placeholder={imageFile}
+                    onChange={(event) => {
+                      setImageFile(event.target.files[0].name);
+                      setImage(event.target.files[0]);
+                    }}
                   />
-                  <img src={upload} alt="imagem selecionada" />
-                  Selecione imagem
-                </label>
+                </div>
                 {errors.image && (
                   <Error title="Você precisa adicionar uma imagem do prato" />
                 )}
-
-                <img className="image" src={image} alt={dish.name} />
-              </OrderImage>
+              </DishImage>
 
               <div className="name">
                 <p>Nome</p>
@@ -208,6 +208,7 @@ export function EditDish() {
                   <Input
                     placeholder={"Ex.: Salada Ceasar"}
                     type="text"
+                    value={name}
                     onChange={(e) => setName(e.target.value)}
                     error={errors.name}
                   />
@@ -220,24 +221,25 @@ export function EditDish() {
 
               <div className="category">
                 <p>Categoria</p>
-                <div className="select">
-                  <select
-                    id="standard-select"
-                    onChange={(e) => setCategory(e.target.value)}
-                    style={{ border: errors.category ? "1px solid red" : "" }}
-                  >
-                    <option value="" className="hide">
-                      Selecione a categoria
-                    </option>
-                    <option value="Entradas">Entradas</option>
-                    <option value="Pratos principais">Pratos Principais</option>
-                    <option value="Bebidas">Bebidas</option>
-                  </select>
-
-                  {errors.category && (
-                    <Error title="Você precisa selecionar uma categoria" />
-                  )}
-                </div>
+                <Select
+                  id="category"
+                  startSelected={startSelected}
+                  options={[
+                    {
+                      title: "Refeições",
+                      value: "meal",
+                    },
+                    {
+                      title: "Sobremesas",
+                      value: "dessert",
+                    },
+                    {
+                      title: "Bebidas",
+                      value: "drink",
+                    },
+                  ]}
+                  onSelect={(value) => setCategory(value)}
+                />
               </div>
             </Wrapper>
 
@@ -265,6 +267,7 @@ export function EditDish() {
                       onChange={(e) => setNewIngredient(e.target.value)}
                       value={newIngredient}
                       onClick={handleAddIngredient}
+                      onKeyDown={handleAddIngredientKeyDown}
                     />
                   </div>
 
@@ -277,9 +280,10 @@ export function EditDish() {
               <div className="price">
                 <p>Preço</p>
                 <div className="box">
-                  <Input
+                  <CurrencyInput
                     placeholder="R$ 00,00"
-                    onChange={(e) => setPrice(e.target.value)}
+                    value={price}
+                    onValueChange={(value, _, values) => setPrice(values.float)}
                     error={errors.price}
                   />
 
@@ -294,6 +298,7 @@ export function EditDish() {
             <div className="box">
               <Textarea
                 placeholder="Fale brevemente sobre o prato, seus ingredientes e composição"
+                value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 style={{ border: errors.description ? "1px solid red" : "" }}
               />
@@ -304,7 +309,13 @@ export function EditDish() {
             </div>
           </Form>
 
-          <div className="teste">
+          <div className="button-wrapper">
+            <Button
+              className="button-delete-dish"
+              title="Excluir prato"
+              onClick={handleDeleteDish}
+            />
+
             <Button
               className="button"
               title="Salvar alterações"

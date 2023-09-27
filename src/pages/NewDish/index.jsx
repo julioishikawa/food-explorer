@@ -272,7 +272,7 @@ export function NewDish() {
             </div>
           </Form>
 
-          <div className="teste">
+          <div className="button-wrapper">
             <Button
               className="button"
               title="Salvar alterações"

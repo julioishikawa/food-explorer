@@ -81,9 +81,7 @@ export const Content = styled.div`
 
       .edit {
         width: 2.4rem;
-        height: 2.2rem;
-
-        margin-bottom: 3rem;
+        height: 2.4rem;
       }
     }
 
@@ -182,10 +180,13 @@ export const Content = styled.div`
         }
 
         .description {
-          display: flex;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          text-overflow: ellipsis;
+          overflow: hidden;
 
           text-align: center;
-
           font-size: 1.4rem;
           font-weight: 400;
           font-family: "Roboto", sans-serif;

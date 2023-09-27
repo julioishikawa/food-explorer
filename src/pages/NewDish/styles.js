@@ -82,7 +82,7 @@ export const Section = styled.div`
       }
     }
 
-    .teste {
+    .button-wrapper {
       display: flex;
 
       justify-content: flex-end;

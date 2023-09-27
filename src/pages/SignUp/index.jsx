@@ -57,6 +57,12 @@ export function SignUp() {
       });
   }
 
+  function handleKeyDown(e) {
+    if (e.key === "Enter") {
+      handleSignUp();
+    }
+  }
+
   return (
     <Container>
       <div className="logo">
@@ -71,6 +77,7 @@ export function SignUp() {
               placeholder="Exemplo: Maria da Silva"
               type="text"
               onChange={(e) => setName(e.target.value)}
+              onKeyDown={handleKeyDown}
               error={errors.name}
             />
 
@@ -85,6 +92,7 @@ export function SignUp() {
               placeholder="Exemplo: exemplo@exemplo.com.br"
               type="text"
               onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={handleKeyDown}
               error={errors.email}
             />
 
@@ -99,6 +107,7 @@ export function SignUp() {
               placeholder="No mínimo 6 caracteres"
               type="password"
               onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={handleKeyDown}
               error={errors.password}
             />
 

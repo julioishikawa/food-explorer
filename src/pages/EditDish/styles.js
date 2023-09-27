@@ -53,6 +53,15 @@ export const Section = styled.div`
     background-color: ${({ theme }) => theme.COLORS.TOMATO_400};
   }
 
+  .button-delete-dish {
+    width: 36.4rem;
+    height: 4.8rem;
+
+    margin: 3.2rem 0 0 0;
+
+    background-color: ${({ theme }) => theme.COLORS.DARK_800};
+  }
+
   @media (min-width: 1368px) {
     width: 100%;
     padding: 4rem 12.4rem 11.6rem;
@@ -70,13 +79,15 @@ export const Section = styled.div`
       }
     }
 
-    .teste {
+    .button-wrapper {
       display: flex;
-
+      gap: 3.2rem;
       justify-content: flex-end;
 
-      .button {
+      button {
         max-width: 17.2rem;
+
+        margin: 3.2rem 0 0 0;
       }
     }
   }
@@ -218,7 +229,7 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const OrderImage = styled.div`
+export const DishImage = styled.div`
   max-width: 36.4rem;
   display: flex;
   flex-direction: column;
@@ -227,39 +238,12 @@ export const OrderImage = styled.div`
     display: none;
   }
 
-  label {
-    padding: 1.6rem 3.2rem;
-
-    max-width: 36.4rem;
-    height: 4.8rem;
-
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 8px;
-
-    font-size: 1.4rem;
-    font-weight: 500;
-
-    color: ${({ theme }) => theme.COLORS.LIGHT_100};
-    background-color: ${({ theme }) => theme.COLORS.DARK_800};
-    border-radius: 8px;
-
-    cursor: pointer;
-  }
-
-  svg {
-    width: 20%;
-  }
-
-  .image {
-    width: 100%;
-
-    margin-top: 2rem;
+  .dish-image {
+    border-radius: 0.8rem;
   }
 
   @media (min-width: 1368px) {
-    max-width: 23rem;
+    min-width: 23.5rem;
 
     label {
       min-width: 23rem;

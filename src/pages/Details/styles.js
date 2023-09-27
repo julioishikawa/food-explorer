@@ -229,6 +229,7 @@ export const Wrapper = styled.div`
 
       p {
         font-size: 2.4rem;
+        text-align: start;
       }
 
       .tags {
