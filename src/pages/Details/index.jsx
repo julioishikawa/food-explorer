@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import { FiChevronLeft, FiMinus, FiPlus } from "react-icons/fi";
+import { Link, useParams } from "react-router-dom";
+import { FiChevronLeft } from "react-icons/fi";
 
 import { api } from "../../services/api";
 import { useAuth } from "../../hooks/auth";
 
 import { Header } from "../../components/Header";
+import { BackButton } from "../../components/BackButton";
 import { Ingredients } from "../../components/Ingredients";
 import { QuantityCounter } from "../../components/QuantityCounter";
 import { Footer } from "../../components/Footer";
@@ -16,7 +17,6 @@ import messages from "../../assets/Messages.png";
 
 export function Details() {
   const params = useParams();
-  const navigate = useNavigate();
 
   const { isAdmin } = useAuth();
 
@@ -38,10 +38,7 @@ export function Details() {
       <Header />
 
       <div className="details">
-        <Link className="back" to="/">
-          <FiChevronLeft /> voltar
-        </Link>
-
+        <BackButton />
         {data && (
           <Wrapper>
             <img

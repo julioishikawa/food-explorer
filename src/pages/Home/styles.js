@@ -109,6 +109,7 @@ export const Banner = styled.div`
 export const Meals = styled.div`
   width: 41.8rem;
   padding: 0 2.4rem 0 2.4rem;
+  margin-bottom: 2.4rem;
 
   .meals {
     display: flex;
@@ -172,6 +173,7 @@ export const Meals = styled.div`
   @media (min-width: 1368px) {
     width: 100%;
 
+    margin-bottom: 4.8rem;
     padding: 0;
 
     display: flex;

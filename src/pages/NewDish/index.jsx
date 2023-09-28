@@ -6,6 +6,7 @@ import { api } from "../../services/api";
 import { useDishes } from "../../hooks/dishes";
 
 import { Header } from "../../components/Header";
+import { BackButton } from "../../components/BackButton";
 import { FileInput } from "../../components/FileInput";
 import { Input } from "../../components/Input";
 import { Footer } from "../../components/Footer";
@@ -142,10 +143,7 @@ export function NewDish() {
 
       <Scrollbar>
         <Section>
-          <Link className="back" to="/">
-            <FiChevronLeft /> voltar
-          </Link>
-
+          <BackButton />
           <Form>
             <h1 className="new-order-mobile">Novo prato</h1>
             <h1 className="new-order-desktop">Adicionar prato</h1>

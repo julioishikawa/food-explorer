@@ -30,19 +30,7 @@ export const Container = styled.div`
 `;
 
 export const Section = styled.div`
-  padding: 1rem 2.8rem 5.3rem;
-
-  .back {
-    display: flex;
-    align-items: center;
-
-    margin-bottom: 2.4rem;
-
-    svg {
-      width: 2.2rem;
-      height: 2.2rem;
-    }
-  }
+  padding: 0 2.8rem 5.3rem;
 
   .button {
     width: 36.4rem;
@@ -63,21 +51,7 @@ export const Section = styled.div`
   }
 
   @media (min-width: 1368px) {
-    width: 100%;
-    padding: 4rem 12.4rem 11.6rem;
-
-    display: flex;
-    flex-direction: column;
-
-    .back {
-      font-size: 2.4rem;
-      font-weight: bold;
-
-      svg {
-        width: 3.2rem;
-        height: 3.2rem;
-      }
-    }
+    padding: 0 12.4rem 11.6rem;
 
     .button-wrapper {
       display: flex;
@@ -101,6 +75,8 @@ export const Form = styled.div`
   gap: 1.6rem;
 
   h1 {
+    margin-top: 2.4rem;
+
     font-size: 3.2rem;
     font-weight: 500;
   }
@@ -179,10 +155,6 @@ export const Form = styled.div`
 
     display: flex;
     gap: 3.2rem;
-
-    h1 {
-      margin: 0;
-    }
 
     .name {
       width: 100%;

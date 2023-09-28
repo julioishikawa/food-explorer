@@ -59,6 +59,31 @@ export const Container = styled.div`
     align-items: center;
     gap: 3.2rem;
 
+    .favorites-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      margin-right: 3.2rem;
+
+      min-width: 14.6rem;
+      height: 5.6rem;
+
+      font-size: 1.4rem;
+      font-weight: 100;
+
+      color: ${({ theme }) => theme.COLORS.LIGHT_100};
+
+      border: 0;
+      border-radius: 1rem;
+      background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
+
+      &:disabled {
+        opacity: 0.5;
+      }
+    }
+
     .search-wrapper {
       display: flex;
       flex-direction: column;
@@ -283,6 +308,8 @@ export const Logo = styled.div`
   justify-content: center;
   gap: 8px;
 
+  cursor: pointer;
+
   .logo {
     display: flex;
     align-items: center;
@@ -312,8 +339,6 @@ export const Logo = styled.div`
     flex-wrap: wrap;
     justify-content: flex-end;
     gap: 0;
-
-    cursor: pointer;
 
     .logo {
       width: 20.4rem;

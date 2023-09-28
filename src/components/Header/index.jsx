@@ -167,13 +167,13 @@ export function Header() {
         )}
       </div>
 
-      {!isAdmin && (
-        <Link to="/favorites" className="favorites-btn">
-          Meus favoritos
-        </Link>
-      )}
-
       <Messages>
+        {!isAdmin && (
+          <Link to="/favorites">
+            <button className="favorites-btn">Meus favoritos</button>
+          </Link>
+        )}
+
         {isAdmin && (
           <Link to="/newdish">
             <button className="new-order">Novo prato</button>

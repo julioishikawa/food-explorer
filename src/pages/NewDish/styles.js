@@ -30,22 +30,10 @@ export const Container = styled.div`
 `;
 
 export const Section = styled.div`
-  padding: 1rem 2.8rem 5.3rem;
+  padding: 0 2.8rem 5.3rem;
 
   .new-order-desktop {
     display: none;
-  }
-
-  .back {
-    display: flex;
-    align-items: center;
-
-    margin-bottom: 2.4rem;
-
-    svg {
-      width: 2.2rem;
-      height: 2.2rem;
-    }
   }
 
   .button {
@@ -58,11 +46,7 @@ export const Section = styled.div`
   }
 
   @media (min-width: 1368px) {
-    width: 100%;
-    padding: 4rem 12.4rem 11.6rem;
-
-    display: flex;
-    flex-direction: column;
+    padding: 0 12.4rem 11.6rem;
 
     .new-order-mobile {
       display: none;
@@ -70,16 +54,6 @@ export const Section = styled.div`
 
     .new-order-desktop {
       display: flex;
-    }
-
-    .back {
-      font-size: 2.4rem;
-      font-weight: bold;
-
-      svg {
-        width: 3.2rem;
-        height: 3.2rem;
-      }
     }
 
     .button-wrapper {
@@ -102,6 +76,8 @@ export const Form = styled.div`
   gap: 1.6rem;
 
   h1 {
+    margin-top: 2.4rem;
+
     font-size: 3.2rem;
     font-weight: 500;
   }
@@ -180,10 +156,6 @@ export const Form = styled.div`
 
     display: flex;
     gap: 3.2rem;
-
-    h1 {
-      margin: 0;
-    }
 
     .name {
       width: 100%;

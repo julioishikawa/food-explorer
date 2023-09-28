@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import { FiChevronLeft } from "react-icons/fi";
+import { useParams, useNavigate } from "react-router-dom";
 
 import { api } from "../../services/api";
 
 import { useDishes } from "../../hooks/dishes";
 
 import { Header } from "../../components/Header";
+import { BackButton } from "../../components/BackButton";
 import { Error } from "../../components/Error";
 import { FileInput } from "../../components/FileInput";
 import { Input } from "../../components/Input";
@@ -172,9 +172,7 @@ export function EditDish() {
 
       <Scrollbar>
         <Section>
-          <Link className="back" to="/">
-            <FiChevronLeft /> voltar
-          </Link>
+          <BackButton />
 
           <Form>
             <h1 className="edit-order-desktop">Editar prato</h1>
