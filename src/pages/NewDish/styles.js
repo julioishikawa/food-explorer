@@ -30,7 +30,7 @@ export const Container = styled.div`
 `;
 
 export const Section = styled.div`
-  padding: 0 2.8rem 5.3rem;
+  padding: 1rem 2.8rem 5.3rem;
 
   .new-order-desktop {
     display: none;
@@ -46,7 +46,7 @@ export const Section = styled.div`
   }
 
   @media (min-width: 1368px) {
-    padding: 0 12.4rem 11.6rem;
+    padding: 3.2rem 12.4rem 11.6rem;
 
     .new-order-mobile {
       display: none;

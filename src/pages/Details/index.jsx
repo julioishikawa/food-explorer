@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { FiChevronLeft } from "react-icons/fi";
 
 import { api } from "../../services/api";
 import { useAuth } from "../../hooks/auth";
@@ -17,7 +16,6 @@ import messages from "../../assets/Messages.png";
 
 export function Details() {
   const params = useParams();
-
   const { isAdmin } = useAuth();
 
   const [data, setData] = useState(null);
@@ -39,63 +37,66 @@ export function Details() {
 
       <div className="details">
         <BackButton />
+
         {data && (
           <Wrapper>
-            <img
-              className="order-image"
-              src={`${api.defaults.baseURL}/files/${data.image}`}
-              alt={`Imagem do prato ${data.name}`}
-            />
+            <div className="teste">
+              <img
+                className="order-image"
+                src={`${api.defaults.baseURL}/files/${data.image}`}
+                alt={`Imagem do prato ${data.name}`}
+              />
 
-            <div className="order-wrapper">
-              <h1>{data.name}</h1>
+              <div className="order-wrapper">
+                <h1>{data.name}</h1>
 
-              <p>{data.description}</p>
+                <p>{data.description}</p>
 
-              <div className="tags">
-                {data.ingredients.map((ingredient, index) => (
-                  <Ingredients key={index} title={ingredient} />
-                ))}
-              </div>
+                <div className="tags">
+                  {data.ingredients.map((ingredient, index) => (
+                    <Ingredients key={index} title={ingredient} />
+                  ))}
+                </div>
 
-              <div className="order">
-                {!isAdmin && (
-                  <div className="quantity">
-                    <QuantityCounter onUpdate={setQuantity} />
-                  </div>
-                )}
+                <div className="order">
+                  {!isAdmin && (
+                    <div className="quantity">
+                      <QuantityCounter onUpdate={setQuantity} />
+                    </div>
+                  )}
 
-                {!isAdmin && (
-                  <button className="order-button">
-                    <img
-                      className="button-mobile"
-                      src={messages}
-                      alt="Imagem ilustrativa de uma comanda"
-                    />
+                  {!isAdmin && (
+                    <button className="order-button">
+                      <img
+                        className="button-mobile"
+                        src={messages}
+                        alt="Imagem ilustrativa de uma comanda"
+                      />
 
-                    <p className="button-mobile">
-                      pedir ∙{" "}
-                      {new Intl.NumberFormat("pt-BR", {
-                        style: "currency",
-                        currency: "BRL",
-                      }).format(data.price * quantity)}
-                    </p>
+                      <p className="button-mobile">
+                        pedir ∙{" "}
+                        {new Intl.NumberFormat("pt-BR", {
+                          style: "currency",
+                          currency: "BRL",
+                        }).format(data.price * quantity)}
+                      </p>
 
-                    <p className="button-desktop">
-                      incluir ∙{" "}
-                      {new Intl.NumberFormat("pt-BR", {
-                        style: "currency",
-                        currency: "BRL",
-                      }).format(data.price * quantity)}
-                    </p>
-                  </button>
-                )}
+                      <p className="button-desktop">
+                        incluir ∙{" "}
+                        {new Intl.NumberFormat("pt-BR", {
+                          style: "currency",
+                          currency: "BRL",
+                        }).format(data.price * quantity)}
+                      </p>
+                    </button>
+                  )}
 
-                {isAdmin && (
-                  <Link to={`/editdish/${data.id}`}>
-                    <button className="edit-button">Editar prato</button>
-                  </Link>
-                )}
+                  {isAdmin && (
+                    <Link to={`/editdish/${data.id}`}>
+                      <button className="edit-button">Editar prato</button>
+                    </Link>
+                  )}
+                </div>
               </div>
             </div>
           </Wrapper>

@@ -106,6 +106,7 @@ export const Content = styled.div`
         display: flex;
         align-items: center;
 
+        text-align: center;
         font-size: 1.4rem;
         font-weight: 500;
         color: ${({ theme }) => theme.COLORS.LIGHT_300};

@@ -14,7 +14,7 @@ export const Container = styled.div`
     width: 100%;
     height: 100%;
 
-    padding: 1.6rem 5.6rem 3.3rem;
+    padding: 3.2rem 5.6rem;
 
     display: flex;
     flex-direction: column;
@@ -43,15 +43,7 @@ export const Container = styled.div`
     align-items: flex-start;
 
     .details {
-      height: 100%;
-
-      padding: 0 12.1rem 3.2rem;
-
-      .back {
-        padding-top: 2rem;
-
-        font-weight: bold;
-      }
+      padding: 3.2rem 12rem;
     }
   }
 `;
@@ -65,6 +57,11 @@ export const Wrapper = styled.div`
 
   .button-desktop {
     display: none;
+  }
+
+  .teste {
+    display: flex;
+    align-items: center;
   }
 
   .order-image {
@@ -197,17 +194,21 @@ export const Wrapper = styled.div`
     width: 100%;
     height: 100%;
 
-    margin: 0;
+    margin-top: 4.2rem;
 
     display: flex;
     flex-direction: row;
-    gap: 4.7rem;
+    align-items: flex-start;
 
     .button-mobile {
       display: none;
     }
 
-    img {
+    .teste {
+      gap: 4.7rem;
+    }
+
+    .order-image {
       width: 39rem;
       height: 39rem;
 

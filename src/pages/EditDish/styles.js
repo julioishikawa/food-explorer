@@ -30,7 +30,7 @@ export const Container = styled.div`
 `;
 
 export const Section = styled.div`
-  padding: 0 2.8rem 5.3rem;
+  padding: 1rem 2.8rem 5.3rem;
 
   .button {
     width: 36.4rem;
@@ -51,7 +51,7 @@ export const Section = styled.div`
   }
 
   @media (min-width: 1368px) {
-    padding: 0 12.4rem 11.6rem;
+    padding: 3.2rem 12.4rem 11.6rem;
 
     .button-wrapper {
       display: flex;

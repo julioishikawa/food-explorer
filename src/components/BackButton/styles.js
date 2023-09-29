@@ -4,8 +4,6 @@ export const Container = styled.button`
   display: flex;
   align-items: center;
 
-  padding-top: 2rem;
-
   font-size: 2.4rem;
   font-weight: 500;
   text-decoration: none;
@@ -21,8 +19,6 @@ export const Container = styled.button`
   }
 
   @media screen and (min-width: 1024px) {
-    padding-top: 3.2rem;
-
     font-weight: bold;
   }
 `;
