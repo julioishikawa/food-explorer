@@ -14,6 +14,10 @@ export const Container = styled.div`
 
   background-color: ${({ theme }) => theme.COLORS.DARK_700};
 
+  .notes-wrapper::-webkit-scrollbar {
+    width: 0;
+  }
+
   #search,
   .search-wrapper,
   .logout,
@@ -93,7 +97,7 @@ export const Container = styled.div`
       position: relative;
 
       #search {
-        z-index: 2;
+        z-index: 3;
       }
 
       .notes-wrapper {
@@ -102,17 +106,12 @@ export const Container = styled.div`
         overflow-y: auto;
 
         position: absolute;
-        top: 4.7rem;
+        top: 4.6rem;
         right: 1.6rem;
-        z-index: 1;
+        z-index: 2;
 
-        border-radius: 0 0 8px 8px;
-
+        border: 1px solid ${({ theme }) => theme.COLORS.CAKE_200};
         background-color: ${({ theme }) => theme.COLORS.DARK_1000};
-
-        .notes {
-          margin: 0 2px 0 0;
-        }
       }
     }
 

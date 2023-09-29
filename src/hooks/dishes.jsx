@@ -6,6 +6,7 @@ export const DishesContext = createContext({});
 
 function DishesProvider({ children }) {
   const [dishes, setDishes] = useState([]);
+  const [dishSought, setDishSought] = useState([]);
 
   async function getAllDishes() {
     try {
@@ -25,9 +26,14 @@ function DishesProvider({ children }) {
     }
   }
 
-  async function searchDishes(searchText) {
+  async function searchDishesKeyDown(searchText) {
     const res = await api.get(`/dishes?searchText=${searchText}`);
     setDishes(res.data);
+  }
+
+  async function searchDishes(searchText) {
+    const res = await api.get(`/dishes?searchText=${searchText}`);
+    setDishSought(res.data);
   }
 
   useEffect(() => {
@@ -35,7 +41,15 @@ function DishesProvider({ children }) {
   }, []);
 
   return (
-    <DishesContext.Provider value={{ getAllDishes, searchDishes, dishes }}>
+    <DishesContext.Provider
+      value={{
+        getAllDishes,
+        searchDishes,
+        searchDishesKeyDown,
+        dishes,
+        dishSought,
+      }}
+    >
       {children}
     </DishesContext.Provider>
   );

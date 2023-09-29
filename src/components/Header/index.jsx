@@ -16,12 +16,17 @@ import { Container, Menu, Logo, Messages } from "./styles";
 
 export function Header() {
   const { isAdmin, signOut } = useAuth();
-  const { getAllDishes, searchDishes } = useDishes();
+  const {
+    dishes,
+    dishSought,
+    getAllDishes,
+    searchDishes,
+    searchDishesKeyDown,
+  } = useDishes();
 
   const navigate = useNavigate();
 
   const [searchText, setSearchText] = useState("");
-  const [dishes, setDishes] = useState([]);
   const [click, setClick] = useState(false);
   const [notification, setNotification] = useState(false);
 
@@ -30,22 +35,30 @@ export function Header() {
 
   const handleClickNotifications = () => setNotification(!notification);
 
+  async function handleBackHome() {
+    await getAllDishes();
+    navigate("/");
+  }
+
   function handleDetails(id) {
     navigate(`/details/${id}`);
   }
 
   function handleSearch(event) {
     if (event.key === "Enter") {
-      searchDishes(searchText);
+      searchDishesKeyDown(searchText);
       setSearchText("");
       event.target.value = "";
+
+      if (window.location.pathname !== "/") {
+        navigate("/");
+      }
     }
   }
 
-  async function handleBackHome() {
-    await getAllDishes();
-    navigate("/");
-  }
+  useEffect(() => {
+    searchDishes(searchText);
+  }, [searchText]);
 
   return (
     <Container>
@@ -67,14 +80,14 @@ export function Header() {
                 placeholder="Busque por pratos ou ingredientes"
                 icon={FiSearch}
                 onChange={(e) => {
-                  setSearch(e.target.value), setIngredients(e.target.value);
+                  setSearchText(e.target.value);
                 }}
               />
             </li>
 
             {searchText.length > 0 && searchText != "" && (
               <li className="nav-item">
-                {dishes.map((dish) => (
+                {dishSought.map((dish) => (
                   <Note
                     key={String(dish.id)}
                     data={dish}
@@ -154,15 +167,13 @@ export function Header() {
 
         {searchText.length > 0 && (
           <div className="notes-wrapper">
-            <div className="notes">
-              {dishes.map((dish) => (
-                <Note
-                  key={String(dish.id)}
-                  data={dish}
-                  onClick={() => handleDetails(dish.id)}
-                />
-              ))}
-            </div>
+            {dishSought.map((dish) => (
+              <Note
+                key={String(dish.id)}
+                data={dish}
+                onClick={() => handleDetails(dish.id)}
+              />
+            ))}
           </div>
         )}
       </div>
