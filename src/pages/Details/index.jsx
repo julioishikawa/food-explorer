@@ -29,7 +29,7 @@ export function Details() {
     }
 
     fetchData();
-  }, []);
+  }, [params.id]);
 
   return (
     <Container>
