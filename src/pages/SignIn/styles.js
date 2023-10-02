@@ -71,7 +71,7 @@ export const Container = styled.div`
     }
   }
 
-  @media (min-width: 768px) {
+  @media screen and (min-width: 768px) {
     width: 100%;
 
     padding: 10rem;
@@ -82,7 +82,7 @@ export const Container = styled.div`
     animation: top-down-middle 500ms 300ms backwards;
   }
 
-  @media (min-width: 1368px) {
+  @media screen and (min-width: 1368px) {
     width: 100%;
 
     padding: 9rem 10.8rem 11.2rem 15.4rem;
@@ -131,14 +131,14 @@ export const Content = styled.div`
     margin: 3.2rem 0;
   }
 
-  @media (min-width: 768px) {
+  @media screen and (min-width: 768px) {
     padding: 5rem;
 
     border-radius: 1.6rem;
     background-color: ${({ theme }) => theme.COLORS.DARK_700};
   }
 
-  @media (min-width: 1368px) {
+  @media screen and (min-width: 1368px) {
     padding: 6.4rem;
 
     border-radius: 1.6rem;

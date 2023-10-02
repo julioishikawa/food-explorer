@@ -37,7 +37,7 @@ export const Container = styled.div`
     }
   }
 
-  @media (min-width: 1368px) {
+  @media screen and (min-width: 1368px) {
     width: 100%;
   }
 `;
@@ -50,13 +50,14 @@ export const Content = styled.div`
     width: 21rem;
     height: 29.2rem;
 
-    position: relative;
-
     padding: 2.4rem;
+
+    position: relative;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 
     .hide,
     .description {
@@ -120,8 +121,6 @@ export const Content = styled.div`
       }
 
       span {
-        margin-bottom: 4px;
-
         display: flex;
         justify-content: center;
         align-items: center;
@@ -134,7 +133,7 @@ export const Content = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 1.6rem;
+        gap: 1.2rem;
 
         p {
           margin: 0 1.4rem;
@@ -150,12 +149,10 @@ export const Content = styled.div`
     }
   }
 
-  @media (min-width: 1368px) {
+  @media screen and (min-width: 1368px) {
     .card {
       width: 30.4rem;
       height: 46.2rem;
-
-      padding: 2.4rem;
 
       .meal {
         width: 25.6rem;

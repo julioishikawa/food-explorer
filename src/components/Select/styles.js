@@ -25,7 +25,7 @@ export const Container = styled.div`
     padding: 1.2rem 1.6rem;
 
     border: 1px solid transparent;
-    border-radius: 5px;
+    border-radius: 8px;
     background: ${({ theme }) => theme.COLORS.DARK_800};
 
     > svg {
@@ -55,7 +55,7 @@ export const Container = styled.div`
 
       width: calc(100% + 2px);
 
-      border-radius: 0 0 5px 5px;
+      border-radius: 0 0 8px 8px;
       overflow: hidden;
 
       li {

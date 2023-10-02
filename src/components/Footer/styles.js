@@ -19,7 +19,7 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.COLORS.LIGHT_200};
   }
 
-  @media (min-width: 1368px) {
+  @media screen and (min-width: 1368px) {
     justify-content: space-between;
 
     padding: 2.8rem 12.3rem;

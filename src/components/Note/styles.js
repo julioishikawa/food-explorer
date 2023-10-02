@@ -12,8 +12,10 @@ export const Container = styled.button`
   justify-content: space-around;
   align-items: center;
 
+  background-color: ${({ theme }) => theme.COLORS.DARK_200};
+
   border: 2px solid ${({ theme }) => theme.COLORS.DARK_1000};
-  border-radius: 0.8rem;
+  border-radius: 0.5rem;
 
   transition: animation 500ms;
   animation: downtop 500ms;
@@ -28,6 +30,14 @@ export const Container = styled.button`
     border-radius: 50%;
   }
 
+  .right-line {
+    height: 100%;
+
+    border-right-width: 2px;
+    border-right-style: solid;
+    border-right-color: ${({ theme }) => theme.COLORS.DARK_1000};
+  }
+
   @keyframes downtop {
     0% {
       opacity: 0;
@@ -40,24 +50,13 @@ export const Container = styled.button`
     }
   }
 
-  .right-line {
-    height: 100%;
-
-    border-right-width: 2px;
-    border-right-style: solid;
-    border-right-color: ${({ theme }) => theme.COLORS.DARK_1000};
-  }
-
-  @media (min-width: 1368px) {
-    height: 13rem;
-
-    margin-bottom: -2px;
-
-    border-radius: 0;
+  @media screen and (min-width: 1368px) {
+    margin-bottom: 0;
 
     border-width: 1px 0;
-    border-style: solid;
-    border-color: ${({ theme }) => theme.COLORS.CAKE_200};
+    border-radius: 0;
+    border-top-style: solid;
+    border-top-color: ${({ theme }) => theme.COLORS.CAKE_200};
 
     .right-line {
       height: 100%;

@@ -12,7 +12,7 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.COLORS.DARK_400};
 
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 0;
   }
 
   ::-webkit-scrollbar-thumb {
@@ -24,33 +24,42 @@ export const Container = styled.div`
     background-color: ${({ theme }) => theme.COLORS.DARK_1000};
   }
 
-  @media (min-width: 1368px) {
+  @media screen and (min-width: 1368px) {
     width: 100%;
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
   }
 `;
 
 export const Section = styled.div`
-  padding: 1rem 2.8rem 5.3rem;
+  padding: 1rem 3.2rem 5.3rem;
 
-  .button {
-    width: 36.4rem;
-    height: 4.8rem;
+  .button-wrapper {
+    display: flex;
+    gap: 3.2rem;
 
-    margin: 3.2rem 0 0 0;
+    .button {
+      width: 36.4rem;
+      height: 4.8rem;
 
-    background-color: ${({ theme }) => theme.COLORS.TOMATO_400};
+      margin: 3.2rem 0 0 0;
+
+      background-color: ${({ theme }) => theme.COLORS.TOMATO_400};
+    }
+
+    .button-delete-dish {
+      width: 36.4rem;
+      height: 4.8rem;
+
+      margin: 3.2rem 0 0 0;
+
+      background-color: ${({ theme }) => theme.COLORS.DARK_800};
+    }
   }
 
-  .button-delete-dish {
-    width: 36.4rem;
-    height: 4.8rem;
-
-    margin: 3.2rem 0 0 0;
-
-    background-color: ${({ theme }) => theme.COLORS.DARK_800};
-  }
-
-  @media (min-width: 1368px) {
+  @media screen and (min-width: 1368px) {
     padding: 3.2rem 12.4rem 11.6rem;
 
     .button-wrapper {
@@ -150,7 +159,7 @@ export const Form = styled.div`
     margin: 0.8rem 0 0 0;
   }
 
-  @media (min-width: 1368px) {
+  @media screen and (min-width: 1368px) {
     width: 100%;
 
     display: flex;
@@ -166,11 +175,6 @@ export const Form = styled.div`
           width: 100%;
         }
       }
-    }
-
-    .category select {
-      color: ${({ theme }) => theme.COLORS.LIGHT_400};
-      background-color: ${({ theme }) => theme.COLORS.DARK_800};
     }
 
     .ingredients {
@@ -192,7 +196,7 @@ export const Wrapper = styled.div`
     margin: 0 0 1.6rem;
   }
 
-  @media (min-width: 1368px) {
+  @media screen and (min-width: 1368px) {
     width: 100%;
 
     flex-direction: row;
@@ -214,7 +218,7 @@ export const DishImage = styled.div`
     border-radius: 0.8rem;
   }
 
-  @media (min-width: 1368px) {
+  @media screen and (min-width: 1368px) {
     min-width: 23.5rem;
 
     label {
@@ -228,7 +232,9 @@ export const DishImage = styled.div`
 `;
 
 export const Scrollbar = styled.div`
-  margin: 2px 2px 2px 0;
-
   overflow-y: auto;
+
+  @media screen and (min-width: 1368px) {
+    margin: 0 2px 0 0;
+  }
 `;

@@ -3,14 +3,14 @@ import styled from "styled-components";
 export const Container = styled.li`
   display: flex;
   align-items: center;
-  gap: 1.3rem;
+  gap: 1.6rem;
 
   padding: 1.6rem;
 
   background-color: ${({ theme }) => theme.COLORS.DARK_200};
 
   border: 2px solid ${({ theme }) => theme.COLORS.DARK_300};
-  border-radius: 0.8rem;
+  border-radius: 0.5rem;
 
   li:hover {
     background-color: aliceblue;

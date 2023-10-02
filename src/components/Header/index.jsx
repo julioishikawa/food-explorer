@@ -187,19 +187,19 @@ export function Header() {
 
         {isAdmin && (
           <Link to="/newdish">
-            <button className="new-order">Novo prato</button>
+            <button className="new-dish">Novo prato</button>
           </Link>
         )}
 
         {!isAdmin && (
-          <div className="menu-orders" onClick={handleClickNotifications}>
+          <div className="menu-dishes" onClick={handleClickNotifications}>
             <img src={messages} alt="Imagem ilustrativa de uma comanda" />
             <span className="notifications">0</span>
           </div>
         )}
 
         {!isAdmin && (
-          <button className="orders" onClick={handleClickNotifications}>
+          <button className="dishes" onClick={handleClickNotifications}>
             <img src={messages} alt="Imagem ilustrativa de uma comanda" />
             Pedidos ({dishes.quantity})
           </button>

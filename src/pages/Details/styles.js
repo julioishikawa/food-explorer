@@ -6,44 +6,41 @@ export const Container = styled.div`
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 
   background-color: ${({ theme }) => theme.COLORS.DARK_400};
 
-  .details {
-    width: 100%;
-    height: 100%;
-
-    padding: 3.2rem 5.6rem;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: start;
-
-    .back {
-      display: flex;
-      align-items: center;
-
-      font-size: 2.4rem;
-      font-weight: 500;
-
-      svg {
-        width: 3.2rem;
-        height: 3.2rem;
-      }
-    }
+  .dish-wrapper {
   }
 
-  @media (min-width: 1368px) {
+  .dish-wrapper {
+    padding: 3.2rem 5.6rem 5rem;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.COLORS.DARK_900};
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:active {
+    background-color: ${({ theme }) => theme.COLORS.DARK_1000};
+  }
+
+  @media screen and (min-width: 1368px) {
     width: 100%;
 
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
 
-    .details {
-      padding: 3.2rem 12rem;
+    .dish-wrapper {
+      padding: 3.2rem 12rem 5rem;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
     }
   }
 `;
@@ -54,17 +51,13 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 
   .button-desktop {
     display: none;
   }
 
-  .teste {
-    display: flex;
-    align-items: center;
-  }
-
-  .order-image {
+  .dish-image {
     width: 26.4rem;
     height: 26.4rem;
 
@@ -74,9 +67,7 @@ export const Wrapper = styled.div`
     object-fit: cover;
   }
 
-  .order-wrapper {
-    width: 31.6rem;
-
+  .infos-wrapper {
     h1 {
       text-align: center;
       font-size: 2.7rem;
@@ -98,7 +89,7 @@ export const Wrapper = styled.div`
       margin-bottom: 4.8rem;
     }
 
-    .order {
+    .quantity-wrapper {
       height: 3.8rem;
 
       display: flex;
@@ -146,7 +137,7 @@ export const Wrapper = styled.div`
         }
       }
 
-      .order-button,
+      .dish-button,
       .edit-button {
         display: flex;
         align-items: center;
@@ -190,32 +181,29 @@ export const Wrapper = styled.div`
     }
   }
 
-  @media (min-width: 1368px) {
+  @media screen and (min-width: 1368px) {
     width: 100%;
-    height: 100%;
 
     margin-top: 4.2rem;
 
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
+
+    gap: 4.7rem;
 
     .button-mobile {
       display: none;
     }
 
-    .teste {
-      gap: 4.7rem;
-    }
-
-    .order-image {
+    .dish-image {
       width: 39rem;
       height: 39rem;
 
       margin: 0;
     }
 
-    .order-wrapper {
+    .infos-wrapper {
       width: 100%;
 
       display: flex;
@@ -245,7 +233,7 @@ export const Wrapper = styled.div`
         }
       }
 
-      .order {
+      .quantity-wrapper {
         height: 4.8rem;
         gap: 3.2rem;
 
@@ -258,7 +246,7 @@ export const Wrapper = styled.div`
           height: 2.4rem;
         }
 
-        .order-button {
+        .dish-button {
           min-width: 16.2rem;
           height: 4.8rem;
 
@@ -276,5 +264,20 @@ export const Wrapper = styled.div`
         }
       }
     }
+  }
+`;
+
+export const Scrollbar = styled.div`
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  overflow-y: auto;
+
+  @media screen and (min-width: 1368px) {
+    margin: 0 2px 0 0;
   }
 `;

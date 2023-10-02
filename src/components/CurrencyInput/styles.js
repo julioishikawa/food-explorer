@@ -30,7 +30,6 @@ export const Container = styled.div`
       color: ${({ theme }) => theme.COLORS.LIGHT_500};
     }
 
-    &:valid,
     &:focus {
       border: 1px solid ${({ theme }) => theme.COLORS.CAKE_200};
     }

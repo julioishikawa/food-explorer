@@ -25,7 +25,7 @@ export const Container = styled.div`
     display: none;
   }
 
-  .orders {
+  .dishes {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -54,8 +54,9 @@ export const Container = styled.div`
     }
   }
 
-  @media (min-width: 1368px) {
-    width: 100vw;
+  @media screen and (min-width: 1368px) {
+    width: 100%;
+    min-height: 10.4rem;
 
     padding: 0;
 
@@ -106,11 +107,13 @@ export const Container = styled.div`
         overflow-y: auto;
 
         position: absolute;
-        top: 4.6rem;
+        top: 4.5rem;
         right: 1.6rem;
         z-index: 2;
 
         border: 1px solid ${({ theme }) => theme.COLORS.CAKE_200};
+        border-radius: 0 0 5px 5px;
+
         background-color: ${({ theme }) => theme.COLORS.DARK_1000};
       }
     }
@@ -129,34 +132,11 @@ export const Container = styled.div`
 
     a {
       svg {
-        width: 2.2rem;
-        height: 2.2rem;
+        width: 3.2rem;
+        height: 3.2rem;
         margin-right: 12.3rem;
       }
     }
-  }
-`;
-
-export const InputSearch = styled.div`
-  width: 100%;
-  height: 4.8rem;
-  padding: 1.6rem 1.4rem;
-
-  color: ${({ theme }) => theme.COLORS.LIGHT_100};
-  background: transparent;
-  border: 0;
-  border-radius: 8px;
-
-  &::placeholder {
-    color: ${({ theme }) => theme.COLORS.LIGHT_500};
-  }
-
-  &:focus {
-    border: 1px solid ${({ theme }) => theme.COLORS.CAKE_200};
-  }
-
-  > svg {
-    margin-left: 1.4rem;
   }
 `;
 
@@ -296,7 +276,7 @@ export const Menu = styled.div`
     }
   }
 
-  @media (min-width: 1368px) {
+  @media screen and (min-width: 1368px) {
     margin-left: 6.5rem;
   }
 `;
@@ -333,7 +313,7 @@ export const Logo = styled.div`
     color: ${({ theme }) => theme.COLORS.CAKE_200};
   }
 
-  @media (min-width: 1368px) {
+  @media screen and (min-width: 1368px) {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
@@ -360,8 +340,8 @@ export const Messages = styled.div`
 
   position: relative;
 
-  .orders,
-  .new-order {
+  .dishes,
+  .new-dish {
     display: none;
   }
 
@@ -370,7 +350,7 @@ export const Messages = styled.div`
     height: 2.2rem;
   }
 
-  .menu-orders {
+  .menu-dishes {
     cursor: pointer;
   }
 
@@ -500,16 +480,16 @@ export const Messages = styled.div`
     cursor: pointer;
   }
 
-  @media (min-width: 1368px) {
-    .orders {
+  @media screen and (min-width: 1368px) {
+    .dishes {
       display: flex;
     }
 
-    .menu-orders {
+    .menu-dishes {
       display: none;
     }
 
-    .new-order {
+    .new-dish {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -517,7 +497,7 @@ export const Messages = styled.div`
 
       min-width: 21.6rem;
 
-      height: 4.8rem;
+      height: 5.6rem;
 
       font-size: 1.4rem;
       font-weight: 100;
@@ -525,7 +505,7 @@ export const Messages = styled.div`
       color: ${({ theme }) => theme.COLORS.LIGHT_100};
 
       border: 0;
-      border-radius: 1rem;
+      border-radius: 0.5rem;
       background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
 
       &:disabled {

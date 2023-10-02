@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { FiChevronLeft } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 import { api } from "../../services/api";
 import { useDishes } from "../../hooks/dishes";
@@ -27,6 +26,8 @@ import {
 } from "./styles";
 
 export function NewDish() {
+  const navigate = useNavigate();
+
   const { getAllDishes } = useDishes();
 
   const [image, setImage] = useState(null);
@@ -44,8 +45,6 @@ export function NewDish() {
     price: false,
     description: false,
   });
-
-  const navigate = useNavigate();
 
   function handleImage() {
     const formData = new FormData();

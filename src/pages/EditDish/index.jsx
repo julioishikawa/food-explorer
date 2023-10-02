@@ -175,7 +175,7 @@ export function EditDish() {
           <BackButton />
 
           <Form>
-            <h1 className="edit-order-desktop">Editar prato</h1>
+            <h1 className="edit-dish-desktop">Editar prato</h1>
             <Wrapper>
               <DishImage>
                 <p>Imagem do prato</p>

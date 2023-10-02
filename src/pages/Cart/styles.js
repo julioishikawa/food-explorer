@@ -11,7 +11,7 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.COLORS.DARK_400};
 
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 0;
   }
 
   ::-webkit-scrollbar-thumb {
@@ -21,6 +21,14 @@ export const Container = styled.div`
 
   ::-webkit-scrollbar-thumb:active {
     background-color: ${({ theme }) => theme.COLORS.DARK_1000};
+  }
+
+  @media screen and (min-width: 1368px) {
+    width: 100%;
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
   }
 `;
 
@@ -127,7 +135,9 @@ export const Payment = styled.div`
 `;
 
 export const Scrollbar = styled.div`
-  margin: 2px 2px 2px 0;
-
   overflow-y: auto;
+
+  @media screen and (min-width: 1368px) {
+    margin: 0 2px 0 0;
+  }
 `;

@@ -6,12 +6,16 @@ export const Container = styled.div`
   min-height: 100vh;
 
   > main {
+    width: 42.8rem;
+
     flex: 1;
+
+    padding: 3.2rem;
 
     background: ${({ theme }) => theme.COLORS.DARK_400};
 
     > h1 {
-      margin-top: 2.7rem;
+      margin-top: 2.8rem;
 
       font-size: 3.2rem;
       font-weight: 500;
@@ -28,22 +32,22 @@ export const Container = styled.div`
   @media screen and (min-width: 1368px) {
     > main {
       width: 100%;
-      padding-inline: 12rem;
+      padding: 3.2rem 12rem;
     }
   }
 `;
 
 export const FavoritesList = styled.ul`
-  margin-top: 2.7rem;
+  margin-top: 1.6rem;
 
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  gap: 2.4rem;
+  gap: 1.6rem;
 
   @media screen and (min-width: 1024px) {
     flex-direction: row;
-    gap: 4.8rem;
+    gap: 2.4rem;
   }
 `;
 

@@ -14,6 +14,10 @@ export const Container = styled.div`
     width: fit-content;
   }
 
+  .swiper-slide:nth-child(n + 2) {
+    margin-left: 1.6rem;
+  }
+
   .swiper-button-next {
     justify-content: flex-end;
     padding-right: 2rem;
@@ -57,8 +61,11 @@ export const Container = styled.div`
     font-weight: 500;
     line-height: 140%;
   }
-
   @media screen and (min-width: 1024px) {
+    .swiper-slide:nth-child(n + 2) {
+      margin-left: 2.7rem;
+    }
+
     .swiper-button-next,
     .swiper-button-prev {
       display: flex;

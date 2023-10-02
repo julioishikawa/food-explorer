@@ -10,7 +10,7 @@ import { Ingredients } from "../../components/Ingredients";
 import { QuantityCounter } from "../../components/QuantityCounter";
 import { Footer } from "../../components/Footer";
 
-import { Container, Wrapper } from "./styles";
+import { Container, Wrapper, Scrollbar } from "./styles";
 
 import messages from "../../assets/Messages.png";
 
@@ -35,19 +35,19 @@ export function Details() {
     <Container>
       <Header />
 
-      <div className="details">
-        <BackButton />
+      <Scrollbar>
+        <div className="dish-wrapper">
+          <BackButton />
 
-        {data && (
-          <Wrapper>
-            <div className="teste">
+          {data && (
+            <Wrapper>
               <img
-                className="order-image"
+                className="dish-image"
                 src={`${api.defaults.baseURL}/files/${data.image}`}
                 alt={`Imagem do prato ${data.name}`}
               />
 
-              <div className="order-wrapper">
+              <div className="infos-wrapper">
                 <h1>{data.name}</h1>
 
                 <p>{data.description}</p>
@@ -58,7 +58,7 @@ export function Details() {
                   ))}
                 </div>
 
-                <div className="order">
+                <div className="quantity-wrapper">
                   {!isAdmin && (
                     <div className="quantity">
                       <QuantityCounter onUpdate={setQuantity} />
@@ -66,7 +66,7 @@ export function Details() {
                   )}
 
                   {!isAdmin && (
-                    <button className="order-button">
+                    <button className="dish-button">
                       <img
                         className="button-mobile"
                         src={messages}
@@ -98,12 +98,11 @@ export function Details() {
                   )}
                 </div>
               </div>
-            </div>
-          </Wrapper>
-        )}
-      </div>
-
-      <Footer />
+            </Wrapper>
+          )}
+        </div>
+        <Footer />
+      </Scrollbar>
     </Container>
   );
 }

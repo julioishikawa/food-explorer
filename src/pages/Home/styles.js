@@ -11,7 +11,7 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.COLORS.DARK_400};
 
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 0;
   }
 
   ::-webkit-scrollbar-thumb {
@@ -23,8 +23,12 @@ export const Container = styled.div`
     background-color: ${({ theme }) => theme.COLORS.DARK_1000};
   }
 
-  @media (min-width: 1368px) {
+  @media screen and (min-width: 1368px) {
     width: 100%;
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
   }
 `;
 
@@ -68,7 +72,7 @@ export const Banner = styled.div`
     }
   }
 
-  @media (min-width: 1368px) {
+  @media screen and (min-width: 1368px) {
     width: 100%;
     height: 26rem;
 
@@ -107,7 +111,7 @@ export const Banner = styled.div`
 `;
 
 export const Meals = styled.div`
-  width: 41.8rem;
+  width: 42.8rem;
   padding: 0 2.4rem 0 2.4rem;
   margin-bottom: 2.4rem;
 
@@ -170,7 +174,7 @@ export const Meals = styled.div`
     color: ${({ theme }) => theme.COLORS.LIGHT_300};
   }
 
-  @media (min-width: 1368px) {
+  @media screen and (min-width: 1368px) {
     width: 100%;
 
     margin-bottom: 4.8rem;
@@ -186,13 +190,13 @@ export const Meals = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  width: 41.8rem;
+  width: 42.8rem;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  @media (min-width: 1368px) {
+  @media screen and (min-width: 1368px) {
     width: 100%;
 
     padding: 0 12.2rem;
@@ -200,7 +204,9 @@ export const Wrapper = styled.div`
 `;
 
 export const Scrollbar = styled.div`
-  margin: 2px 2px 2px 0;
-
   overflow-y: auto;
+
+  @media screen and (min-width: 1368px) {
+    margin: 0 2px 0 0;
+  }
 `;
