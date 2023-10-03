@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 import { useAuth } from "../hooks/auth";
 import { DishesProvider } from "../hooks/dishes";
+import { CartProvider } from "../hooks/cart";
 import { FavoritesProvider } from "../hooks/favorites";
 
 import { Home } from "../pages/Home";
@@ -16,16 +17,18 @@ export function AppRoutes() {
 
   return (
     <DishesProvider>
-      <FavoritesProvider>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/details/:id" element={<Details />} />
-          {!isAdmin && <Route path="/favorites" element={<Favorites />} />}
-          {isAdmin && <Route path="/newdish" element={<NewDish />} />}
-          {isAdmin && <Route path="/editdish/:id" element={<EditDish />} />}
-          <Route path="/shoppingcart" element={<Cart />} />
-        </Routes>
-      </FavoritesProvider>
+      <CartProvider>
+        <FavoritesProvider>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/details/:id" element={<Details />} />
+            {!isAdmin && <Route path="/favorites" element={<Favorites />} />}
+            {isAdmin && <Route path="/newdish" element={<NewDish />} />}
+            {isAdmin && <Route path="/editdish/:id" element={<EditDish />} />}
+            <Route path="/shoppingcart" element={<Cart />} />
+          </Routes>
+        </FavoritesProvider>
+      </CartProvider>
     </DishesProvider>
   );
 }

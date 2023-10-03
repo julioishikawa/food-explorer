@@ -4,6 +4,7 @@ import { FiMenu, FiX, FiSearch, FiGithub, FiLogOut } from "react-icons/fi";
 
 import { useAuth } from "../../hooks/auth";
 import { useDishes } from "../../hooks/dishes";
+import { useCart } from "../../hooks/cart";
 
 import { Note } from "../Note";
 import { InputSearch } from "../InputSearch";
@@ -12,28 +13,25 @@ import polygon from "../../assets/Polygon.svg";
 import footerLogo from "../../assets/Polygon-footer.svg";
 import messages from "../../assets/Messages.png";
 
-import { Container, Menu, Logo, Messages } from "./styles";
+import { Container, Menu, Logo, Cart } from "./styles";
 
 export function Header() {
   const { isAdmin, signOut } = useAuth();
-  const {
-    dishes,
-    dishSought,
-    getAllDishes,
-    searchDishes,
-    searchDishesKeyDown,
-  } = useDishes();
+  const { dishSought, getAllDishes, searchDishes, searchDishesKeyDown } =
+    useDishes();
+  const { getCartTotalItems } = useCart();
 
   const navigate = useNavigate();
 
-  const [searchText, setSearchText] = useState("");
   const [click, setClick] = useState(false);
-  const [notification, setNotification] = useState(false);
+  const [cart, setCart] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const [totalCartItems, setTotalCartItems] = useState(0);
 
   const handleClickMobileMenu = () => setClick(!click);
   const closeMobileMenu = () => setClose(false);
 
-  const handleClickNotifications = () => setNotification(!notification);
+  const handleClickDishes = () => setCart(!cart);
 
   async function handleBackHome() {
     await getAllDishes();
@@ -59,6 +57,10 @@ export function Header() {
   useEffect(() => {
     searchDishes(searchText);
   }, [searchText]);
+
+  useEffect(() => {
+    setTotalCartItems(getCartTotalItems());
+  });
 
   return (
     <Container>
@@ -178,7 +180,7 @@ export function Header() {
         )}
       </div>
 
-      <Messages>
+      <Cart>
         {!isAdmin && (
           <Link to="/favorites">
             <button className="favorites-btn">Meus favoritos</button>
@@ -192,42 +194,38 @@ export function Header() {
         )}
 
         {!isAdmin && (
-          <div className="menu-dishes" onClick={handleClickNotifications}>
+          <div className="menu-dishes" onClick={handleClickDishes}>
             <img src={messages} alt="Imagem ilustrativa de uma comanda" />
-            <span className="notifications">0</span>
+            <span className="dishes">{totalCartItems}</span>
           </div>
         )}
 
         {!isAdmin && (
-          <button className="dishes" onClick={handleClickNotifications}>
+          <button className="dishes-wrapper" onClick={handleClickDishes}>
             <img src={messages} alt="Imagem ilustrativa de uma comanda" />
-            Pedidos ({dishes.quantity})
+            Pedidos ({totalCartItems})
           </button>
         )}
 
-        <div
-          className={
-            notification ? "nav-notifications active" : "nav-notifications"
-          }
-        >
+        <div className={cart ? "nav-dishes active" : "nav-dishes"}>
           <ul>
-            <li className="notification-logo">
-              <FiX onClick={handleClickNotifications} />
+            <li className="cart-logo">
+              <FiX onClick={handleClickDishes} />
               <h2>Carrinho</h2>
             </li>
 
-            <li className="notification-item">
+            <li className="cart-item">
               <Link
                 target="_blank"
                 to="https://github.com/shuharib0t"
-                className="notification-links"
+                className="cart-links"
               >
                 testando
               </Link>
             </li>
           </ul>
         </div>
-      </Messages>
+      </Cart>
 
       <Link to="/" onClick={signOut}>
         <FiLogOut className="logout" />

@@ -25,7 +25,7 @@ export const Container = styled.div`
     display: none;
   }
 
-  .dishes {
+  .dishes-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -333,14 +333,14 @@ export const Logo = styled.div`
   }
 `;
 
-export const Messages = styled.div`
+export const Cart = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
 
   position: relative;
 
-  .dishes,
+  .dishes-wrapper,
   .new-dish {
     display: none;
   }
@@ -354,7 +354,7 @@ export const Messages = styled.div`
     cursor: pointer;
   }
 
-  .notifications {
+  .dishes {
     position: absolute;
 
     display: flex;
@@ -373,7 +373,7 @@ export const Messages = styled.div`
     background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
   }
 
-  .nav-notifications {
+  .nav-dishes {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -383,15 +383,15 @@ export const Messages = styled.div`
 
     position: absolute;
 
-    top: 0px;
-    right: 12.8rem;
+    top: 5px;
+    right: 5px;
 
     opacity: 1;
     transition: all 0.5s ease;
     z-index: -1;
   }
 
-  .nav-notifications.active {
+  .nav-dishes.active {
     width: 23.8rem;
 
     display: flex;
@@ -400,22 +400,18 @@ export const Messages = styled.div`
     border-radius: 1rem;
     background: ${({ theme }) => theme.COLORS.DARK_600};
 
-    top: 0px;
-    right: -10px;
-
     opacity: 1;
-    transition: all 0.5s ease;
-    z-index: 2;
+    z-index: 3;
   }
 
-  .notification-logo {
+  .cart-logo {
     display: flex;
     align-items: center;
     gap: 1.6rem;
 
-    padding: 2.7rem;
+    padding: 2.4rem;
 
-    border-radius: 1rem 1rem 0 0;
+    border-radius: 5px 5px 0 0;
     background-color: ${({ theme }) => theme.COLORS.DARK_1000};
 
     svg {
@@ -431,7 +427,7 @@ export const Messages = styled.div`
     }
   }
 
-  .notification-item {
+  .cart-item {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -453,7 +449,7 @@ export const Messages = styled.div`
     }
   }
 
-  .notification-links {
+  .cart-links {
     width: 100%;
     padding: 1rem;
 
@@ -473,7 +469,7 @@ export const Messages = styled.div`
     }
   }
 
-  .notification-links:hover {
+  .cart-links:hover {
     background-color: ${({ theme }) => theme.COLORS.DARK_1000};
     border-radius: 1rem;
 
@@ -481,7 +477,7 @@ export const Messages = styled.div`
   }
 
   @media screen and (min-width: 1368px) {
-    .dishes {
+    .dishes-wrapper {
       display: flex;
     }
 
@@ -511,6 +507,30 @@ export const Messages = styled.div`
       &:disabled {
         opacity: 0.5;
       }
+    }
+
+    .nav-dishes {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+
+      width: 100%;
+      height: 50vh;
+
+      position: absolute;
+
+      top: 10px;
+      right: 0;
+
+      opacity: 1;
+      transition: all 0.5s ease;
+      z-index: -1;
+    }
+
+    .nav-dishes.active {
+      width: 39.4rem;
+
+      top: 0;
     }
   }
 `;

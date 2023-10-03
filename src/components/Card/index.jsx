@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiEdit2 } from "react-icons/fi";
 
-import { api } from "../../services/api";
 import { useAuth } from "../../hooks/auth";
 import { useFavorites } from "../../hooks/favorites";
+import { useCart } from "../../hooks/cart";
+
+import { api } from "../../services/api";
 
 import { Button } from "../Button";
 import { Heart } from "../Heart";
@@ -14,6 +16,8 @@ import { Container, Content } from "./styles";
 
 export function Card({ id, title, description, price, image }) {
   const { isAdmin } = useAuth();
+
+  const { addToCart } = useCart();
 
   const { favorites, addFavorite, removeFavorite } = useFavorites();
 
@@ -30,6 +34,10 @@ export function Card({ id, title, description, price, image }) {
     } else {
       await addFavorite(id);
     }
+  }
+
+  function handleAddToCart() {
+    addToCart({ id, title, price, image, quantity });
   }
 
   useEffect(() => {
@@ -82,9 +90,7 @@ export function Card({ id, title, description, price, image }) {
                   <QuantityCounter onUpdate={setQuantity} />
                 </div>
 
-                <Link to="/shoppingcart">
-                  <Button title="incluir" />
-                </Link>
+                <Button title="incluir" onClick={handleAddToCart} />
               </div>
             )}
           </div>

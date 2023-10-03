@@ -8,6 +8,12 @@ export const Container = styled.div`
   .swiper {
     width: 100%;
     position: relative;
+
+    z-index: 0;
+  }
+
+  .swiper-wrapper {
+    z-index: 0;
   }
 
   .swiper-slide {
@@ -61,7 +67,7 @@ export const Container = styled.div`
     font-weight: 500;
     line-height: 140%;
   }
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 1368px) {
     .swiper-slide:nth-child(n + 2) {
       margin-left: 2.7rem;
     }

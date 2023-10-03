@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 
 import { api } from "../../services/api";
 import { useAuth } from "../../hooks/auth";
+import { useCart } from "../../hooks/cart";
 
 import { Header } from "../../components/Header";
 import { BackButton } from "../../components/BackButton";
@@ -16,10 +17,22 @@ import messages from "../../assets/Messages.png";
 
 export function Details() {
   const params = useParams();
+
   const { isAdmin } = useAuth();
+  const { addToCart } = useCart();
 
   const [data, setData] = useState(null);
   const [quantity, setQuantity] = useState(1);
+
+  function handleAddToCart() {
+    addToCart({
+      id: data.id,
+      title: data.name,
+      price: data.price,
+      image: data.image,
+      quantity,
+    });
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -66,7 +79,7 @@ export function Details() {
                   )}
 
                   {!isAdmin && (
-                    <button className="dish-button">
+                    <button className="dish-button" onClick={handleAddToCart}>
                       <img
                         className="button-mobile"
                         src={messages}

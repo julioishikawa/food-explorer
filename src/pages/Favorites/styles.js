@@ -23,7 +23,7 @@ export const Container = styled.div`
     }
   }
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 1368px) {
     > main {
       width: min(100%, 112rem);
     }
@@ -45,7 +45,7 @@ export const FavoritesList = styled.ul`
   flex-direction: column;
   gap: 1.6rem;
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 1368px) {
     flex-direction: row;
     gap: 2.4rem;
   }

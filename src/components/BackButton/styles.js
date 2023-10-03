@@ -18,7 +18,7 @@ export const Container = styled.button`
     height: 3.2rem;
   }
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 1368px) {
     font-weight: bold;
   }
 `;

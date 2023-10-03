@@ -25,6 +25,10 @@ export function QuantityCounter({ onUpdate }) {
     return number;
   }
 
+  useEffect(() => {
+    onUpdate(quantity);
+  }, [quantity]);
+
   return (
     <Container>
       <button aria-label="Minus quantity button" onClick={handleMinus}>
