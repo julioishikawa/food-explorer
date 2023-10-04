@@ -8,7 +8,7 @@ import { Category } from "../../components/Category";
 
 import { Banner, Container, Meals, Wrapper, Scrollbar } from "./styles";
 
-import food from "../../assets/food-desktop.png";
+import food from "../../assets/food.png";
 
 export function Home() {
   const { dishes } = useDishes();

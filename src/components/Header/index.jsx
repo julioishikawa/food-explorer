@@ -8,10 +8,11 @@ import { useCart } from "../../hooks/cart";
 
 import { Note } from "../Note";
 import { InputSearch } from "../InputSearch";
+import { ProductItem } from "../ProductItem";
 
 import polygon from "../../assets/Polygon.svg";
 import footerLogo from "../../assets/Polygon-footer.svg";
-import messages from "../../assets/Messages.png";
+import orderImage from "../../assets/order.png";
 
 import { Container, Menu, Logo, Cart } from "./styles";
 
@@ -19,19 +20,19 @@ export function Header() {
   const { isAdmin, signOut } = useAuth();
   const { dishSought, getAllDishes, searchDishes, searchDishesKeyDown } =
     useDishes();
-  const { getCartTotalItems } = useCart();
+  const { cart, removeFromCart, getCartTotalItems } = useCart();
 
   const navigate = useNavigate();
 
   const [click, setClick] = useState(false);
-  const [cart, setCart] = useState(false);
+  const [order, setOrder] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [totalCartItems, setTotalCartItems] = useState(0);
 
   const handleClickMobileMenu = () => setClick(!click);
   const closeMobileMenu = () => setClose(false);
 
-  const handleClickDishes = () => setCart(!cart);
+  const handleClickDishes = () => setOrder(!order);
 
   async function handleBackHome() {
     await getAllDishes();
@@ -195,32 +196,43 @@ export function Header() {
 
         {!isAdmin && (
           <div className="menu-dishes" onClick={handleClickDishes}>
-            <img src={messages} alt="Imagem ilustrativa de uma comanda" />
+            <img src={orderImage} alt="Imagem ilustrativa de uma comanda" />
             <span className="dishes">{totalCartItems}</span>
           </div>
         )}
 
         {!isAdmin && (
           <button className="dishes-wrapper" onClick={handleClickDishes}>
-            <img src={messages} alt="Imagem ilustrativa de uma comanda" />
+            <img src={orderImage} alt="Imagem ilustrativa de uma comanda" />
             Pedidos ({totalCartItems})
           </button>
         )}
 
-        <div className={cart ? "nav-dishes active" : "nav-dishes"}>
-          <ul>
-            <li className="cart-logo">
-              <FiX onClick={handleClickDishes} />
-              <h2>Carrinho</h2>
-            </li>
+        <div className={order ? "nav-dishes active" : "nav-dishes"}>
+          <div className="cart-logo">
+            <FiX onClick={handleClickDishes} />
+            <h2>Carrinho</h2>
+          </div>
+
+          <ul className="cart-list">
+            {cart.map((product) => (
+              <ProductItem
+                id={product.id}
+                key={product.id}
+                image={product.image}
+                title={product.title}
+                price={product.price}
+                quantity={product.quantity}
+                buttonText="Remover"
+                onClick={() => {
+                  removeFromCart(product.id);
+                }}
+              />
+            ))}
 
             <li className="cart-item">
-              <Link
-                target="_blank"
-                to="https://github.com/shuharib0t"
-                className="cart-links"
-              >
-                testando
+              <Link to="/cart" className="cart-links">
+                Fechar pedido
               </Link>
             </li>
           </ul>

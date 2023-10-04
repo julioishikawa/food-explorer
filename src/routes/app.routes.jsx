@@ -23,9 +23,9 @@ export function AppRoutes() {
             <Route path="/" element={<Home />} />
             <Route path="/details/:id" element={<Details />} />
             {!isAdmin && <Route path="/favorites" element={<Favorites />} />}
+            {!isAdmin && <Route path="/cart" element={<Cart />} />}
             {isAdmin && <Route path="/newdish" element={<NewDish />} />}
             {isAdmin && <Route path="/editdish/:id" element={<EditDish />} />}
-            <Route path="/shoppingcart" element={<Cart />} />
           </Routes>
         </FavoritesProvider>
       </CartProvider>

@@ -17,6 +17,7 @@ export function ProductItem({
     <Container>
       <Link to={`/details/${id}`}>
         <img
+          className="product-image"
           src={`${api.defaults.baseURL}/files/${image}`}
           alt={`Foto do ${title}`}
         />

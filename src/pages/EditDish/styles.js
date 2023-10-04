@@ -1,5 +1,4 @@
 import { styled } from "styled-components";
-import arrow from "../../assets/arrow-down.svg";
 
 export const Container = styled.div`
   width: 42.8rem;
@@ -103,36 +102,6 @@ export const Form = styled.div`
 
       background-color: ${({ theme }) => theme.COLORS.DARK_800};
       color: ${({ theme }) => theme.COLORS.LIGHT_100};
-    }
-  }
-
-  .select {
-    display: flex;
-    flex-direction: column;
-  }
-
-  select {
-    width: 36.4rem;
-    height: 4.8rem;
-
-    appearance: none;
-
-    padding: 1.3rem 1.6rem;
-
-    font-size: 1.6rem;
-
-    border-radius: 5px;
-    border: none;
-    outline: none;
-
-    background: url(${arrow}) no-repeat top 13px right 15px;
-
-    background-color: ${({ theme }) => theme.COLORS.DARK_900};
-    color: ${({ theme }) => theme.COLORS.LIGHT_400};
-
-    option {
-      font-size: 1.6rem;
-      background-color: ${({ theme }) => theme.COLORS.DARK_1000};
     }
   }
 

@@ -118,52 +118,6 @@ export const Meals = styled.div`
   .meals {
     display: flex;
     flex-direction: column;
-
-    .carousel {
-      cursor: pointer;
-
-      overflow: hidden;
-      text-overflow: ellipsis;
-
-      position: relative;
-
-      .arrow-left {
-        position: absolute;
-
-        left: 0;
-        top: 231px;
-
-        z-index: 1;
-
-        svg {
-          width: 24px;
-          height: 24px;
-        }
-      }
-
-      .arrow-right {
-        font-size: 2rem;
-
-        position: absolute;
-
-        right: 0;
-        top: 231px;
-
-        z-index: 1;
-
-        svg {
-          width: 24px;
-          height: 24px;
-        }
-      }
-
-      .inner {
-        display: flex;
-        gap: 2.7rem;
-
-        margin-bottom: 2.4rem;
-      }
-    }
   }
 
   h3 {

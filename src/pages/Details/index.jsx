@@ -13,7 +13,7 @@ import { Footer } from "../../components/Footer";
 
 import { Container, Wrapper, Scrollbar } from "./styles";
 
-import messages from "../../assets/Messages.png";
+import order from "../../assets/order.png";
 
 export function Details() {
   const params = useParams();
@@ -82,7 +82,7 @@ export function Details() {
                     <button className="dish-button" onClick={handleAddToCart}>
                       <img
                         className="button-mobile"
-                        src={messages}
+                        src={order}
                         alt="Imagem ilustrativa de uma comanda"
                       />
 

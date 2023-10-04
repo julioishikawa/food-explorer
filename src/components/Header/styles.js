@@ -14,8 +14,16 @@ export const Container = styled.div`
 
   background-color: ${({ theme }) => theme.COLORS.DARK_700};
 
-  .notes-wrapper::-webkit-scrollbar {
+  .nav-dishes::-webkit-scrollbar {
     width: 0;
+  }
+
+  .cart-list::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.COLORS.DARK_1000};
+  }
+
+  .cart-list::-webkit-scrollbar-thumb:active {
+    background-color: ${({ theme }) => theme.COLORS.DARK_900};
   }
 
   #search,
@@ -41,7 +49,7 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.COLORS.LIGHT_100};
 
     border: 0;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
 
     &:disabled {
@@ -81,7 +89,7 @@ export const Container = styled.div`
       color: ${({ theme }) => theme.COLORS.LIGHT_100};
 
       border: 0;
-      border-radius: 1rem;
+      border-radius: 0.5rem;
       background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
 
       &:disabled {
@@ -99,22 +107,6 @@ export const Container = styled.div`
 
       #search {
         z-index: 3;
-      }
-
-      .notes-wrapper {
-        max-height: 44rem;
-
-        overflow-y: auto;
-
-        position: absolute;
-        top: 4.5rem;
-        right: 1.6rem;
-        z-index: 2;
-
-        border: 1px solid ${({ theme }) => theme.COLORS.CAKE_200};
-        border-radius: 0 0 5px 5px;
-
-        background-color: ${({ theme }) => theme.COLORS.DARK_1000};
       }
     }
 
@@ -389,91 +381,91 @@ export const Cart = styled.div`
     opacity: 1;
     transition: all 0.5s ease;
     z-index: -1;
+
+    .cart-logo,
+    .cart-list {
+      display: none;
+    }
   }
 
   .nav-dishes.active {
     width: 23.8rem;
 
     display: flex;
-    justify-content: space-between;
 
-    border-radius: 1rem;
+    border-radius: 5px 5px 0 0;
     background: ${({ theme }) => theme.COLORS.DARK_600};
 
     opacity: 1;
     z-index: 3;
-  }
 
-  .cart-logo {
-    display: flex;
-    align-items: center;
-    gap: 1.6rem;
+    .cart-logo {
+      display: flex;
+      align-items: center;
+      gap: 1.6rem;
 
-    padding: 2.4rem;
+      padding: 2.4rem;
 
-    border-radius: 5px 5px 0 0;
-    background-color: ${({ theme }) => theme.COLORS.DARK_1000};
+      border-radius: 5px 5px 0 0;
+      background-color: ${({ theme }) => theme.COLORS.DARK_1000};
 
-    svg {
-      width: 2.6rem;
-      height: 2.6rem;
+      svg {
+        width: 2.6rem;
+        height: 2.6rem;
 
-      cursor: pointer;
+        cursor: pointer;
+      }
+
+      h2 {
+        font-size: 2.1rem;
+        font-weight: 400;
+      }
     }
 
-    h2 {
-      font-size: 2.1rem;
-      font-weight: 400;
+    .cart-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      padding: 2rem;
+
+      max-height: 44rem;
+
+      overflow-y: auto;
+
+      .cart-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        padding: 1rem 2.8rem;
+
+        h2 {
+          font-size: 1.6rem;
+          font-weight: 400;
+
+          padding: 1rem 0;
+
+          text-align: center;
+        }
+
+        svg {
+          width: 2.4rem;
+          height: 2.4rem;
+        }
+      }
+
+      .cart-links {
+        width: 100%;
+        padding: 1rem;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
+        border-radius: 5px;
+      }
     }
-  }
-
-  .cart-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    padding: 1rem 2.8rem;
-
-    h2 {
-      font-size: 1.6rem;
-      font-weight: 400;
-
-      padding: 1rem 0;
-
-      text-align: center;
-    }
-
-    svg {
-      width: 2.4rem;
-      height: 2.4rem;
-    }
-  }
-
-  .cart-links {
-    width: 100%;
-    padding: 1rem;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 2.4rem;
-
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    border-bottom-color: ${({ theme }) => theme.COLORS.DARK_1000};
-
-    svg {
-      width: 2.4rem;
-      height: 2.4rem;
-    }
-  }
-
-  .cart-links:hover {
-    background-color: ${({ theme }) => theme.COLORS.DARK_1000};
-    border-radius: 1rem;
-
-    cursor: pointer;
   }
 
   @media screen and (min-width: 1368px) {
@@ -529,8 +521,15 @@ export const Cart = styled.div`
 
     .nav-dishes.active {
       width: 39.4rem;
+      max-height: 44rem;
+
+      overflow-y: auto;
 
       top: 0;
+    }
+
+    .cart-links {
+      font-size: 2rem;
     }
   }
 `;

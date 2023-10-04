@@ -12,11 +12,7 @@ export const Container = styled.li`
   border: 2px solid ${({ theme }) => theme.COLORS.DARK_300};
   border-radius: 0.5rem;
 
-  li:hover {
-    background-color: aliceblue;
-  }
-
-  img {
+  .product-image {
     height: 7.2rem;
     width: 7.2rem;
     object-fit: cover;
@@ -52,7 +48,8 @@ export const Container = styled.li`
 
   .dish-info {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
     gap: 1.2rem;
 
     a {
@@ -60,10 +57,9 @@ export const Container = styled.li`
     }
 
     h3 {
-      font-size: 2rem;
       display: flex;
       align-items: center;
-      gap: 0.8rem;
+      gap: 0.6rem;
 
       color: ${({ theme }) => theme.COLORS.LIGHT_300};
 
@@ -82,15 +78,46 @@ export const Container = styled.li`
 
       .title,
       .quantity {
-        font-size: 2rem;
+        font-size: 1.4rem;
         font-weight: 500;
       }
     }
 
     > span {
-      color: ${({ theme }) => theme.COLORS.LIGHT_400};
+      color: ${({ theme }) => theme.COLORS.CAKE_200};
       font-family: Roboto;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
+    }
+  }
+
+  @media screen and (min-width: 1368px) {
+    .product-image {
+      height: 10.2rem;
+      width: 10.2rem;
+      object-fit: cover;
+
+      border-radius: 50%;
+    }
+
+    .dish-info {
+      h3 {
+        .title,
+        .quantity {
+          font-size: 2rem;
+        }
+      }
+
+      > span {
+        color: ${({ theme }) => theme.COLORS.CAKE_200};
+        font-family: Roboto;
+        font-size: 2rem;
+      }
+    }
+
+    > div {
+      button {
+        font-size: 1.6rem;
+      }
     }
   }
 `;
