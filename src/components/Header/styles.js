@@ -14,6 +14,7 @@ export const Container = styled.div`
 
   background-color: ${({ theme }) => theme.COLORS.DARK_700};
 
+  .notes-wrapper::-webkit-scrollbar,
   .nav-dishes::-webkit-scrollbar {
     width: 0;
   }
@@ -107,6 +108,21 @@ export const Container = styled.div`
 
       #search {
         z-index: 3;
+      }
+
+      .notes-wrapper {
+        max-height: 44rem;
+
+        overflow-y: auto;
+
+        position: absolute;
+        top: 4.5rem;
+        right: 1.6rem;
+
+        z-index: 2;
+        border: 1px solid ${({ theme }) => theme.COLORS.CAKE_200};
+        border-radius: 0 0 5px 5px;
+        background-color: ${({ theme }) => theme.COLORS.DARK_1000};
       }
     }
 
@@ -378,7 +394,7 @@ export const Cart = styled.div`
     top: 5px;
     right: 5px;
 
-    opacity: 1;
+    opacity: 0;
     transition: all 0.5s ease;
     z-index: -1;
 
@@ -507,16 +523,13 @@ export const Cart = styled.div`
       justify-content: flex-start;
 
       width: 100%;
-      height: 50vh;
 
       position: absolute;
 
-      top: 10px;
+      top: -10px;
       right: 0;
 
-      opacity: 1;
-      transition: all 0.5s ease;
-      z-index: -1;
+      opacity: 0;
     }
 
     .nav-dishes.active {
@@ -526,6 +539,8 @@ export const Cart = styled.div`
       overflow-y: auto;
 
       top: 0;
+
+      opacity: 1;
     }
 
     .cart-links {

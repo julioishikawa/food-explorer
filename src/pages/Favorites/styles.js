@@ -23,6 +23,19 @@ export const Container = styled.div`
     }
   }
 
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.COLORS.DARK_900};
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:active {
+    background-color: ${({ theme }) => theme.COLORS.DARK_1000};
+  }
+
   @media screen and (min-width: 1368px) {
     > main {
       width: min(100%, 112rem);
@@ -60,18 +73,18 @@ export const EmptyFavorites = styled.div`
 
   text-align: center;
 
-  & img {
+  img {
     width: min(100%, 40rem);
 
     margin-top: 8rem;
   }
 
-  & h2 {
+  h2 {
     color: ${({ theme }) => theme.COLORS.LIGHT_300};
     font-size: 2.4rem;
     font-weight: 500;
 
-    & span {
+    span {
       font-size: 2.4rem;
       color: ${({ theme }) => theme.COLORS.CAKE_200};
     }

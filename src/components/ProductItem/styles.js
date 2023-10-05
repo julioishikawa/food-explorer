@@ -13,8 +13,8 @@ export const Container = styled.li`
   border-radius: 0.5rem;
 
   .product-image {
-    height: 7.2rem;
-    width: 7.2rem;
+    height: 5.4rem;
+    width: 5.4rem;
     object-fit: cover;
 
     border-radius: 50%;
@@ -74,12 +74,6 @@ export const Container = styled.li`
         -webkit-box-orient: vertical;
         text-overflow: ellipsis;
         overflow: hidden;
-      }
-
-      .title,
-      .quantity {
-        font-size: 1.4rem;
-        font-weight: 500;
       }
     }
 

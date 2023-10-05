@@ -1,15 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FiCreditCard, FiX, FiCopy } from "react-icons/fi";
 
 import { useCart } from "../../hooks/cart";
 
 import { Header } from "../../components/Header";
 import { BackButton } from "../../components/BackButton";
 import { ProductItem } from "../../components/ProductItem";
+import { Input } from "../../components/Input";
+import { PixInput } from "../../components/PixInput";
 import { Button } from "../../components/Button";
 import { Footer } from "../../components/Footer";
 
 import EmptyCartImage from "../../assets/empty-cart.svg";
+import PixIcon from "../../assets/pix-icon.svg";
+import QRCode from "../../assets/qrcode.svg";
+
 import {
   Container,
   Scrollbar,
@@ -25,8 +31,7 @@ export function Cart() {
 
   const { cart, removeFromCart, getCartTotalPrice } = useCart();
 
-  const [payment, setPayment] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState("pix");
+  const [paymentMethod, setPaymentMethod] = useState("");
 
   const totalPrice = getCartTotalPrice();
 
@@ -47,7 +52,7 @@ export function Cart() {
           <BackButton />
           {cart.length === 0 ? (
             <EmptyCart>
-              <img src={EmptyCartImage} alt="Empty cart icon" />
+              <img src={EmptyCartImage} alt="Ícone de carrinho vazio" />
 
               <div className="text">
                 <h2>Seu carrinho está vazio</h2>
@@ -60,7 +65,7 @@ export function Cart() {
               <Button title="Buscar pratos" onClick={() => navigate("/")} />
             </EmptyCart>
           ) : (
-            <div className="wrapper">
+            <div className="cart-wrapper">
               <Content>
                 <h1 className="cart-title">Carrinho</h1>
 
@@ -89,24 +94,109 @@ export function Cart() {
                 </span>
               </Content>
 
-              <Wrapper>
+              <div className="infos-wrapper">
                 <Adress>
                   <p>
                     Endereço: endereço
-                    cadastradooooooooooooooooooooooooooooooooooooooooooo
+                    cadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOO
                   </p>
+
+                  <button>alterar</button>
                 </Adress>
 
-                <div className="payment">
-                  <h1>Forma de pagamento</h1>
+                <Wrapper>
+                  <div className="payment">
+                    <h1>Forma de pagamento</h1>
 
-                  <button className="payment-type">Pix</button>
+                    <div className="payment-methods">
+                      <div
+                        id="payment-type"
+                        onClick={() => handleMethodChange("pix")}
+                      >
+                        <div>
+                          <img src={PixIcon} alt="Ícone do pix" />
+                          <span>Pix</span>
+                        </div>
+                      </div>
 
-                  <button className="payment-type">Cartão de crédito</button>
-                </div>
+                      <div id="payment-type">
+                        <div onClick={() => handleMethodChange("credit")}>
+                          <FiCreditCard size={25} />
+                          <span>Cartão de crédito</span>
+                        </div>
 
-                <Button title="Confirmar pedido" />
-              </Wrapper>
+                        <button onClick={() => handleMethodChange("alt")}>
+                          alterar
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="payment-info">
+                      {paymentMethod === "pix" && (
+                        <div className="pix-wrapper">
+                          <FiX onClick={() => handleMethodChange("")} />
+                          <div className="pix">
+                            <div className="qrcode-wrapper">
+                              <img
+                                src={QRCode}
+                                alt="QRCode de shuharib0t no github"
+                              />
+
+                              <span>*QRCode funcional</span>
+                            </div>
+
+                            <PixInput
+                              value="ckddkSODKJKF@*928219"
+                              icon={FiCopy}
+                            />
+
+                            <Button title="Copiar código" />
+                          </div>
+                        </div>
+                      )}
+
+                      {paymentMethod === "alt" && (
+                        <div className="credit-card">
+                          <FiX onClick={() => handleMethodChange("")} />
+
+                          <Input
+                            type="text"
+                            id="card-number"
+                            label="Número do cartão"
+                            placeholder="0000 0000 0000 0000"
+                          />
+
+                          <Input
+                            type="text"
+                            id="card-name"
+                            label="Nome do cartão"
+                            placeholder="Maria Silva"
+                          />
+
+                          <div>
+                            <Input
+                              type="text"
+                              id="card-expiration"
+                              label="Validade"
+                              placeholder="04/25"
+                            />
+
+                            <Input
+                              type="text"
+                              id="card-cvc"
+                              label="CVC"
+                              placeholder="000"
+                            />
+                          </div>
+                          <Button title="Salvar cartão" />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <Button title="Realizar pagamento" />
+                </Wrapper>
+              </div>
             </div>
           )}
         </Section>
