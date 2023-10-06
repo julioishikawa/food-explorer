@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FiCreditCard, FiX, FiCopy } from "react-icons/fi";
+import { FiCreditCard, FiX, FiCopy, FiMapPin } from "react-icons/fi";
 
 import { useCart } from "../../hooks/cart";
 
@@ -67,24 +67,26 @@ export function Cart() {
           ) : (
             <div className="cart-wrapper">
               <Content>
-                <h1 className="cart-title">Carrinho</h1>
+                <div>
+                  <h1 className="cart-title">Carrinho</h1>
 
-                <ul className="cart-items">
-                  {cart.map((product) => (
-                    <ProductItem
-                      id={product.id}
-                      key={product.id}
-                      image={product.image}
-                      title={product.title}
-                      price={product.price}
-                      quantity={product.quantity}
-                      buttonText="Remover"
-                      onClick={() => {
-                        removeFromCart(product.id);
-                      }}
-                    />
-                  ))}
-                </ul>
+                  <ul className="cart-items">
+                    {cart.map((product) => (
+                      <ProductItem
+                        id={product.id}
+                        key={product.id}
+                        image={product.image}
+                        title={product.title}
+                        price={product.price}
+                        quantity={product.quantity}
+                        buttonText="Remover"
+                        onClick={() => {
+                          removeFromCart(product.id);
+                        }}
+                      />
+                    ))}
+                  </ul>
+                </div>
                 <span className="total">
                   Total:{" "}
                   {new Intl.NumberFormat("pt-BR", {
@@ -96,12 +98,28 @@ export function Cart() {
 
               <div className="infos-wrapper">
                 <Adress>
-                  <p>
-                    Endereço: endereço
-                    cadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOO
-                  </p>
+                  <div>
+                    <FiMapPin size={25} />
 
-                  <button>alterar</button>
+                    <span>
+                      endereço
+                      cadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOO
+                    </span>
+
+                    <button onClick={() => handleMethodChange("adress")}>
+                      alterar
+                    </button>
+                  </div>
+
+                  {paymentMethod === "adress" && (
+                    <div className="adress-wrapper">
+                      <FiX onClick={() => handleMethodChange("")} />
+
+                      <Input placeholder="Endereço e número" />
+
+                      <button>salvar</button>
+                    </div>
+                  )}
                 </Adress>
 
                 <Wrapper>

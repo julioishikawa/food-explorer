@@ -15,6 +15,7 @@ export const Container = styled.div`
 
   .cart-wrapper {
     width: 100%;
+
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -22,9 +23,10 @@ export const Container = styled.div`
 
   .infos-wrapper {
     width: 100%;
+
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 2rem;
   }
 
   ::-webkit-scrollbar {
@@ -40,6 +42,18 @@ export const Container = styled.div`
     background-color: ${({ theme }) => theme.COLORS.DARK_1000};
   }
 
+  @keyframes appear {
+    0% {
+      opacity: 0;
+      transform: translateY(0);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   @media screen and (min-width: 1368px) {
     width: 100%;
 
@@ -52,12 +66,20 @@ export const Container = styled.div`
       flex-direction: row;
       gap: 3rem;
 
-      max-height: 60rem;
+      height: 57rem;
 
       .total {
         font-size: 2rem;
         font-weight: 500;
       }
+    }
+
+    .infos-wrapper {
+      width: 58rem;
+
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
     }
   }
 `;
@@ -67,8 +89,6 @@ export const EmptyCart = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 4rem;
-
-  flex: 1;
 
   margin-top: 3rem;
 
@@ -99,10 +119,10 @@ export const EmptyCart = styled.div`
 
   button {
     width: 30rem;
-    font-size: 1rem;
+    font-size: 1.4rem;
   }
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 1368px) {
     img {
       width: 40rem;
     }
@@ -173,9 +193,10 @@ export const Content = styled.div`
   border-radius: 0.5rem;
 
   .cart-items {
-    overflow-y: auto;
+    max-height: 30rem;
 
-    padding-right: 1rem;
+    margin-top: 1.6rem;
+    overflow-y: auto;
 
     display: flex;
     flex-direction: column;
@@ -188,47 +209,88 @@ export const Content = styled.div`
     padding: 3rem;
 
     gap: 2.4rem;
+
+    .cart-items {
+      max-height: 39rem;
+    }
   }
 `;
 
 export const Adress = styled.div`
+  width: 100%;
   padding: 2rem;
-  margin-bottom: 2rem;
+
+  position: relative;
 
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 1.6rem;
+  gap: 1rem;
 
   border: 2px solid ${({ theme }) => theme.COLORS.DARK_1000};
   border-radius: 0.5rem;
 
+  color: ${({ theme }) => theme.COLORS.LIGHT_500};
   background-color: ${({ theme }) => theme.COLORS.DARK_400};
 
-  p {
+  div {
     width: 100%;
-    max-height: 2.5rem;
 
-    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    span {
+      width: 100%;
 
-    color: ${({ theme }) => theme.COLORS.LIGHT_500};
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    button {
+      background-color: transparent;
+      border: 0;
+      color: ${({ theme }) => theme.COLORS.LIGHT_500};
+    }
   }
 
-  button {
-    background-color: transparent;
-    border: 0;
-    color: ${({ theme }) => theme.COLORS.LIGHT_500};
+  .adress-wrapper {
+    width: 100%;
+
+    padding: 0 2rem;
+
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+
+    position: absolute;
+
+    left: 0;
+
+    background-color: ${({ theme }) => theme.COLORS.DARK_400};
+
+    animation: appear 300ms;
+
+    input {
+      height: 3.2rem;
+    }
+
+    svg {
+      min-width: 1.6rem;
+      min-height: 1.6rem;
+
+      cursor: pointer;
+    }
   }
 
   @media screen and (min-width: 1368px) {
-    gap: 2rem;
+    .adress-wrapper input {
+      height: 4rem;
+    }
 
-    p {
-      max-width: 50rem;
+    .adress-wrapper svg {
+      min-width: 2rem;
+      min-height: 2rem;
     }
   }
 `;
@@ -387,18 +449,6 @@ export const Wrapper = styled.div`
     }
   }
 
-  @keyframes appear {
-    0% {
-      opacity: 0;
-      transform: translateY(0);
-    }
-
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
   @media screen and (min-width: 1368px) {
     height: 100%;
 
@@ -409,8 +459,6 @@ export const Wrapper = styled.div`
     }
 
     .pix-wrapper {
-      height: 41rem;
-
       svg {
         width: 2.5rem;
         height: 2.5rem;
@@ -427,7 +475,7 @@ export const Wrapper = styled.div`
     }
 
     .credit-card {
-      height: 41rem;
+      height: 40rem;
       gap: 2rem;
 
       svg {

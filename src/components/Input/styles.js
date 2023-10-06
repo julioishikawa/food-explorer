@@ -7,7 +7,11 @@ export const Container = styled.div`
 
   background-color: ${({ theme }) => theme.COLORS.DARK_900};
 
-  border-radius: 1rem;
+  border-radius: 0.5rem;
+
+  &:focus-within {
+    border: 1px solid ${({ theme }) => theme.COLORS.CAKE_200};
+  }
 
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
@@ -22,14 +26,10 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.COLORS.LIGHT_100};
     background: transparent;
     border: 0;
-    border-radius: 8px;
+    border-radius: 0.5rem;
 
     &::placeholder {
       color: ${({ theme }) => theme.COLORS.LIGHT_500};
-    }
-
-    &:focus {
-      border: 1px solid ${({ theme }) => theme.COLORS.CAKE_200};
     }
   }
 

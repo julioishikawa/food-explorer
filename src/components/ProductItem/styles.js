@@ -85,6 +85,8 @@ export const Container = styled.li`
   }
 
   @media screen and (min-width: 1368px) {
+    padding: 2rem;
+
     .product-image {
       height: 10.2rem;
       width: 10.2rem;
