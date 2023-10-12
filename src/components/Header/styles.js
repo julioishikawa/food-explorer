@@ -405,7 +405,7 @@ export const Cart = styled.div`
   }
 
   .nav-dishes.active {
-    width: 23.8rem;
+    width: 30.8rem;
 
     display: flex;
 
@@ -533,7 +533,7 @@ export const Cart = styled.div`
     }
 
     .nav-dishes.active {
-      width: 39.4rem;
+      width: 41.4rem;
       max-height: 44rem;
 
       overflow-y: auto;

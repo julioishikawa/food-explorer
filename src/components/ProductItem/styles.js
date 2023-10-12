@@ -21,14 +21,11 @@ export const Container = styled.li`
   }
 
   > div {
+    width: 100%;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
 
     button {
-      width: fit-content;
-
-      margin-top: 1.2rem;
-
       background: transparent;
       color: ${({ theme }) => theme.COLORS.TOMATO_400};
       font-family: Roboto;
@@ -86,6 +83,7 @@ export const Container = styled.li`
 
   @media screen and (min-width: 1368px) {
     padding: 2rem;
+    margin-right: 1rem;
 
     .product-image {
       height: 10.2rem;

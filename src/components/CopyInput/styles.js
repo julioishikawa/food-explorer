@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 100%;
+  width: 80%;
   display: flex;
   flex-direction: column;
 
@@ -24,7 +24,7 @@ export const Container = styled.div`
 
     padding: 1.6rem 1.4rem;
 
-    border-radius: 0.5rem;
+    border-radius: 0.5rem 0.5rem 0 0;
 
     &:focus-within {
       border: 1px solid ${({ theme }) => theme.COLORS.CAKE_200};
@@ -32,6 +32,8 @@ export const Container = styled.div`
 
     > input {
       width: 100%;
+
+      text-align: center;
 
       color: ${({ theme }) => theme.COLORS.LIGHT_100};
       background: transparent;
@@ -65,6 +67,32 @@ export const Container = styled.div`
         width: 2.5rem;
         height: 2.5rem;
       }
+    }
+  }
+`;
+
+export const CopyMessage = styled.span`
+  width: 100%;
+
+  text-align: center;
+  font-size: 1.4rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+
+  color: ${({ theme }) => theme.COLORS.LIGHT_100};
+  background-color: ${({ theme }) => theme.COLORS.MINT_100};
+
+  animation: top-down 500ms 300ms backwards;
+
+  @keyframes top-down {
+    0% {
+      opacity: 0;
+      transform: translateY(-15px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 `;

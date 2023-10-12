@@ -9,10 +9,6 @@ export const Container = styled.div`
 
   border-radius: 0.5rem;
 
-  &:focus-within {
-    border: 1px solid ${({ theme }) => theme.COLORS.CAKE_200};
-  }
-
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -30,6 +26,10 @@ export const Container = styled.div`
 
     &::placeholder {
       color: ${({ theme }) => theme.COLORS.LIGHT_500};
+    }
+
+    &:focus {
+      border: 1px solid ${({ theme }) => theme.COLORS.CAKE_200};
     }
   }
 

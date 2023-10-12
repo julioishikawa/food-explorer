@@ -10,9 +10,6 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.COLORS.DARK_400};
 
   .dish-wrapper {
-  }
-
-  .dish-wrapper {
     padding: 3.2rem 5.6rem 5rem;
   }
 

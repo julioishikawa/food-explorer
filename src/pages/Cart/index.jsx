@@ -1,16 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiCreditCard, FiX, FiCopy, FiMapPin } from "react-icons/fi";
 
 import { useCart } from "../../hooks/cart";
 
+import { api } from "../../services/api";
+
 import { Header } from "../../components/Header";
 import { BackButton } from "../../components/BackButton";
 import { ProductItem } from "../../components/ProductItem";
 import { Input } from "../../components/Input";
-import { PixInput } from "../../components/PixInput";
+import { CopyInput } from "../../components/CopyInput";
+import { CreditCardInput } from "../../components/CreditCardInput";
 import { Button } from "../../components/Button";
 import { Footer } from "../../components/Footer";
+import { Error } from "../../components/Error";
 
 import EmptyCartImage from "../../assets/empty-cart.svg";
 import PixIcon from "../../assets/pix-icon.svg";
@@ -22,7 +26,7 @@ import {
   Section,
   Content,
   Wrapper,
-  Adress,
+  Address,
   EmptyCart,
 } from "./styles";
 
@@ -31,17 +35,102 @@ export function Cart() {
 
   const { cart, removeFromCart, getCartTotalPrice } = useCart();
 
+  const [address, setAddress] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
 
-  const totalPrice = getCartTotalPrice();
+  const [creditCard, setCreditCard] = useState([]);
+  const [number, setNumber] = useState(null);
+  const [name, setName] = useState("");
+  const [validation, setValidation] = useState(0);
+  const [cvc, setCvc] = useState(0);
 
-  function handlePayment() {
-    setPayment(true);
-  }
+  const [errors, setErrors] = useState({
+    number: false,
+    name: false,
+    validation: false,
+    cvc: false,
+  });
+
+  const totalPrice = getCartTotalPrice();
 
   function handleMethodChange(method) {
     setPaymentMethod(method);
   }
+
+  function handleAddAddress() {
+    if (!address) {
+      setErrors((prevState) => ({ ...prevState, address: true }));
+      return;
+    } else {
+      setErrors((prevState) => ({ ...prevState, address: false }));
+    }
+  }
+
+  async function getAllCreditCards() {
+    try {
+      async function fetchCreditCards() {
+        const res = await api.get("/credit_cards");
+
+        setCreditCard(res.data);
+      }
+
+      fetchCreditCards();
+    } catch (e) {
+      if (e.response) {
+        alert(e.response.data.message);
+      } else {
+        alert("Não foi possível buscar o cartão de crédito.");
+      }
+    }
+  }
+
+  function addCreditCard() {
+    if (!number) {
+      setErrors((prevState) => ({ ...prevState, number: true }));
+      return;
+    } else {
+      setErrors((prevState) => ({ ...prevState, number: false }));
+    }
+
+    if (!name) {
+      setErrors((prevState) => ({ ...prevState, name: true }));
+      return;
+    } else {
+      setErrors((prevState) => ({ ...prevState, name: false }));
+    }
+
+    if (!validation) {
+      setErrors((prevState) => ({ ...prevState, validation: true }));
+      return;
+    } else {
+      setErrors((prevState) => ({ ...prevState, validation: false }));
+    }
+
+    if (!cvc) {
+      setErrors((prevState) => ({ ...prevState, cvc: true }));
+      return;
+    } else {
+      setErrors((prevState) => ({ ...prevState, cvc: false }));
+    }
+
+    if (number && name && validation && cvc) {
+      api.post("/credit_cards", {
+        card_number: number,
+        cardholder_name: name,
+        expiration_date: validation,
+        cvc,
+      });
+
+      alert("Cartão adicionado com sucesso!");
+      window.location.reload();
+    } else {
+      alert("Não foi possível adicionar o cartão");
+    }
+  }
+
+  useEffect(() => {
+    getAllCreditCards();
+  }, []);
 
   return (
     <Container>
@@ -50,6 +139,7 @@ export function Cart() {
       <Scrollbar>
         <Section>
           <BackButton />
+
           {cart.length === 0 ? (
             <EmptyCart>
               <img src={EmptyCartImage} alt="Ícone de carrinho vazio" />
@@ -97,30 +187,42 @@ export function Cart() {
               </Content>
 
               <div className="infos-wrapper">
-                <Adress>
-                  <div>
+                {errors.address && (
+                  <Error title="Você precisa adicionar um nome no prato" />
+                )}
+                <Address>
+                  <div className="address-wrapper">
                     <FiMapPin size={25} />
 
-                    <span>
-                      endereço
-                      cadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOOcadastradoooooOOOOOOOOOOOOO
-                    </span>
+                    <span>{address}</span>
 
-                    <button onClick={() => handleMethodChange("adress")}>
+                    <button onClick={() => handleMethodChange("address")}>
                       alterar
                     </button>
                   </div>
 
-                  {paymentMethod === "adress" && (
-                    <div className="adress-wrapper">
-                      <FiX onClick={() => handleMethodChange("")} />
+                  {paymentMethod === "address" && (
+                    <div className="address-wrapper-active">
+                      <div className="x" onClick={() => setAddress("")}>
+                        <FiX onClick={() => handleMethodChange("")} />
+                      </div>
 
-                      <Input placeholder="Endereço e número" />
+                      <Input
+                        type="text"
+                        placeholder="Endereço e número"
+                        onChange={(e) => setAddress(e.target.value)}
+                        error={errors.address}
+                      />
 
-                      <button>salvar</button>
+                      <div
+                        className="save"
+                        onClick={() => handleMethodChange("")}
+                      >
+                        <button onClick={handleAddAddress}>salvar</button>
+                      </div>
                     </div>
                   )}
-                </Adress>
+                </Address>
 
                 <Wrapper>
                   <div className="payment">
@@ -137,82 +239,96 @@ export function Cart() {
                         </div>
                       </div>
 
-                      <div id="payment-type">
+                      <div
+                        id="payment-type"
+                        className={paymentMethod === "credit" ? "active" : ""}
+                      >
                         <div onClick={() => handleMethodChange("credit")}>
                           <FiCreditCard size={25} />
                           <span>Cartão de crédito</span>
+                          <p>{creditCard}</p>
                         </div>
 
-                        <button onClick={() => handleMethodChange("alt")}>
-                          alterar
-                        </button>
+                        <button>alterar</button>
                       </div>
                     </div>
 
-                    <div className="payment-info">
-                      {paymentMethod === "pix" && (
-                        <div className="pix-wrapper">
-                          <FiX onClick={() => handleMethodChange("")} />
-                          <div className="pix">
-                            <div className="qrcode-wrapper">
-                              <img
-                                src={QRCode}
-                                alt="QRCode de shuharib0t no github"
-                              />
+                    <Button
+                      title="Adicionar cartão"
+                      className="add-card"
+                      onClick={() => handleMethodChange("alt")}
+                    />
 
-                              <span>*QRCode funcional</span>
-                            </div>
-
-                            <PixInput
-                              value="ckddkSODKJKF@*928219"
-                              icon={FiCopy}
+                    {paymentMethod === "pix" && (
+                      <div className="pix-wrapper">
+                        <FiX onClick={() => handleMethodChange("")} />
+                        <div className="pix">
+                          <div className="qrcode-wrapper">
+                            <img
+                              src={QRCode}
+                              alt="QRCode de shuharib0t no github"
                             />
 
-                            <Button title="Copiar código" />
+                            <span>*QRCode funcional</span>
                           </div>
+
+                          <CopyInput value="qr.link/SmY3b5" icon={FiCopy} />
                         </div>
-                      )}
+                      </div>
+                    )}
 
-                      {paymentMethod === "alt" && (
-                        <div className="credit-card">
-                          <FiX onClick={() => handleMethodChange("")} />
+                    {paymentMethod === "alt" && (
+                      <div className="credit-card">
+                        <FiX onClick={() => handleMethodChange("")} />
 
-                          <Input
+                        <div className="credit-cards-infos">
+                          <CreditCardInput
                             type="text"
                             id="card-number"
                             label="Número do cartão"
                             placeholder="0000 0000 0000 0000"
+                            onChange={(e) => setNumber(e.target.value)}
+                            error={errors.number}
                           />
 
-                          <Input
+                          <CreditCardInput
                             type="text"
                             id="card-name"
                             label="Nome do cartão"
                             placeholder="Maria Silva"
+                            onChange={(e) => setName(e.target.value)}
+                            error={errors.name}
                           />
 
                           <div>
-                            <Input
+                            <CreditCardInput
                               type="text"
                               id="card-expiration"
                               label="Validade"
                               placeholder="04/25"
+                              onChange={(e) => setValidation(e.target.value)}
+                              error={errors.validation}
                             />
 
-                            <Input
+                            <CreditCardInput
                               type="text"
                               id="card-cvc"
                               label="CVC"
                               placeholder="000"
+                              onChange={(e) => setCvc(e.target.value)}
+                              error={errors.cvc}
                             />
                           </div>
-                          <Button title="Salvar cartão" />
+                          <Button
+                            title="Salvar cartão"
+                            onClick={addCreditCard}
+                          />
                         </div>
-                      )}
-                    </div>
+                      </div>
+                    )}
                   </div>
 
-                  <Button title="Realizar pagamento" />
+                  <Button title="Finalizar pagamento" onClick={addCreditCard} />
                 </Wrapper>
               </div>
             </div>

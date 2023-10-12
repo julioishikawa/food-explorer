@@ -16,6 +16,8 @@ export const Container = styled.div`
   .cart-wrapper {
     width: 100%;
 
+    margin-top: 2.4rem;
+
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -62,11 +64,13 @@ export const Container = styled.div`
     }
 
     .cart-wrapper {
+      height: 60.4rem;
+
+      margin-top: 3.2rem;
+
       display: flex;
       flex-direction: row;
       gap: 3rem;
-
-      height: 57rem;
 
       .total {
         font-size: 2rem;
@@ -150,11 +154,6 @@ export const EmptyCart = styled.div`
 export const Section = styled.div`
   padding: 2.4rem 2.8rem;
 
-  display: flex;
-  flex-direction: column;
-  gap: 2.4rem;
-
-  h1,
   .cart-title {
     padding-bottom: 1.6rem;
 
@@ -211,12 +210,12 @@ export const Content = styled.div`
     gap: 2.4rem;
 
     .cart-items {
-      max-height: 39rem;
+      max-height: 42rem;
     }
   }
 `;
 
-export const Adress = styled.div`
+export const Address = styled.div`
   width: 100%;
   padding: 2rem;
 
@@ -232,7 +231,7 @@ export const Adress = styled.div`
   color: ${({ theme }) => theme.COLORS.LIGHT_500};
   background-color: ${({ theme }) => theme.COLORS.DARK_400};
 
-  div {
+  .address-wrapper {
     width: 100%;
 
     display: flex;
@@ -254,7 +253,7 @@ export const Adress = styled.div`
     }
   }
 
-  .adress-wrapper {
+  .address-wrapper-active {
     width: 100%;
 
     padding: 0 2rem;
@@ -281,14 +280,20 @@ export const Adress = styled.div`
 
       cursor: pointer;
     }
+
+    button {
+      background-color: transparent;
+      border: 0;
+      color: ${({ theme }) => theme.COLORS.LIGHT_500};
+    }
   }
 
   @media screen and (min-width: 1368px) {
-    .adress-wrapper input {
+    .address-wrapper-active input {
       height: 4rem;
     }
 
-    .adress-wrapper svg {
+    .address-wrapper-active svg {
       min-width: 2rem;
       min-height: 2rem;
     }
@@ -296,7 +301,7 @@ export const Adress = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  height: 47.2rem;
+  height: 50.4rem;
 
   display: flex;
   flex-direction: column;
@@ -308,7 +313,16 @@ export const Wrapper = styled.div`
   border-radius: 0.5rem;
 
   .payment {
-    margin-bottom: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+
+    position: relative;
+
+    .add-card {
+      width: 50%;
+    }
   }
 
   .payment-methods {
@@ -376,21 +390,15 @@ export const Wrapper = styled.div`
     background-color: ${({ theme }) => theme.COLORS.DARK_600};
   }
 
-  .payment-info {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-
-    position: relative;
-  }
-
   .pix-wrapper {
     width: 100%;
-    height: 40rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 
     position: absolute;
-    top: -15.1rem;
-
+    top: 4.5rem;
     background-color: ${({ theme }) => theme.COLORS.DARK_400};
 
     animation: appear 300ms;
@@ -402,6 +410,8 @@ export const Wrapper = styled.div`
   }
 
   .pix {
+    height: 39rem;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -426,22 +436,39 @@ export const Wrapper = styled.div`
 
   .credit-card {
     width: 100%;
-    height: 40rem;
 
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
+    gap: 2rem;
 
     position: absolute;
-    top: -15.1rem;
+    top: 4.5rem;
 
-    background-color: ${({ theme }) => theme.COLORS.DARK_400};
+    z-index: 1;
 
     animation: appear 300ms;
 
-    div {
+    background-color: ${({ theme }) => theme.COLORS.DARK_400};
+
+    .credit-cards-infos {
+      height: 39rem;
+
       display: flex;
-      gap: 2rem;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.6rem;
+
+      padding: 0 1.6rem;
+
+      div {
+        width: 100%;
+        display: flex;
+        gap: 1rem;
+      }
+
+      button {
+        width: 55%;
+      }
     }
 
     svg {
@@ -452,13 +479,14 @@ export const Wrapper = styled.div`
   @media screen and (min-width: 1368px) {
     height: 100%;
 
-    padding: 3rem;
-
-    #payment-type div span {
+    button,
+    .payment #payment-type div span {
       font-size: 1.6rem;
     }
 
     .pix-wrapper {
+      top: 5.5rem;
+
       svg {
         width: 2.5rem;
         height: 2.5rem;
@@ -475,8 +503,15 @@ export const Wrapper = styled.div`
     }
 
     .credit-card {
-      height: 40rem;
-      gap: 2rem;
+      top: 5.5rem;
+
+      .credit-cards-infos {
+        height: 38rem;
+
+        gap: 2rem;
+
+        padding: 0 3.2rem;
+      }
 
       svg {
         width: 2.5rem;

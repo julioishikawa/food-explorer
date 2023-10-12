@@ -42,6 +42,7 @@ export function NewDish() {
     image: false,
     name: false,
     ingredients: false,
+    newIngredient: false,
     price: false,
     description: false,
   });
@@ -53,11 +54,25 @@ export function NewDish() {
   }
 
   function handleAddIngredient() {
+    if (!newIngredient) {
+      setErrors((prevState) => ({ ...prevState, newIngredient: true }));
+      return;
+    } else {
+      setErrors((prevState) => ({ ...prevState, newIngredient: false }));
+    }
+
     setIngredients((prevState) => [...prevState, newIngredient]);
     setNewIngredient("");
   }
 
   function handleAddIngredientKeyDown(e) {
+    if (!newIngredient) {
+      setErrors((prevState) => ({ ...prevState, newIngredient: true }));
+      return;
+    } else {
+      setErrors((prevState) => ({ ...prevState, newIngredient: false }));
+    }
+
     if (e.key === "Enter") {
       setIngredients((prevState) => [...prevState, newIngredient]);
       setNewIngredient("");
@@ -78,37 +93,41 @@ export function NewDish() {
   function handleNewDish() {
     if (!image) {
       setErrors((prevState) => ({ ...prevState, image: true }));
+      return;
     } else {
       setErrors((prevState) => ({ ...prevState, image: false }));
     }
 
     if (!name) {
       setErrors((prevState) => ({ ...prevState, name: true }));
+      return;
     } else {
       setErrors((prevState) => ({ ...prevState, name: false }));
     }
 
     if (ingredients.length === 0) {
       setErrors((prevState) => ({ ...prevState, ingredients: true }));
+      return;
     } else {
       setErrors((prevState) => ({ ...prevState, ingredients: false }));
     }
 
     if (newIngredient) {
       setErrors((prevState) => ({ ...prevState, newIngredient: true }));
+      return;
     } else {
       setErrors((prevState) => ({ ...prevState, newIngredient: false }));
     }
 
     if (!price) {
       setErrors((prevState) => ({ ...prevState, price: true }));
+      return;
     } else {
       setErrors((prevState) => ({ ...prevState, price: false }));
     }
 
     if (!description) {
       setErrors((prevState) => ({ ...prevState, description: true }));
-
       return;
     } else {
       setErrors((prevState) => ({ ...prevState, description: false }));
@@ -212,7 +231,10 @@ export function NewDish() {
                   <div
                     className="tags"
                     style={{
-                      border: errors.ingredients ? "1px solid red" : "",
+                      border:
+                        errors.ingredients || errors.newIngredient
+                          ? "1px solid red"
+                          : "",
                     }}
                   >
                     {ingredients.map((ingredient, index) => (
@@ -234,7 +256,11 @@ export function NewDish() {
                   </div>
 
                   {errors.ingredients && (
-                    <Error title="Você precisa adicionar os ingredientes do prato" />
+                    <Error title="Você precisa adicionar ingredientes ao prato" />
+                  )}
+
+                  {errors.newIngredient && (
+                    <Error title="Você precisa adicionar um valor para adicionar um ingrediente" />
                   )}
                 </div>
               </div>
