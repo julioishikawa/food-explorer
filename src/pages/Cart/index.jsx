@@ -38,20 +38,96 @@ export function Cart() {
   const [address, setAddress] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
 
-  const [creditCard, setCreditCard] = useState([]);
+  const [creditCards, setCreditCards] = useState([]);
+
   const [number, setNumber] = useState(null);
+  const [formattedNumber, setFormattedNumber] = useState("");
+
   const [name, setName] = useState("");
-  const [validation, setValidation] = useState(0);
-  const [cvc, setCvc] = useState(0);
+
+  const [expiration, setExpiration] = useState("");
+  const [isExpirationValid, setIsExpirationValid] = useState(false);
+
+  const [cvc, setCVC] = useState("");
+  const [isCVCValid, setIsCVCValid] = useState(false);
 
   const [errors, setErrors] = useState({
     number: false,
     name: false,
-    validation: false,
+    expiration: false,
     cvc: false,
   });
 
   const totalPrice = getCartTotalPrice();
+
+  const handleCVCChange = (e) => {
+    const inputCVC = e.target.value;
+
+    const formattedCVC = inputCVC.replace(/\D/g, "");
+
+    const trimmedCVC = formattedCVC.slice(0, 3);
+
+    const isValidLength = trimmedCVC.length === 3;
+
+    if (isValidLength) {
+      setCVC(trimmedCVC);
+    } else {
+      setCVC(formattedCVC);
+    }
+
+    setIsCVCValid(isValidLength);
+  };
+
+  const handleExpirationDateChange = (e) => {
+    const inputExpirationDate = e.target.value;
+
+    const formattedExpirationDate = inputExpirationDate.replace(/\D/g, "");
+
+    const trimmedExpirationDate = formattedExpirationDate.slice(0, 4);
+
+    const month = trimmedExpirationDate.slice(0, 2);
+    const year = trimmedExpirationDate.slice(2, 4);
+
+    const currentYear = new Date().getFullYear() % 100;
+    const currentMonth = new Date().getMonth() + 1;
+
+    const isMonthValid =
+      /^[0-1]*\d$/.test(month) && +month >= 1 && +month <= 12;
+    const isYearValid = /^\d{2}$/.test(year);
+
+    const isValidDate =
+      isMonthValid &&
+      isYearValid &&
+      (+year > currentYear || (+year === currentYear && +month > currentMonth));
+
+    if (isValidDate) {
+      setExpiration(`${month}/${year}`);
+    } else {
+      setExpiration(trimmedExpirationDate);
+      setIsExpirationValid(false);
+    }
+
+    setIsExpirationValid(isValidDate);
+  };
+
+  const handleCreditCardChange = (e) => {
+    const { value } = e.target;
+
+    const sanitizedValue = value.replace(/\s+/g, "");
+
+    const trimmedValue = sanitizedValue.slice(0, 16);
+
+    let formattedValue = trimmedValue.match(/\d{1,4}/g);
+
+    if (formattedValue) {
+      formattedValue = formattedValue.join(" ");
+    } else {
+      formattedValue = "";
+    }
+
+    setNumber(trimmedValue);
+    setFormattedNumber(formattedValue);
+  };
 
   function handleMethodChange(method) {
     setPaymentMethod(method);
@@ -71,7 +147,7 @@ export function Cart() {
       async function fetchCreditCards() {
         const res = await api.get("/credit_cards");
 
-        setCreditCard(res.data);
+        setCreditCards(res.data);
       }
 
       fetchCreditCards();
@@ -85,7 +161,7 @@ export function Cart() {
   }
 
   function addCreditCard() {
-    if (!number) {
+    if (!number || number.length !== 16) {
       setErrors((prevState) => ({ ...prevState, number: true }));
       return;
     } else {
@@ -99,25 +175,25 @@ export function Cart() {
       setErrors((prevState) => ({ ...prevState, name: false }));
     }
 
-    if (!validation) {
-      setErrors((prevState) => ({ ...prevState, validation: true }));
+    if (!expiration || !isExpirationValid) {
+      setErrors((prevState) => ({ ...prevState, expiration: true }));
       return;
     } else {
-      setErrors((prevState) => ({ ...prevState, validation: false }));
+      setErrors((prevState) => ({ ...prevState, expiration: false }));
     }
 
-    if (!cvc) {
+    if (!cvc || !isCVCValid) {
       setErrors((prevState) => ({ ...prevState, cvc: true }));
       return;
     } else {
       setErrors((prevState) => ({ ...prevState, cvc: false }));
     }
 
-    if (number && name && validation && cvc) {
+    if (number && name && expiration && cvc) {
       api.post("/credit_cards", {
         card_number: number,
         cardholder_name: name,
-        expiration_date: validation,
+        expiration_date: expiration,
         cvc,
       });
 
@@ -239,18 +315,31 @@ export function Cart() {
                         </div>
                       </div>
 
-                      <div
-                        id="payment-type"
-                        className={paymentMethod === "credit" ? "active" : ""}
-                      >
-                        <div onClick={() => handleMethodChange("credit")}>
-                          <FiCreditCard size={25} />
-                          <span>Cartão de crédito</span>
-                          <p>{creditCard}</p>
-                        </div>
+                      {creditCards &&
+                        creditCards.map((creditCard) => (
+                          <div
+                            id="payment-type"
+                            className={
+                              paymentMethod === `credit${creditCard.id}`
+                                ? "active"
+                                : ""
+                            }
+                          >
+                            <div
+                              onClick={() =>
+                                handleMethodChange(`credit${creditCard.id}`)
+                              }
+                            >
+                              <FiCreditCard size={25} />
+                              <span>Cartão de crédito</span>
+                              <p>
+                                {creditCard.card_number.toString().slice(-4)}
+                              </p>
+                            </div>
 
-                        <button>alterar</button>
-                      </div>
+                            <button>alterar</button>
+                          </div>
+                        ))}
                     </div>
 
                     <Button
@@ -269,10 +358,13 @@ export function Cart() {
                               alt="QRCode de shuharib0t no github"
                             />
 
-                            <span>*QRCode funcional</span>
+                            <span>*QRCode ilustrativo</span>
                           </div>
 
-                          <CopyInput value="qr.link/SmY3b5" icon={FiCopy} />
+                          <CopyInput
+                            value="https://github.com/shuharib0t"
+                            icon={FiCopy}
+                          />
                         </div>
                       </div>
                     )}
@@ -287,7 +379,8 @@ export function Cart() {
                             id="card-number"
                             label="Número do cartão"
                             placeholder="0000 0000 0000 0000"
-                            onChange={(e) => setNumber(e.target.value)}
+                            value={formattedNumber}
+                            onChange={handleCreditCardChange}
                             error={errors.number}
                           />
 
@@ -305,17 +398,19 @@ export function Cart() {
                               type="text"
                               id="card-expiration"
                               label="Validade"
-                              placeholder="04/25"
-                              onChange={(e) => setValidation(e.target.value)}
-                              error={errors.validation}
+                              value={expiration}
+                              placeholder="00/00"
+                              onChange={handleExpirationDateChange}
+                              error={errors.expiration}
                             />
 
                             <CreditCardInput
                               type="text"
                               id="card-cvc"
                               label="CVC"
-                              placeholder="000"
-                              onChange={(e) => setCvc(e.target.value)}
+                              value={cvc}
+                              placeholder="CVC"
+                              onChange={handleCVCChange}
                               error={errors.cvc}
                             />
                           </div>
@@ -328,7 +423,7 @@ export function Cart() {
                     )}
                   </div>
 
-                  <Button title="Finalizar pagamento" onClick={addCreditCard} />
+                  <Button title="Finalizar pagamento" />
                 </Wrapper>
               </div>
             </div>

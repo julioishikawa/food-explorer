@@ -322,11 +322,15 @@ export const Wrapper = styled.div`
 
     .add-card {
       width: 50%;
+      height: 50%;
     }
   }
 
   .payment-methods {
     width: 100%;
+    max-height: 220px;
+
+    overflow-y: auto;
   }
 
   #payment-type {
@@ -375,15 +379,15 @@ export const Wrapper = styled.div`
   }
 
   #payment-type:nth-child(1) {
-    border-width: 1px;
-    border-top-style: solid;
-    border-top-color: ${({ theme }) => theme.COLORS.DARK_1000};
-  }
-
-  #payment-type:nth-child(2) {
     border-width: 1px 0;
     border-style: solid;
     border-color: ${({ theme }) => theme.COLORS.DARK_1000};
+  }
+
+  #payment-type:nth-child(n + 2) {
+    border-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: ${({ theme }) => theme.COLORS.DARK_1000};
   }
 
   #payment-type:hover {
@@ -482,6 +486,10 @@ export const Wrapper = styled.div`
     button,
     .payment #payment-type div span {
       font-size: 1.6rem;
+    }
+
+    .payment-methods {
+      padding-right: 1rem;
     }
 
     .pix-wrapper {
