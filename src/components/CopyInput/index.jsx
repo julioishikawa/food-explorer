@@ -19,14 +19,8 @@ export function CopyInput({ icon: Icon, ...rest }) {
 
   return (
     <Container {...rest}>
-      <div className="input-wrapper">
-        <input
-          onClick={copyToClipboard}
-          ref={textAreaRef}
-          value={textToCopy}
-          readOnly
-          {...rest}
-        />
+      <div className="input-wrapper" onClick={copyToClipboard}>
+        <input ref={textAreaRef} value={textToCopy} readOnly {...rest} />
         <button>{Icon && <Icon size={20} />}</button>
       </div>
       {copied && <CopyMessage>URL copiada</CopyMessage>}

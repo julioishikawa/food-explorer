@@ -26,6 +26,8 @@ export const Container = styled.div`
   .infos-wrapper {
     width: 100%;
 
+    position: relative;
+
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -217,11 +219,11 @@ export const Content = styled.div`
 
 export const Address = styled.div`
   width: 100%;
+
   padding: 2rem;
 
-  position: relative;
-
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 1rem;
 
@@ -255,24 +257,23 @@ export const Address = styled.div`
 
   .address-wrapper-active {
     width: 100%;
+    height: 100%;
 
-    padding: 0 2rem;
+    padding: 2rem;
 
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 1.6rem;
 
     position: absolute;
+    top: 0;
+    z-index: 1;
 
-    left: 0;
-
+    border: 2px solid ${({ theme }) => theme.COLORS.DARK_1000};
+    border-radius: 0.5rem;
     background-color: ${({ theme }) => theme.COLORS.DARK_400};
 
     animation: appear 300ms;
-
-    input {
-      height: 3.2rem;
-    }
 
     svg {
       min-width: 1.6rem;
@@ -280,22 +281,16 @@ export const Address = styled.div`
 
       cursor: pointer;
     }
-
-    button {
-      background-color: transparent;
-      border: 0;
-      color: ${({ theme }) => theme.COLORS.LIGHT_500};
-    }
   }
 
   @media screen and (min-width: 1368px) {
-    .address-wrapper-active input {
-      height: 4rem;
-    }
+    .address-wrapper-active {
+      padding: 1.6rem 0.6rem 1.6rem 1.6rem;
 
-    .address-wrapper-active svg {
-      min-width: 2rem;
-      min-height: 2rem;
+      svg {
+        min-width: 2rem;
+        min-height: 2rem;
+      }
     }
   }
 `;
@@ -320,78 +315,78 @@ export const Wrapper = styled.div`
 
     position: relative;
 
-    .add-card {
-      width: 50%;
-      height: 50%;
+    .payment-methods {
+      width: 100%;
+      max-height: 220px;
+
+      overflow-y: auto;
     }
-  }
 
-  .payment-methods {
-    width: 100%;
-    max-height: 220px;
-
-    overflow-y: auto;
-  }
-
-  #payment-type {
-    width: 100%;
-    height: 7rem;
-    padding: 2rem;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    cursor: pointer;
-
-    color: ${({ theme }) => theme.COLORS.LIGHT_100};
-    background-color: ${({ theme }) => theme.COLORS.DARK_400};
-
-    div {
+    #payment-type {
       width: 100%;
       height: 7rem;
+      padding: 2rem;
 
       display: flex;
       align-items: center;
-      gap: 1rem;
+      justify-content: space-between;
 
-      span {
-        font-size: 1.4rem;
-        font-weight: 500;
+      cursor: pointer;
+
+      color: ${({ theme }) => theme.COLORS.LIGHT_100};
+      background-color: ${({ theme }) => theme.COLORS.DARK_400};
+
+      div {
+        width: 100%;
+        height: 7rem;
+
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        span {
+          font-size: 1.4rem;
+          font-weight: 500;
+        }
+      }
+
+      button {
+        background-color: transparent;
+        border: 0;
+        color: ${({ theme }) => theme.COLORS.LIGHT_100};
+      }
+
+      img {
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+
+      &.active {
+        border-radius: 0.2rem;
+        background: ${({ theme }) => theme.COLORS.DARK_800};
       }
     }
 
-    button {
-      background-color: transparent;
-      border: 0;
-      color: ${({ theme }) => theme.COLORS.LIGHT_100};
+    #payment-type:nth-child(1) {
+      border-width: 1px 0;
+      border-style: solid;
+      border-color: ${({ theme }) => theme.COLORS.DARK_1000};
     }
 
-    img {
-      width: 2.5rem;
-      height: 2.5rem;
+    #payment-type:nth-child(n + 2) {
+      border-width: 1px;
+      border-bottom-style: solid;
+      border-bottom-color: ${({ theme }) => theme.COLORS.DARK_1000};
     }
 
-    &.active {
-      border-radius: 0.2rem;
-      background: ${({ theme }) => theme.COLORS.DARK_800};
+    #payment-type:hover {
+      background-color: ${({ theme }) => theme.COLORS.DARK_600};
     }
   }
 
-  #payment-type:nth-child(1) {
-    border-width: 1px 0;
-    border-style: solid;
-    border-color: ${({ theme }) => theme.COLORS.DARK_1000};
-  }
-
-  #payment-type:nth-child(n + 2) {
-    border-width: 1px;
-    border-bottom-style: solid;
-    border-bottom-color: ${({ theme }) => theme.COLORS.DARK_1000};
-  }
-
-  #payment-type:hover {
-    background-color: ${({ theme }) => theme.COLORS.DARK_600};
+  .add-card {
+    width: 50%;
+    height: 3.2rem;
   }
 
   .pix-wrapper {
@@ -413,31 +408,6 @@ export const Wrapper = styled.div`
     }
   }
 
-  .pix {
-    height: 39rem;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.6rem;
-
-    .qrcode-wrapper {
-      display: flex;
-      gap: 0.5rem;
-      flex-direction: column;
-      align-items: center;
-
-      span {
-        font-size: 1rem;
-      }
-    }
-
-    img {
-      width: 17rem;
-      height: 17rem;
-    }
-  }
-
   .credit-card {
     width: 100%;
 
@@ -453,27 +423,6 @@ export const Wrapper = styled.div`
     animation: appear 300ms;
 
     background-color: ${({ theme }) => theme.COLORS.DARK_400};
-
-    .credit-cards-infos {
-      height: 39rem;
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.6rem;
-
-      padding: 0 1.6rem;
-
-      div {
-        width: 100%;
-        display: flex;
-        gap: 1rem;
-      }
-
-      button {
-        width: 55%;
-      }
-    }
 
     svg {
       cursor: pointer;
@@ -492,6 +441,10 @@ export const Wrapper = styled.div`
       padding-right: 1rem;
     }
 
+    .add-card {
+      height: 4rem;
+    }
+
     .pix-wrapper {
       top: 5.5rem;
 
@@ -501,25 +454,8 @@ export const Wrapper = styled.div`
       }
     }
 
-    .pix {
-      gap: 2rem;
-
-      img {
-        width: 18.4rem;
-        height: 18.4rem;
-      }
-    }
-
     .credit-card {
       top: 5.5rem;
-
-      .credit-cards-infos {
-        height: 38rem;
-
-        gap: 2rem;
-
-        padding: 0 3.2rem;
-      }
 
       svg {
         width: 2.5rem;

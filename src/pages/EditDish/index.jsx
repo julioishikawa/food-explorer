@@ -94,6 +94,21 @@ export function EditDish() {
     navigate("/");
   }
 
+  function handleDeleteDish() {
+    const confirmed = window.confirm(
+      "Você tem certeza que quer excluir este prato?"
+    );
+
+    if (confirmed) {
+      api.delete(`/dishes/${params.id}`);
+      alert("Prato excluido com sucesso!");
+
+      handleBackHome();
+    } else {
+      return;
+    }
+  }
+
   function handleEditDish() {
     if (!name) {
       setErrors((prevState) => ({ ...prevState, name: true }));
@@ -151,21 +166,6 @@ export function EditDish() {
 
         alert("Prato atualizado com sucesso!");
       });
-  }
-
-  function handleDeleteDish() {
-    const confirmed = window.confirm(
-      "Você tem certeza que quer excluir este prato?"
-    );
-
-    if (confirmed) {
-      api.delete(`/dishes/${params.id}`);
-      alert("Prato excluido com sucesso!");
-
-      handleBackHome();
-    } else {
-      return;
-    }
   }
 
   useEffect(() => {

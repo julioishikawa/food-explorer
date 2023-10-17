@@ -1,6 +1,6 @@
 import { Container } from "./styles";
 
-export function CreditCardInput({ label, id, error, className, ...rest }) {
+export function InfosInput({ label, id, error, className, ...rest }) {
   return (
     <Container className={className}>
       {label && <label htmlFor={id}>{label}</label>}

@@ -152,6 +152,13 @@ export function NewDish() {
         }
 
         alert("Prato criado com sucesso!");
+      })
+      .catch((e) => {
+        if (e.response) {
+          alert(e.response.data.message);
+        } else {
+          alert("Não foi possível criar o prato.");
+        }
       });
   }
 
