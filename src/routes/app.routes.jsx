@@ -12,6 +12,7 @@ import { Favorites } from "../pages/Favorites";
 import { NewDish } from "../pages/NewDish";
 import { EditDish } from "../pages/EditDish";
 import { Cart } from "../pages/Cart";
+import { AddressProvider } from "../hooks/address";
 
 export function AppRoutes() {
   const { isAdmin } = useAuth();
@@ -19,19 +20,25 @@ export function AppRoutes() {
   return (
     <DishesProvider>
       <CreditCardsProvider>
-        <CartProvider>
-          <FavoritesProvider>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/details/:id" element={<Details />} />
-              {!isAdmin && <Route path="/favorites" element={<Favorites />} />}
-              {!isAdmin && <Route path="/cart" element={<Cart />} />}
-              {!isAdmin && <Route path="/cart/:id" element={<Cart />} />}
-              {isAdmin && <Route path="/newdish" element={<NewDish />} />}
-              {isAdmin && <Route path="/editdish/:id" element={<EditDish />} />}
-            </Routes>
-          </FavoritesProvider>
-        </CartProvider>
+        <AddressProvider>
+          <CartProvider>
+            <FavoritesProvider>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/details/:id" element={<Details />} />
+                {!isAdmin && (
+                  <Route path="/favorites" element={<Favorites />} />
+                )}
+                {!isAdmin && <Route path="/cart" element={<Cart />} />}
+                {!isAdmin && <Route path="/cart/:id" element={<Cart />} />}
+                {isAdmin && <Route path="/newdish" element={<NewDish />} />}
+                {isAdmin && (
+                  <Route path="/editdish/:id" element={<EditDish />} />
+                )}
+              </Routes>
+            </FavoritesProvider>
+          </CartProvider>
+        </AddressProvider>
       </CreditCardsProvider>
     </DishesProvider>
   );

@@ -238,6 +238,7 @@ export const Address = styled.div`
 
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 1rem;
 
     span {
@@ -275,6 +276,79 @@ export const Address = styled.div`
 
     animation: appear 300ms;
 
+    a {
+      width: 100%;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    svg {
+      min-width: 1.6rem;
+      min-height: 1.6rem;
+
+      cursor: pointer;
+    }
+  }
+
+  .box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.6rem;
+
+    padding: 0 4rem;
+
+    .addresses-infos {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      width: 100%;
+      height: 4rem;
+
+      border: 2px solid ${({ theme }) => theme.COLORS.DARK_1000};
+      border-radius: 0.5rem;
+      background-color: ${({ theme }) => theme.COLORS.DARK_400};
+
+      a {
+        padding: 1rem;
+      }
+    }
+
+    .addresses-infos:hover {
+      background-color: ${({ theme }) => theme.COLORS.DARK_1000};
+    }
+
+    button {
+      margin-top: 2rem;
+
+      width: 90%;
+      height: 4.5rem;
+    }
+  }
+
+  .new-address-wrapper-active {
+    width: 100%;
+    height: 100%;
+
+    padding: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+
+    position: absolute;
+    top: 0;
+    z-index: 1;
+
+    border: 2px solid ${({ theme }) => theme.COLORS.DARK_1000};
+    border-radius: 0.5rem;
+    background-color: ${({ theme }) => theme.COLORS.DARK_400};
+
+    animation: appear 300ms;
+
     svg {
       min-width: 1.6rem;
       min-height: 1.6rem;
@@ -284,7 +358,7 @@ export const Address = styled.div`
   }
 
   @media screen and (min-width: 1368px) {
-    .address-wrapper-active {
+    .new-address-wrapper-active {
       padding: 1.6rem 0.6rem 1.6rem 1.6rem;
 
       svg {

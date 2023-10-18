@@ -5,7 +5,7 @@ export const Container = styled.button`
   height: 12.4rem;
   background-color: ${({ theme }) => theme.COLORS.DARK_400};
 
-  padding: 1rem 0;
+  padding: 1.5rem 0;
   margin-bottom: 2.6rem;
 
   display: flex;

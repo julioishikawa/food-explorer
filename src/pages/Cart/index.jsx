@@ -3,20 +3,18 @@ import { useNavigate } from "react-router-dom";
 import { FiCreditCard, FiX, FiCopy, FiMapPin } from "react-icons/fi";
 
 import { useCart } from "../../hooks/cart";
-
 import { useCreditCards } from "../../hooks/credit_cards";
+import { useAddress } from "../../hooks/address";
 
 import { Header } from "../../components/Header";
 import { BackButton } from "../../components/BackButton";
 import { ProductItem } from "../../components/ProductItem";
-import { Input } from "../../components/Input";
 import { NewAddress } from "../../components/NewAddress";
 import { NewPix } from "../../components/NewPix";
 import { NewCreditCard } from "../../components/NewCreditCard";
 import { UpdateCreditCard } from "../../components/UpdateCreditCard";
 import { Button } from "../../components/Button";
 import { Footer } from "../../components/Footer";
-import { Error } from "../../components/Error";
 
 import EmptyCartImage from "../../assets/empty-cart.svg";
 import PixIcon from "../../assets/pix-icon.svg";
@@ -35,14 +33,22 @@ export function Cart() {
   const navigate = useNavigate();
 
   const { cart, removeFromCart, getCartTotalPrice } = useCart();
-
-  const { getAllCreditCards } = useCreditCards();
-
-  const { creditCards } = useCreditCards();
+  const { creditCards, getAllCreditCards } = useCreditCards();
+  const { addresses, getAllAddresses } = useAddress();
 
   const [paymentMethod, setPaymentMethod] = useState("");
+  const [selectedAddress, setSelectedAddress] = useState(null);
 
   const totalPrice = getCartTotalPrice();
+
+  const handleAddressClick = (address) => {
+    setSelectedAddress(address);
+    localStorage.setItem(
+      "@food-explorer:selectedAddress",
+      JSON.stringify(address)
+    );
+    handleMethodChange("");
+  };
 
   function handleMethodChange(method) {
     setPaymentMethod(method);
@@ -60,6 +66,17 @@ export function Cart() {
 
   useEffect(() => {
     getAllCreditCards();
+    getAllAddresses();
+  }, []);
+
+  useEffect(() => {
+    const storedAddress = localStorage.getItem(
+      "@food-explorer:selectedAddress"
+    );
+
+    if (storedAddress) {
+      setSelectedAddress(JSON.parse(storedAddress));
+    }
   }, []);
 
   return (
@@ -120,16 +137,47 @@ export function Cart() {
                 <Address>
                   <div className="address-wrapper">
                     <FiMapPin size={25} />
-
-                    <span>{}</span>
-
-                    <button onClick={() => handleMethodChange("address")}>
+                    {selectedAddress && (
+                      <span>
+                        {`R: ${selectedAddress.street},`}
+                        &nbsp;
+                        {selectedAddress.number}
+                      </span>
+                    )}
+                    <button onClick={() => handleMethodChange("addresses")}>
                       alterar
                     </button>
                   </div>
 
-                  {paymentMethod === "address" && (
+                  {paymentMethod === "addresses" && (
                     <div className="address-wrapper-active">
+                      <FiX onClick={() => handleMethodChange("")} />
+
+                      <div className="box">
+                        {addresses &&
+                          addresses.map((address) => (
+                            <div
+                              key={address.id}
+                              className="addresses-infos"
+                              onClick={() => handleAddressClick(address)}
+                            >
+                              <a>
+                                {`R: ${address.street},`}
+                                &nbsp;
+                                {address.number}
+                              </a>
+                            </div>
+                          ))}
+                        <Button
+                          title="Adicionar novo endereço"
+                          onClick={() => handleMethodChange("address")}
+                        />
+                      </div>
+                    </div>
+                  )}
+
+                  {paymentMethod === "address" && (
+                    <div className="new-address-wrapper-active">
                       <FiX onClick={() => handleMethodChange("")} />
 
                       <NewAddress />
