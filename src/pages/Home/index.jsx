@@ -8,7 +8,8 @@ import { Category } from "../../components/Category";
 
 import { Banner, Container, Meals, Wrapper, Scrollbar } from "./styles";
 
-import food from "../../assets/food.png";
+import food_mobile from "../../assets/food-banner-mobile.svg";
+import food_desktop from "../../assets/food-banner-desktop.svg";
 
 export function Home() {
   const { dishes } = useDishes();
@@ -38,7 +39,12 @@ export function Home() {
       <Scrollbar>
         <Wrapper>
           <Banner>
-            <img src={food} alt="imagem de comida" />
+            <picture>
+              <source media="(max-width: 800px)" srcSet={food_mobile} />
+              <source media="(min-width: 1368px)" srcSet={food_desktop} />
+
+              <img src={food_mobile} alt="imagem de comidas" />
+            </picture>
 
             <div className="infos">
               <h2>Sabores inigualáveis</h2>

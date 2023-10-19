@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 42.8rem;
+  width: 100%;
   min-height: 11.4rem;
 
   display: flex;
-
+  justify-content: space-between;
   align-items: center;
 
   gap: 7.5rem;
@@ -34,32 +34,124 @@ export const Container = styled.div`
     display: none;
   }
 
-  .dishes-wrapper {
+  @media screen and (min-width: 800px) {
+    width: 100%;
+    min-height: 10.4rem;
+
+    padding: 0;
+
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 8px;
+    gap: 2.4rem;
 
-    min-width: 21.6rem;
+    .search-wrapper {
+      display: flex;
+      flex-direction: column;
 
-    height: 5.6rem;
+      width: 100%;
 
-    font-size: 1.4rem;
-    font-weight: 100;
+      position: relative;
 
-    color: ${({ theme }) => theme.COLORS.LIGHT_100};
+      #search {
+        z-index: 3;
+      }
 
-    border: 0;
-    border-radius: 0.5rem;
-    background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
+      .notes-wrapper {
+        max-height: 44rem;
 
-    &:disabled {
-      opacity: 0.5;
+        overflow-y: auto;
+
+        position: absolute;
+        top: 4.5rem;
+        right: 1.6rem;
+
+        z-index: 2;
+        border: 1px solid ${({ theme }) => theme.COLORS.CAKE_200};
+        border-radius: 0 0 5px 5px;
+        background-color: ${({ theme }) => theme.COLORS.DARK_1000};
+      }
     }
 
-    img {
-      width: 2.6rem;
-      height: 2.2rem;
+    .favorites-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      margin-right: 2rem;
+
+      min-width: 12.6rem;
+      height: 4.8rem;
+
+      font-size: 1.4rem;
+      font-weight: 100;
+
+      color: ${({ theme }) => theme.COLORS.LIGHT_100};
+
+      border: 0;
+      border-radius: 0.5rem;
+      background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
+
+      &:disabled {
+        opacity: 0.5;
+      }
+    }
+
+    .dishes-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      min-width: 14.6rem;
+
+      height: 4.8rem;
+
+      font-size: 1.4rem;
+      font-weight: 100;
+
+      color: ${({ theme }) => theme.COLORS.LIGHT_100};
+
+      border: 0;
+      border-radius: 0.5rem;
+      background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
+
+      &:disabled {
+        opacity: 0.5;
+      }
+
+      img {
+        width: 2.6rem;
+        height: 2.2rem;
+      }
+    }
+
+    .dishes-wrapper {
+      font-size: 1.4rem;
+      font-weight: 100;
+
+      img {
+        width: 2.6rem;
+        height: 2.2rem;
+      }
+    }
+
+    .logout svg {
+      width: 2.4rem;
+      height: 2.4rem;
+      margin-right: 2.4rem;
+    }
+
+    #search-mobile,
+    .menu-item,
+    .nav-item {
+      display: none;
+    }
+
+    #search,
+    .logout,
+    .favorites-btn {
+      display: flex;
     }
   }
 
@@ -98,6 +190,30 @@ export const Container = styled.div`
       }
     }
 
+    .dishes-wrapper {
+      min-width: 21.6rem;
+
+      height: 5.6rem;
+
+      font-size: 1.4rem;
+      font-weight: 100;
+
+      color: ${({ theme }) => theme.COLORS.LIGHT_100};
+
+      border: 0;
+      border-radius: 0.5rem;
+      background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
+
+      &:disabled {
+        opacity: 0.5;
+      }
+
+      img {
+        width: 2.6rem;
+        height: 2.2rem;
+      }
+    }
+
     .search-wrapper {
       display: flex;
       flex-direction: column;
@@ -126,6 +242,12 @@ export const Container = styled.div`
       }
     }
 
+    .logout svg {
+      width: 3.2rem;
+      height: 3.2rem;
+      margin-right: 12.3rem;
+    }
+
     #search-mobile,
     .menu-item,
     .nav-item {
@@ -136,14 +258,6 @@ export const Container = styled.div`
     .logout,
     .favorites-btn {
       display: flex;
-    }
-
-    a {
-      svg {
-        width: 3.2rem;
-        height: 3.2rem;
-        margin-right: 12.3rem;
-      }
     }
   }
 `;
@@ -178,7 +292,7 @@ export const Menu = styled.div`
   }
 
   .nav-menu.active {
-    width: 42.8rem;
+    width: 100%;
 
     display: flex;
     justify-content: space-between;
@@ -284,6 +398,10 @@ export const Menu = styled.div`
     }
   }
 
+  @media screen and (min-width: 800px) {
+    margin-left: 0;
+  }
+
   @media screen and (min-width: 1368px) {
     margin-left: 6.5rem;
   }
@@ -319,6 +437,25 @@ export const Logo = styled.div`
     font-size: 1.2rem;
     font-weight: 300;
     color: ${({ theme }) => theme.COLORS.CAKE_200};
+  }
+
+  @media screen and (min-width: 800px) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0;
+
+    .logo {
+      width: 19rem;
+    }
+
+    img {
+      margin-right: 1rem;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+    }
   }
 
   @media screen and (min-width: 1368px) {
@@ -481,6 +618,70 @@ export const Cart = styled.div`
         background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
         border-radius: 5px;
       }
+    }
+  }
+
+  @media screen and (min-width: 800px) {
+    .dishes-wrapper {
+      display: flex;
+    }
+
+    .menu-dishes {
+      display: none;
+    }
+
+    .new-dish {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      min-width: 21.6rem;
+
+      height: 5.6rem;
+
+      font-size: 1.4rem;
+      font-weight: 100;
+
+      color: ${({ theme }) => theme.COLORS.LIGHT_100};
+
+      border: 0;
+      border-radius: 0.5rem;
+      background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
+
+      &:disabled {
+        opacity: 0.5;
+      }
+    }
+
+    .nav-dishes {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+
+      width: 100%;
+
+      position: absolute;
+
+      top: -10px;
+      right: 0;
+
+      opacity: 0;
+    }
+
+    .nav-dishes.active {
+      width: 31.4rem;
+      max-height: 44rem;
+
+      overflow-y: auto;
+
+      top: 0;
+
+      opacity: 1;
+    }
+
+    .cart-links {
+      font-size: 1.6rem;
     }
   }
 

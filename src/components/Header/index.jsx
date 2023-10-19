@@ -12,7 +12,7 @@ import { ProductItem } from "../ProductItem";
 
 import polygon from "../../assets/Polygon.svg";
 import footerLogo from "../../assets/Polygon-footer.svg";
-import orderImage from "../../assets/order.png";
+import orderImage from "../../assets/order.svg";
 
 import { Container, Menu, Logo, Cart } from "./styles";
 
@@ -239,8 +239,8 @@ export function Header() {
         </div>
       </Cart>
 
-      <Link to="/" onClick={signOut}>
-        <FiLogOut className="logout" />
+      <Link to="/" className="logout" onClick={signOut}>
+        <FiLogOut />
       </Link>
     </Container>
   );

@@ -6,7 +6,7 @@ export const Container = styled.div`
   min-height: 100vh;
 
   > main {
-    width: 42.8rem;
+    width: 100%;
 
     flex: 1;
 

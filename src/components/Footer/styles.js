@@ -8,6 +8,7 @@ export const Container = styled.div`
 
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 2rem;
 
   background-color: ${({ theme }) => theme.COLORS.DARK_600};
@@ -19,9 +20,11 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.COLORS.LIGHT_200};
   }
 
-  @media screen and (min-width: 1368px) {
-    justify-content: space-between;
+  @media screen and (min-width: 800px) {
+    padding: 2.8rem 5.2rem;
+  }
 
+  @media screen and (min-width: 1368px) {
     padding: 2.8rem 12.3rem;
   }
 `;

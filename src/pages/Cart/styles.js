@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 export const Container = styled.div`
-  width: 42.8rem;
+  width: 100%rem;
   height: 100vh;
 
   display: flex;
@@ -276,56 +276,52 @@ export const Address = styled.div`
 
     animation: appear 300ms;
 
-    a {
-      width: 100%;
-
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
     svg {
       min-width: 1.6rem;
       min-height: 1.6rem;
 
       cursor: pointer;
     }
-  }
 
-  .box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.6rem;
-
-    padding: 0 4rem;
-
-    .addresses-infos {
+    .box {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      align-items: center;
+      gap: 1.6rem;
 
-      width: 100%;
-      height: 4rem;
+      padding: 0 4rem;
 
-      border: 2px solid ${({ theme }) => theme.COLORS.DARK_1000};
-      border-radius: 0.5rem;
-      background-color: ${({ theme }) => theme.COLORS.DARK_400};
+      .addresses-infos {
+        width: 100%;
 
-      a {
-        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        border: 2px solid ${({ theme }) => theme.COLORS.DARK_1000};
+        border-radius: 0.5rem;
+        background-color: ${({ theme }) => theme.COLORS.DARK_400};
+
+        a {
+          width: 100%;
+          padding: 1rem;
+
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
-    }
 
-    .addresses-infos:hover {
-      background-color: ${({ theme }) => theme.COLORS.DARK_1000};
-    }
+      .addresses-infos:hover {
+        background-color: ${({ theme }) => theme.COLORS.DARK_1000};
+      }
 
-    button {
-      margin-top: 2rem;
+      button {
+        margin-top: 2rem;
 
-      width: 90%;
-      height: 4.5rem;
+        width: 90%;
+        height: 4.5rem;
+      }
     }
   }
 
@@ -358,6 +354,12 @@ export const Address = styled.div`
   }
 
   @media screen and (min-width: 1368px) {
+    .box .addresses-infos a {
+      padding: 1.6rem;
+
+      font-size: 1.6rem;
+    }
+
     .new-address-wrapper-active {
       padding: 1.6rem 0.6rem 1.6rem 1.6rem;
 

@@ -67,7 +67,8 @@ export const Container = styled.div`
     font-weight: 500;
     line-height: 140%;
   }
-  @media screen and (min-width: 1368px) {
+
+  @media screen and (min-width: 1024px) {
     .swiper-slide:nth-child(n + 2) {
       margin-left: 2.7rem;
     }
@@ -75,6 +76,29 @@ export const Container = styled.div`
     .swiper-button-next,
     .swiper-button-prev {
       display: flex;
+
+      &::after {
+        font-size: 2.4rem;
+      }
+    }
+
+    .swiper-button-disabled {
+      display: none;
+    }
+
+    > h2 {
+      margin-top: 2.4rem;
+    }
+  }
+
+  @media screen and (min-width: 1368px) {
+    .swiper-button-next,
+    .swiper-button-prev {
+      display: flex;
+
+      &::after {
+        font-size: 3.4rem;
+      }
     }
 
     .swiper-button-disabled {

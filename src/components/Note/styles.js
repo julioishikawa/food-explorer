@@ -50,7 +50,13 @@ export const Container = styled.button`
     }
   }
 
+  @media screen and (min-width: 800px) {
+    display: none;
+  }
+
   @media screen and (min-width: 1368px) {
+    display: flex;
+
     margin-bottom: 0;
 
     border-width: 1px 0;
@@ -87,5 +93,13 @@ export const Content = styled.div`
     font-size: 2rem;
 
     color: ${({ theme }) => theme.COLORS.LIGHT_100};
+  }
+
+  @media screen and (min-width: 800px) {
+    display: none;
+  }
+
+  @media screen and (min-width: 1368px) {
+    display: flex;
   }
 `;

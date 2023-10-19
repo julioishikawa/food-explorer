@@ -13,7 +13,7 @@ import { Footer } from "../../components/Footer";
 
 import { Container, Wrapper, Scrollbar } from "./styles";
 
-import order from "../../assets/order.png";
+import order from "../../assets/order.svg";
 
 export function Details() {
   const params = useParams();
