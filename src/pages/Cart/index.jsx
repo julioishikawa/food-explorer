@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FiCreditCard, FiX, FiCopy, FiMapPin } from "react-icons/fi";
+import { FiCreditCard, FiX, FiMoreVertical, FiMapPin } from "react-icons/fi";
 
 import { useCart } from "../../hooks/cart";
 import { useCreditCards } from "../../hooks/credit_cards";
@@ -10,6 +10,7 @@ import { Header } from "../../components/Header";
 import { BackButton } from "../../components/BackButton";
 import { ProductItem } from "../../components/ProductItem";
 import { NewAddress } from "../../components/NewAddress";
+import { UpdateAddress } from "../../components/UpdateAddress";
 import { NewPix } from "../../components/NewPix";
 import { NewCreditCard } from "../../components/NewCreditCard";
 import { UpdateCreditCard } from "../../components/UpdateCreditCard";
@@ -54,12 +55,17 @@ export function Cart() {
     setPaymentMethod(method);
   }
 
-  function handleDetails(id) {
+  function handleDetailsAddress(id) {
+    navigate(`/cart/${id}`);
+    handleMethodChange("update-address");
+  }
+
+  function handleDetailsCard(id) {
     navigate(`/cart/${id}`);
     handleMethodChange("update-card");
   }
 
-  function handleCloseCreditCard() {
+  function handleClose() {
     navigate(`/cart`);
     handleMethodChange("");
   }
@@ -156,20 +162,35 @@ export function Cart() {
                       <div className="box">
                         {addresses &&
                           addresses.map((address) => (
-                            <div
-                              key={address.id}
-                              className="addresses-infos"
-                              onClick={() => handleAddressClick(address)}
-                            >
-                              <a>
-                                {`R: ${address.street},`}
-                                &nbsp;
-                                {address.number}
-                              </a>
+                            <div className="select-address">
+                              <div
+                                key={address.id}
+                                className="addresses-infos"
+                                onClick={() => handleAddressClick(address)}
+                              >
+                                <a>
+                                  <div>
+                                    {`R: ${address.street},`}
+                                    &nbsp;
+                                    {address.number}
+                                  </div>
+
+                                  {address.neighborhood}
+                                </a>
+                              </div>
+
+                              <div className="address-options">
+                                <FiMoreVertical
+                                  onClick={() =>
+                                    handleDetailsAddress(address.id)
+                                  }
+                                />
+                              </div>
                             </div>
                           ))}
                         <Button
                           title="Adicionar novo endereço"
+                          className="save-address"
                           onClick={() => handleMethodChange("address")}
                         />
                       </div>
@@ -181,6 +202,14 @@ export function Cart() {
                       <FiX onClick={() => handleMethodChange("")} />
 
                       <NewAddress />
+                    </div>
+                  )}
+
+                  {paymentMethod === "update-address" && (
+                    <div className="new-address-wrapper-active">
+                      <FiX onClick={() => handleClose("")} />
+
+                      <UpdateAddress />
                     </div>
                   )}
                 </Address>
@@ -223,7 +252,7 @@ export function Cart() {
                             </div>
 
                             <button
-                              onClick={() => handleDetails(creditCard.id)}
+                              onClick={() => handleDetailsCard(creditCard.id)}
                             >
                               alterar
                             </button>
@@ -247,7 +276,7 @@ export function Cart() {
 
                     {paymentMethod === "update-card" && (
                       <div className="credit-card">
-                        <FiX onClick={() => handleCloseCreditCard("")} />
+                        <FiX onClick={() => handleClose("")} />
 
                         <UpdateCreditCard />
                       </div>

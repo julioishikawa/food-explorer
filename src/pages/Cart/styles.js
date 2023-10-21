@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 export const Container = styled.div`
-  width: 100%rem;
+  width: 100%;
   height: 100vh;
 
   display: flex;
@@ -24,8 +24,6 @@ export const Container = styled.div`
   }
 
   .infos-wrapper {
-    width: 100%;
-
     position: relative;
 
     display: flex;
@@ -58,6 +56,37 @@ export const Container = styled.div`
     }
   }
 
+  @media screen and (min-width: 800px) {
+    width: 100%;
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .cart-wrapper {
+      height: 60.4rem;
+
+      margin-top: 3.2rem;
+
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+
+      .total {
+        font-size: 2rem;
+        font-weight: 500;
+      }
+    }
+
+    .infos-wrapper {
+      min-width: 33.8rem;
+
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+  }
+
   @media screen and (min-width: 1368px) {
     width: 100%;
 
@@ -81,11 +110,11 @@ export const Container = styled.div`
     }
 
     .infos-wrapper {
-      width: 58rem;
+      min-width: 54.8rem;
 
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 3rem;
     }
   }
 `;
@@ -170,6 +199,15 @@ export const Section = styled.div`
     border-bottom-color: ${({ theme }) => theme.COLORS.DARK_1000};
   }
 
+  @media screen and (min-width: 800px) {
+    padding: 2.4rem 5.2rem;
+
+    h1,
+    .cart-title {
+      font-size: 2.2rem;
+    }
+  }
+
   @media screen and (min-width: 1368px) {
     padding: 2.4rem 13.4rem;
 
@@ -204,6 +242,19 @@ export const Content = styled.div`
     gap: 1.6rem;
   }
 
+  @media screen and (min-width: 800px) {
+    height: 100%;
+
+    padding: 3rem;
+
+    gap: 2.4rem;
+
+    .cart-items {
+      max-height: 42rem;
+      padding: 0 1rem 0 0;
+    }
+  }
+
   @media screen and (min-width: 1368px) {
     height: 100%;
 
@@ -213,6 +264,7 @@ export const Content = styled.div`
 
     .cart-items {
       max-height: 42rem;
+      padding: 0 1rem 0 0;
     }
   }
 `;
@@ -284,43 +336,58 @@ export const Address = styled.div`
     }
 
     .box {
+      padding: 1rem;
+
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 1.6rem;
 
-      padding: 0 4rem;
-
-      .addresses-infos {
+      .select-address {
         width: 100%;
 
         display: flex;
-        flex-direction: column;
-        justify-content: center;
+        justify-content: space-between;
+        align-items: center;
 
         border: 2px solid ${({ theme }) => theme.COLORS.DARK_1000};
         border-radius: 0.5rem;
         background-color: ${({ theme }) => theme.COLORS.DARK_400};
 
-        a {
+        .addresses-infos {
           width: 100%;
+          display: flex;
+
+          a {
+            padding: 1rem;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+
+        .addresses-infos:hover {
+          background-color: ${({ theme }) => theme.COLORS.DARK_1000};
+        }
+
+        .address-options {
+          display: flex;
+          flex-direction: column;
+
           padding: 1rem;
 
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
+          svg {
+            color: ${({ theme }) => theme.COLORS.LIGHT_100};
+          }
         }
-      }
 
-      .addresses-infos:hover {
-        background-color: ${({ theme }) => theme.COLORS.DARK_1000};
-      }
+        .save-address {
+          margin-top: 2rem;
 
-      button {
-        margin-top: 2rem;
-
-        width: 90%;
-        height: 4.5rem;
+          width: 90%;
+          height: 4.5rem;
+        }
       }
     }
   }
@@ -354,10 +421,17 @@ export const Address = styled.div`
   }
 
   @media screen and (min-width: 1368px) {
-    .box .addresses-infos a {
-      padding: 1.6rem;
+    .address-wrapper-active {
+      .box .select-address .addresses-infos a {
+        padding: 2rem;
 
-      font-size: 1.6rem;
+        font-size: 1.6rem;
+      }
+
+      svg {
+        min-width: 2rem;
+        min-height: 2rem;
+      }
     }
 
     .new-address-wrapper-active {
@@ -372,7 +446,7 @@ export const Address = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  height: 50.4rem;
+  height: 60.4rem;
 
   display: flex;
   flex-direction: column;
@@ -548,6 +622,8 @@ export const Scrollbar = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  overflow-y: auto;
 
   @media screen and (min-width: 1368px) {
     margin: 0 2px 0 0;

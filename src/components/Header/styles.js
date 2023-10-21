@@ -542,7 +542,7 @@ export const Cart = styled.div`
   }
 
   .nav-dishes.active {
-    width: 30.8rem;
+    width: 32.8rem;
 
     display: flex;
 
@@ -670,12 +670,14 @@ export const Cart = styled.div`
     }
 
     .nav-dishes.active {
-      width: 31.4rem;
+      width: 38rem;
+
       max-height: 44rem;
 
       overflow-y: auto;
 
       top: 0;
+      right: -5rem;
 
       opacity: 1;
     }
@@ -734,12 +736,13 @@ export const Cart = styled.div`
     }
 
     .nav-dishes.active {
-      width: 41.4rem;
+      width: 47.4rem;
       max-height: 44rem;
 
       overflow-y: auto;
 
       top: 0;
+      right: -8rem;
 
       opacity: 1;
     }

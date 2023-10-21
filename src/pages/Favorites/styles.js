@@ -3,10 +3,15 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+
+  height: 100vh;
 
   > main {
     width: 100%;
+
+    margin: 0 0 2px 0;
+
+    overflow-y: auto;
 
     flex: 1;
 
@@ -14,17 +19,23 @@ export const Container = styled.div`
 
     background: ${({ theme }) => theme.COLORS.DARK_400};
 
-    > h1 {
-      margin-top: 2.8rem;
+    .favorites-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 
-      font-size: 3.2rem;
-      font-weight: 500;
-      line-height: 140%;
+      > h1 {
+        margin-top: 2.8rem;
+
+        font-size: 3.2rem;
+        font-weight: 500;
+        line-height: 140%;
+      }
     }
   }
 
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 0;
   }
 
   ::-webkit-scrollbar-thumb {
@@ -36,9 +47,14 @@ export const Container = styled.div`
     background-color: ${({ theme }) => theme.COLORS.DARK_1000};
   }
 
-  @media screen and (min-width: 1368px) {
+  @media screen and (min-width: 800px) {
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
     > main {
-      width: min(100%, 112rem);
+      width: 100%;
+      padding: 3.2rem 5.2rem;
     }
   }
 
@@ -55,11 +71,10 @@ export const FavoritesList = styled.ul`
 
   display: flex;
   flex-wrap: wrap;
-  flex-direction: column;
   gap: 1.6rem;
 
-  @media screen and (min-width: 1368px) {
-    flex-direction: row;
+  @media screen and (min-width: 800px), screen and (min-width: 1368px) {
+    justify-content: center;
     gap: 2.4rem;
   }
 `;

@@ -30,7 +30,7 @@ export function Favorites() {
             </h2>
           </EmptyFavorites>
         ) : (
-          <>
+          <div className="favorites-wrapper">
             <h1>Meus favoritos</h1>
             <FavoritesList>
               {favorites.map((favorite) => (
@@ -39,12 +39,12 @@ export function Favorites() {
                   key={favorite.id}
                   title={favorite.name}
                   image={favorite.image}
-                  buttonText="Remover dos Favoritos"
+                  buttonText="Remover"
                   onClick={() => handleRemoveFavorite(favorite.id)}
                 />
               ))}
             </FavoritesList>
-          </>
+          </div>
         )}
       </main>
 

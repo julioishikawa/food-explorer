@@ -18,11 +18,15 @@ export const Container = styled.form`
     gap: 1rem;
   }
 
-  button {
-    width: 50%;
-    min-height: 4.4rem;
+  .buttons {
+    gap: 1.6rem;
 
     margin-bottom: 2rem;
+
+    button {
+      width: 50%;
+      height: 4.4rem;
+    }
   }
 
   @media screen and (min-width: 1368px) {
@@ -31,7 +35,7 @@ export const Container = styled.form`
     padding: 0 3.2rem;
 
     button {
-      min-height: 5rem;
+      height: 5.6rem;
     }
   }
 `;

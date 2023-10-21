@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.li`
+  width: 100%;
+
   display: flex;
   align-items: center;
   gap: 1.6rem;
@@ -25,6 +27,12 @@ export const Container = styled.li`
     display: flex;
     justify-content: space-between;
 
+    gap: 2rem;
+
+    span {
+      font-size: 1.4rem;
+    }
+
     button {
       background: transparent;
       color: ${({ theme }) => theme.COLORS.TOMATO_400};
@@ -47,7 +55,7 @@ export const Container = styled.li`
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    gap: 1.2rem;
+    justify-content: center;
 
     a {
       text-decoration: none;
@@ -78,12 +86,54 @@ export const Container = styled.li`
       color: ${({ theme }) => theme.COLORS.CAKE_200};
       font-family: Roboto;
       font-size: 1.4rem;
+
+      word-break: break-word;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+
+  @media screen and (min-width: 800px) {
+    width: 100%;
+    padding: 2rem;
+    gap: 2rem;
+
+    .product-image {
+      height: 7.2rem;
+      width: 7.2rem;
+      object-fit: cover;
+
+      border-radius: 50%;
+    }
+
+    .dish-info {
+      h3 {
+        .title,
+        .quantity {
+          font-size: 1.6rem;
+        }
+      }
+
+      > span {
+        color: ${({ theme }) => theme.COLORS.CAKE_200};
+        font-family: Roboto;
+        font-size: 1.6rem;
+      }
+    }
+
+    > div {
+      button {
+        font-size: 1.6rem;
+      }
     }
   }
 
   @media screen and (min-width: 1368px) {
+    width: 100%;
     padding: 2rem;
-    margin-right: 1rem;
 
     .product-image {
       height: 10.2rem;
@@ -110,7 +160,7 @@ export const Container = styled.li`
 
     > div {
       button {
-        font-size: 1.6rem;
+        font-size: 2rem;
       }
     }
   }

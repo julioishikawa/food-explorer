@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { api } from "../../services/api";
 
@@ -8,7 +8,9 @@ import { Button } from "../Button";
 
 import { Container } from "./styles";
 
-export function NewAddress() {
+export function UpdateAddress() {
+  const params = useParams();
+
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
@@ -31,6 +33,20 @@ export function NewAddress() {
     const numericValue = value.replace(/\D/g, "");
 
     setNumber(numericValue);
+  }
+
+  function handleDeleteAddress() {
+    const confirmed = window.confirm(
+      "Você tem certeza que quer excluir este endereço?"
+    );
+
+    if (confirmed) {
+      api.delete(`address/${params.id}`);
+      navigate("/cart");
+      window.location.reload();
+    } else {
+      return;
+    }
   }
 
   function handleAddAddress() {
@@ -63,7 +79,7 @@ export function NewAddress() {
     }
 
     api
-      .post("/address", {
+      .put(`/address/${params.id}`, {
         name,
         neighborhood,
         street,
@@ -83,6 +99,21 @@ export function NewAddress() {
       });
   }
 
+  useEffect(() => {
+    async function fetchAddress() {
+      const addressId = params.id;
+      const { data } = await api.get(`/address/${addressId}`);
+
+      setName(data.name);
+      setNeighborhood(data.neighborhood);
+      setStreet(data.street);
+      setNumber(data.number);
+      setComplement(data.complement);
+    }
+
+    fetchAddress();
+  }, []);
+
   return (
     <Container>
       <InfosInput
@@ -90,6 +121,7 @@ export function NewAddress() {
         id="card-name"
         label="Nome do cliente (quem irá receber o pedido)"
         placeholder="Maria Silva"
+        value={name}
         onChange={(e) => setName(e.target.value)}
         error={errors.name}
       />
@@ -103,6 +135,7 @@ export function NewAddress() {
         id="card-neighborhood"
         label="Bairro"
         placeholder="Pinheiros"
+        value={neighborhood}
         onChange={(e) => setNeighborhood(e.target.value)}
         error={errors.neighborhood}
       />
@@ -112,6 +145,7 @@ export function NewAddress() {
         id="card-street"
         label="Endereço"
         placeholder="R: Bandeirantes"
+        value={street}
         onChange={(e) => setStreet(e.target.value)}
         error={errors.street}
       />
@@ -120,7 +154,7 @@ export function NewAddress() {
         type="text"
         id="card-house-number"
         label="Número"
-        placeholder="000"
+        placeholder="000-0"
         value={number}
         onChange={handleNumberChange}
         error={errors.number}
@@ -131,11 +165,15 @@ export function NewAddress() {
         id="card-complement"
         label="Complemento (opcional)"
         placeholder="Perto do mercado"
+        value={complement}
         onChange={(e) => setComplement(e.target.value)}
         error={errors.complement}
       />
 
-      <Button title="Salvar endereço" onClick={handleAddAddress} />
+      <div className="buttons">
+        <Button title="Atualizar" onClick={handleAddAddress} />
+        <Button title="Excluir" onClick={handleDeleteAddress} />
+      </div>
     </Container>
   );
 }

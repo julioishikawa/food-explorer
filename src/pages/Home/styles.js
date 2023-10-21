@@ -72,7 +72,7 @@ export const Banner = styled.div`
     width: 100%;
 
     margin: 7.2rem 3.2rem 0 3.2rem;
-    padding: 4.8rem 11.8rem;
+    padding: 4.8rem 9.8rem;
 
     img {
       width: 55.6rem;
