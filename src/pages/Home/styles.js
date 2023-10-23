@@ -6,7 +6,6 @@ export const Container = styled.div`
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 
   background-color: ${({ theme }) => theme.COLORS.DARK_400};
 
@@ -31,9 +30,9 @@ export const Container = styled.div`
 `;
 
 export const Banner = styled.div`
-  width: 100%;
+  width: 97%;
 
-  margin: 4.4rem 3.6rem 3.8rem;
+  margin: 4.4rem 0 3.8rem;
   padding: 3.6rem 2rem 2.2rem 0;
 
   display: flex;
@@ -68,7 +67,7 @@ export const Banner = styled.div`
     }
   }
 
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 900px) {
     width: 100%;
 
     margin: 7.2rem 3.2rem 0 3.2rem;
@@ -169,7 +168,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
 
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 900px) {
     padding: 0 5.2rem;
   }
 
@@ -179,9 +178,16 @@ export const Wrapper = styled.div`
 `;
 
 export const Scrollbar = styled.div`
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   overflow-y: auto;
 
-  @media screen and (min-width: 800px), screen and (min-width: 1368px) {
+  @media screen and (min-width: 900px), screen and (min-width: 1368px) {
     margin: 0 2px 0 0;
   }
 `;

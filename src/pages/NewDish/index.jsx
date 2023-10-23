@@ -66,16 +66,15 @@ export function NewDish() {
   }
 
   function handleAddIngredientKeyDown(e) {
-    if (!newIngredient) {
-      setErrors((prevState) => ({ ...prevState, newIngredient: true }));
-      return;
+    if (e.key === "Enter") {
+      if (!newIngredient) {
+        setErrors((prevState) => ({ ...prevState, newIngredient: true }));
+      } else {
+        setIngredients((prevState) => [...prevState, newIngredient]);
+        setNewIngredient("");
+      }
     } else {
       setErrors((prevState) => ({ ...prevState, newIngredient: false }));
-    }
-
-    if (e.key === "Enter") {
-      setIngredients((prevState) => [...prevState, newIngredient]);
-      setNewIngredient("");
     }
   }
 

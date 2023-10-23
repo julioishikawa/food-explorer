@@ -56,7 +56,7 @@ export const Container = styled.div`
     }
   }
 
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 900px) {
     width: 100%;
 
     ::-webkit-scrollbar {
@@ -79,7 +79,7 @@ export const Container = styled.div`
     }
 
     .infos-wrapper {
-      min-width: 33.8rem;
+      min-width: 37.8rem;
 
       display: flex;
       flex-direction: column;
@@ -199,7 +199,7 @@ export const Section = styled.div`
     border-bottom-color: ${({ theme }) => theme.COLORS.DARK_1000};
   }
 
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 900px) {
     padding: 2.4rem 5.2rem;
 
     h1,
@@ -242,7 +242,7 @@ export const Content = styled.div`
     gap: 1.6rem;
   }
 
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 900px) {
     height: 100%;
 
     padding: 3rem;
@@ -343,6 +343,13 @@ export const Address = styled.div`
       align-items: center;
       gap: 1.6rem;
 
+      overflow-y: auto;
+
+      button {
+        width: 50%;
+        height: 4rem;
+      }
+
       .select-address {
         width: 100%;
 
@@ -358,9 +365,13 @@ export const Address = styled.div`
           width: 100%;
           display: flex;
 
-          a {
-            padding: 1rem;
+          padding: 1rem;
 
+          overflow: hidden;
+
+          cursor: pointer;
+
+          a {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -420,12 +431,40 @@ export const Address = styled.div`
     }
   }
 
+  @media screen and (min-width: 900px) {
+    .address-wrapper-active {
+      .box .select-address .addresses-infos {
+        padding: 1.5rem;
+
+        a {
+          font-size: 1.6rem;
+        }
+      }
+
+      .box button {
+        width: 70%;
+        min-height: 4.6rem;
+      }
+
+      svg {
+        min-width: 2rem;
+        min-height: 2rem;
+      }
+    }
+  }
+
   @media screen and (min-width: 1368px) {
     .address-wrapper-active {
-      .box .select-address .addresses-infos a {
+      .box .select-address .addresses-infos {
         padding: 2rem;
 
-        font-size: 1.6rem;
+        a {
+          font-size: 1.6rem;
+        }
+      }
+
+      .box button {
+        min-height: 4.6rem;
       }
 
       svg {
@@ -576,6 +615,12 @@ export const Wrapper = styled.div`
 
     svg {
       cursor: pointer;
+    }
+  }
+
+  @media screen and (min-width: 900px) {
+    .payment-methods {
+      padding-right: 1rem;
     }
   }
 

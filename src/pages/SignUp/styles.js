@@ -71,7 +71,7 @@ export const Container = styled.div`
     }
   }
 
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 900px) {
     width: 100%;
 
     padding: 10rem;
@@ -131,7 +131,7 @@ export const Content = styled.div`
     margin: 3.2rem 0;
   }
 
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 900px) {
     padding: 5rem;
 
     border-radius: 1.6rem;

@@ -51,68 +51,69 @@ export function Details() {
       <Scrollbar>
         <div className="dish-wrapper">
           <BackButton />
+          <div className="dish-box">
+            {data && (
+              <Wrapper>
+                <img
+                  className="dish-image"
+                  src={`${api.defaults.baseURL}/files/${data.image}`}
+                  alt={`Imagem do prato ${data.name}`}
+                />
 
-          {data && (
-            <Wrapper>
-              <img
-                className="dish-image"
-                src={`${api.defaults.baseURL}/files/${data.image}`}
-                alt={`Imagem do prato ${data.name}`}
-              />
+                <div className="infos-wrapper">
+                  <h1>{data.name}</h1>
 
-              <div className="infos-wrapper">
-                <h1>{data.name}</h1>
+                  <p>{data.description}</p>
 
-                <p>{data.description}</p>
+                  <div className="tags">
+                    {data.ingredients.map((ingredient, index) => (
+                      <Ingredients key={index} title={ingredient} />
+                    ))}
+                  </div>
 
-                <div className="tags">
-                  {data.ingredients.map((ingredient, index) => (
-                    <Ingredients key={index} title={ingredient} />
-                  ))}
+                  <div className="quantity-wrapper">
+                    {!isAdmin && (
+                      <div className="quantity">
+                        <QuantityCounter onUpdate={setQuantity} />
+                      </div>
+                    )}
+
+                    {!isAdmin && (
+                      <button className="dish-button" onClick={handleAddToCart}>
+                        <img
+                          className="button-mobile"
+                          src={order}
+                          alt="Imagem ilustrativa de uma comanda"
+                        />
+
+                        <p className="button-mobile">
+                          pedir ∙{" "}
+                          {new Intl.NumberFormat("pt-BR", {
+                            style: "currency",
+                            currency: "BRL",
+                          }).format(data.price * quantity)}
+                        </p>
+
+                        <p className="button-desktop">
+                          incluir ∙{" "}
+                          {new Intl.NumberFormat("pt-BR", {
+                            style: "currency",
+                            currency: "BRL",
+                          }).format(data.price * quantity)}
+                        </p>
+                      </button>
+                    )}
+
+                    {isAdmin && (
+                      <Link to={`/editdish/${data.id}`}>
+                        <button className="edit-button">Editar prato</button>
+                      </Link>
+                    )}
+                  </div>
                 </div>
-
-                <div className="quantity-wrapper">
-                  {!isAdmin && (
-                    <div className="quantity">
-                      <QuantityCounter onUpdate={setQuantity} />
-                    </div>
-                  )}
-
-                  {!isAdmin && (
-                    <button className="dish-button" onClick={handleAddToCart}>
-                      <img
-                        className="button-mobile"
-                        src={order}
-                        alt="Imagem ilustrativa de uma comanda"
-                      />
-
-                      <p className="button-mobile">
-                        pedir ∙{" "}
-                        {new Intl.NumberFormat("pt-BR", {
-                          style: "currency",
-                          currency: "BRL",
-                        }).format(data.price * quantity)}
-                      </p>
-
-                      <p className="button-desktop">
-                        incluir ∙{" "}
-                        {new Intl.NumberFormat("pt-BR", {
-                          style: "currency",
-                          currency: "BRL",
-                        }).format(data.price * quantity)}
-                      </p>
-                    </button>
-                  )}
-
-                  {isAdmin && (
-                    <Link to={`/editdish/${data.id}`}>
-                      <button className="edit-button">Editar prato</button>
-                    </Link>
-                  )}
-                </div>
-              </div>
-            </Wrapper>
-          )}
+              </Wrapper>
+            )}
+          </div>
         </div>
         <Footer />
       </Scrollbar>

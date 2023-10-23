@@ -169,13 +169,13 @@ export function Cart() {
                                 onClick={() => handleAddressClick(address)}
                               >
                                 <a>
-                                  <div>
-                                    {`R: ${address.street},`}
-                                    &nbsp;
+                                  <span>
+                                    {`R: ${address.street}`}
+                                    {", "}
                                     {address.number}
-                                  </div>
-
-                                  {address.neighborhood}
+                                  </span>
+                                  <br />
+                                  <span>{address.neighborhood}</span>
                                 </a>
                               </div>
 

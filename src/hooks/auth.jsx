@@ -36,6 +36,7 @@ function AuthProvider({ children }) {
     localStorage.removeItem("@food-explorer:user");
     localStorage.removeItem("@food-explorer:token");
     localStorage.removeItem("@food-explorer:cart");
+    localStorage.removeItem("@food-explorer:selectedAddress");
 
     setData({});
   }
@@ -59,7 +60,12 @@ function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ signIn, signOut, user: data.user, isAdmin: data.isAdmin }}
+      value={{
+        signIn,
+        signOut,
+        user: data.user,
+        isAdmin: data.isAdmin,
+      }}
     >
       {children}
     </AuthContext.Provider>

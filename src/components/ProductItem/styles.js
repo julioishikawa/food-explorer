@@ -96,7 +96,7 @@ export const Container = styled.li`
     }
   }
 
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 900px) {
     width: 100%;
     padding: 2rem;
     gap: 2rem;

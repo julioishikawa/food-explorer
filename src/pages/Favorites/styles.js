@@ -47,7 +47,7 @@ export const Container = styled.div`
     background-color: ${({ theme }) => theme.COLORS.DARK_1000};
   }
 
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 900px) {
     ::-webkit-scrollbar {
       width: 8px;
     }
@@ -73,7 +73,7 @@ export const FavoritesList = styled.ul`
   flex-wrap: wrap;
   gap: 1.6rem;
 
-  @media screen and (min-width: 800px), screen and (min-width: 1368px) {
+  @media screen and (min-width: 900px), screen and (min-width: 1368px) {
     justify-content: center;
     gap: 2.4rem;
   }

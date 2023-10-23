@@ -89,7 +89,7 @@ export function Header() {
             </li>
 
             {searchText.length > 0 && searchText != "" && (
-              <li className="nav-item">
+              <li id="mobile-search" className="nav-item">
                 {dishSought.map((dish) => (
                   <Note
                     key={String(dish.id)}

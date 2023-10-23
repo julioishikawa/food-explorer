@@ -68,7 +68,7 @@ export const Container = styled.div`
     line-height: 140%;
   }
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 900px) {
     .swiper-slide:nth-child(n + 2) {
       margin-left: 2.7rem;
     }

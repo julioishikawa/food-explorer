@@ -34,7 +34,7 @@ export const Container = styled.div`
     display: none;
   }
 
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 900px) {
     width: 100%;
     min-height: 10.4rem;
 
@@ -63,7 +63,7 @@ export const Container = styled.div`
 
         position: absolute;
         top: 4.5rem;
-        right: 1.6rem;
+        right: 1rem;
 
         z-index: 2;
         border: 1px solid ${({ theme }) => theme.COLORS.CAKE_200};
@@ -131,7 +131,7 @@ export const Container = styled.div`
       font-weight: 100;
 
       img {
-        width: 2.6rem;
+        width: 2.2rem;
         height: 2.2rem;
       }
     }
@@ -327,8 +327,11 @@ export const Menu = styled.div`
 
   .nav-item {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
 
     padding: 0 2.8rem;
 
@@ -341,6 +344,10 @@ export const Menu = styled.div`
       font-size: 2.4rem;
       font-weight: 300;
     }
+  }
+
+  #mobile-search {
+    margin-bottom: 2.8rem;
   }
 
   .nav-item:nth-child(2) {
@@ -398,7 +405,7 @@ export const Menu = styled.div`
     }
   }
 
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 900px) {
     margin-left: 0;
   }
 
@@ -439,7 +446,7 @@ export const Logo = styled.div`
     color: ${({ theme }) => theme.COLORS.CAKE_200};
   }
 
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 900px) {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
@@ -621,7 +628,7 @@ export const Cart = styled.div`
     }
   }
 
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 900px) {
     .dishes-wrapper {
       display: flex;
     }

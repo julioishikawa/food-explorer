@@ -40,7 +40,7 @@ export function Home() {
         <Wrapper>
           <Banner>
             <picture>
-              <source media="(max-width: 800px)" srcSet={food_mobile} />
+              <source media="(max-width: 900px)" srcSet={food_mobile} />
               <source media="(min-width: 1368px)" srcSet={food_desktop} />
 
               <img src={food_mobile} alt="imagem de comidas" />

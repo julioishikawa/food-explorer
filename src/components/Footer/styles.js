@@ -20,7 +20,7 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.COLORS.LIGHT_200};
   }
 
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 900px) {
     padding: 2.8rem 5.2rem;
   }
 

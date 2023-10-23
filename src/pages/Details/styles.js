@@ -11,6 +11,12 @@ export const Container = styled.div`
 
   .dish-wrapper {
     padding: 3.2rem 5.6rem 5rem;
+
+    .dish-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   ::-webkit-scrollbar {
@@ -24,6 +30,21 @@ export const Container = styled.div`
 
   ::-webkit-scrollbar-thumb:active {
     background-color: ${({ theme }) => theme.COLORS.DARK_1000};
+  }
+
+  @media screen and (min-width: 900px) {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    .dish-wrapper {
+      padding: 2.8rem 5.2rem;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
   }
 
   @media screen and (min-width: 1368px) {
@@ -178,7 +199,7 @@ export const Wrapper = styled.div`
     }
   }
 
-  @media screen and (min-width: 1368px) {
+  @media screen and (min-width: 900px), screen and (min-width: 1368px) {
     width: 100%;
 
     margin-top: 4.2rem;

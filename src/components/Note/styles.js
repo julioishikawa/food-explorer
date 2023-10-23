@@ -1,12 +1,10 @@
 import styled from "styled-components";
 
 export const Container = styled.button`
-  width: 100%;
   height: 12.4rem;
   background-color: ${({ theme }) => theme.COLORS.DARK_400};
 
   padding: 1.5rem 0;
-  margin-bottom: 2.6rem;
 
   display: flex;
   justify-content: space-around;
@@ -50,11 +48,30 @@ export const Container = styled.button`
     }
   }
 
-  @media screen and (min-width: 800px) {
-    display: none;
+  @media screen and (min-width: 900px) {
+    width: 25rem;
+
+    display: flex;
+
+    margin-bottom: 0;
+
+    border-width: 1px 0;
+    border-radius: 0;
+    border-top-style: solid;
+    border-top-color: ${({ theme }) => theme.COLORS.CAKE_200};
+
+    .right-line {
+      height: 100%;
+
+      border-right-width: 1px;
+      border-right-style: solid;
+      border-right-color: ${({ theme }) => theme.COLORS.CAKE_200};
+    }
   }
 
   @media screen and (min-width: 1368px) {
+    width: 100%;
+
     display: flex;
 
     margin-bottom: 0;
@@ -85,6 +102,7 @@ export const Content = styled.div`
 
   align-items: center;
 
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 
@@ -95,11 +113,33 @@ export const Content = styled.div`
     color: ${({ theme }) => theme.COLORS.LIGHT_100};
   }
 
-  @media screen and (min-width: 800px) {
-    display: none;
+  @media screen and (min-width: 900px) {
+    display: flex;
+
+    > h1 {
+      max-width: 10rem;
+
+      font-size: 1.4rem;
+      font-weight: 500;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
   @media screen and (min-width: 1368px) {
     display: flex;
+
+    > h1 {
+      max-width: 12rem;
+
+      font-size: 2rem;
+      font-weight: 500;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 `;
