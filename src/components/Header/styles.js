@@ -81,7 +81,6 @@ export const Container = styled.div`
       margin-right: 2rem;
 
       min-width: 12.6rem;
-      height: 4.8rem;
 
       font-size: 1.4rem;
       font-weight: 100;
@@ -90,7 +89,6 @@ export const Container = styled.div`
 
       border: 0;
       border-radius: 0.5rem;
-      background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
 
       &:disabled {
         opacity: 0.5;
@@ -183,7 +181,6 @@ export const Container = styled.div`
 
       border: 0;
       border-radius: 0.5rem;
-      background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
 
       &:disabled {
         opacity: 0.5;

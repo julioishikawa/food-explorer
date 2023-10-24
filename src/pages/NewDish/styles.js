@@ -27,7 +27,7 @@ export const Container = styled.div`
     background-color: red;
   }
 
-  @media screen and (min-width: 1368px) {
+  @media screen and (min-width: 900px), screen and (min-width: 1368px) {
     width: 100%;
 
     ::-webkit-scrollbar {
@@ -43,13 +43,41 @@ export const Section = styled.div`
     display: none;
   }
 
-  .button {
-    width: 36.4rem;
-    height: 4.8rem;
+  .button-wrapper {
+    display: flex;
 
-    margin: 3.2rem 0 0 0;
+    justify-content: center;
 
-    background-color: ${({ theme }) => theme.COLORS.TOMATO_400};
+    .button {
+      width: 36.4rem;
+      height: 4.8rem;
+
+      margin: 3.2rem 0 0 0;
+
+      background-color: ${({ theme }) => theme.COLORS.TOMATO_400};
+    }
+  }
+
+  @media screen and (min-width: 900px) {
+    padding: 3.2rem 5.2rem 11.6rem;
+
+    .new-order-mobile {
+      display: none;
+    }
+
+    .new-order-desktop {
+      display: flex;
+    }
+
+    .button-wrapper {
+      display: flex;
+
+      justify-content: flex-end;
+
+      .button {
+        max-width: 17.2rem;
+      }
+    }
   }
 
   @media screen and (min-width: 1368px) {
@@ -76,7 +104,7 @@ export const Section = styled.div`
 `;
 
 export const Form = styled.div`
-  width: 36.4rem;
+  width: 100%;
 
   display: flex;
   flex-direction: column;
@@ -98,8 +126,6 @@ export const Form = styled.div`
     flex-direction: column;
 
     input {
-      width: 36.4rem;
-
       background-color: ${({ theme }) => theme.COLORS.DARK_800};
       color: ${({ theme }) => theme.COLORS.LIGHT_100};
     }
@@ -126,6 +152,33 @@ export const Form = styled.div`
 
   .button {
     margin: 0.8rem 0 0 0;
+  }
+
+  @media screen and (min-width: 900px) {
+    width: 100%;
+
+    display: flex;
+    gap: 2.4rem;
+
+    .name {
+      width: 100%;
+
+      .box {
+        width: 100%;
+
+        input {
+          width: 100%;
+        }
+      }
+    }
+
+    .ingredients {
+      width: 100%;
+    }
+
+    .price input {
+      width: 25.1rem;
+    }
   }
 
   @media screen and (min-width: 1368px) {
@@ -165,7 +218,7 @@ export const Wrapper = styled.div`
     margin: 0 0 1.6rem;
   }
 
-  @media screen and (min-width: 1368px) {
+  @media screen and (min-width: 900px), screen and (min-width: 1368px) {
     width: 100%;
 
     flex-direction: row;
@@ -175,7 +228,6 @@ export const Wrapper = styled.div`
 `;
 
 export const DishImage = styled.div`
-  max-width: 36.4rem;
   display: flex;
   flex-direction: column;
 
@@ -187,7 +239,7 @@ export const DishImage = styled.div`
     border-radius: 0.8rem;
   }
 
-  @media screen and (min-width: 1368px) {
+  @media screen and (min-width: 900px), screen and (min-width: 1368px) {
     min-width: 23.5rem;
 
     label {
@@ -203,7 +255,7 @@ export const DishImage = styled.div`
 export const Scrollbar = styled.div`
   overflow-y: auto;
 
-  @media screen and (min-width: 1368px) {
+  @media screen and (min-width: 900px), screen and (min-width: 1368px) {
     margin: 0 2px 0 0;
   }
 `;

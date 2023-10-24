@@ -64,8 +64,6 @@ export const Container = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  width: 31.6rem;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -86,6 +84,10 @@ export const Wrapper = styled.div`
   }
 
   .infos-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     h1 {
       text-align: center;
       font-size: 2.7rem;
@@ -96,6 +98,7 @@ export const Wrapper = styled.div`
       margin: 2.4rem 0;
 
       text-align: center;
+      font-size: 1.4rem;
     }
 
     .tags {
@@ -108,6 +111,7 @@ export const Wrapper = styled.div`
     }
 
     .quantity-wrapper {
+      min-width: 31.6rem;
       height: 3.8rem;
 
       display: flex;
@@ -189,7 +193,7 @@ export const Wrapper = styled.div`
       }
 
       .edit-button {
-        width: 31.6rem;
+        width: 21.6rem;
         height: 4.8rem;
 
         font-size: 1.4rem;
@@ -235,7 +239,7 @@ export const Wrapper = styled.div`
       }
 
       p {
-        font-size: 2.4rem;
+        font-size: 1.6rem;
         text-align: start;
       }
 
@@ -246,13 +250,15 @@ export const Wrapper = styled.div`
         span {
           display: flex;
 
-          height: 3.2rem;
+          min-height: 3.2rem;
           align-items: center;
         }
       }
 
       .quantity-wrapper {
         height: 4.8rem;
+
+        justify-content: start;
         gap: 3.2rem;
 
         .quantity p {

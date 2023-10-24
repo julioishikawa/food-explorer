@@ -183,8 +183,8 @@ export function Header() {
 
       <Cart>
         {!isAdmin && (
-          <Link to="/favorites">
-            <button className="favorites-btn">Meus favoritos</button>
+          <Link className="favorites-btn" to="/favorites">
+            Meus favoritos
           </Link>
         )}
 

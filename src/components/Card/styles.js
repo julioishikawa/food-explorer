@@ -149,6 +149,83 @@ export const Content = styled.div`
     }
   }
 
+  @media screen and (min-width: 900px) {
+    .card {
+      width: 26.4rem;
+      height: 42.2rem;
+
+      .meal {
+        width: 22.6rem;
+        gap: 1.6rem;
+
+        img {
+          width: 15.6rem;
+          height: 15.6rem;
+
+          object-fit: cover;
+          border-radius: 50%;
+        }
+
+        h2 {
+          font-size: 2rem;
+          font-weight: bold;
+          color: ${({ theme }) => theme.COLORS.LIGHT_300};
+
+          svg {
+            width: 2rem;
+            height: 2rem;
+          }
+        }
+
+        .description {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          text-overflow: ellipsis;
+          overflow: hidden;
+
+          text-align: center;
+          font-size: 1.4rem;
+          font-weight: 400;
+          font-family: "Roboto", sans-serif;
+
+          color: ${({ theme }) => theme.COLORS.LIGHT_400};
+        }
+
+        span {
+          margin: 0;
+
+          font-size: 2.6rem;
+          font-weight: 500;
+        }
+
+        .wrapper {
+          display: flex;
+          flex-direction: row;
+
+          .quantity {
+            svg {
+              width: 2rem;
+              height: 2rem;
+            }
+
+            p {
+              font-size: 2rem;
+              font-weight: bold;
+              font-family: "Roboto", sans-serif;
+              color: ${({ theme }) => theme.COLORS.LIGHT_300};
+            }
+          }
+
+          button {
+            width: 9.2rem;
+            height: 4rem;
+          }
+        }
+      }
+    }
+  }
+
   @media screen and (min-width: 1368px) {
     .card {
       width: 30.4rem;

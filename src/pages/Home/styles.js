@@ -162,18 +162,18 @@ export const Meals = styled.div`
 export const Wrapper = styled.div`
   width: 100%;
 
-  padding: 0 2.4rem 0 2.4rem;
+  padding: 0 2.4rem 2.4rem;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
   @media screen and (min-width: 900px) {
-    padding: 0 5.2rem;
+    padding: 0 5.2rem 2.4rem;
   }
 
   @media screen and (min-width: 1368px) {
-    padding: 0 12.2rem;
+    padding: 0 12.2rem 2.4rem;
   }
 `;
 
