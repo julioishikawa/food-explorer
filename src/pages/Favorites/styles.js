@@ -6,10 +6,8 @@ export const Container = styled.div`
 
   height: 100vh;
 
-  > main {
+  main {
     width: 100%;
-
-    margin: 0 0 2px 0;
 
     overflow-y: auto;
 
@@ -52,14 +50,14 @@ export const Container = styled.div`
       width: 8px;
     }
 
-    > main {
+    main {
       width: 100%;
       padding: 3.2rem 5.2rem;
     }
   }
 
   @media screen and (min-width: 1368px) {
-    > main {
+    main {
       width: 100%;
       padding: 3.2rem 12rem;
     }
@@ -67,10 +65,13 @@ export const Container = styled.div`
 `;
 
 export const FavoritesList = styled.ul`
+  width: 100%;
+
   margin-top: 1.6rem;
 
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 1.6rem;
 
   @media screen and (min-width: 900px), screen and (min-width: 1368px) {
@@ -103,5 +104,20 @@ export const EmptyFavorites = styled.div`
       font-size: 2.4rem;
       color: ${({ theme }) => theme.COLORS.CAKE_200};
     }
+  }
+`;
+
+export const Scrollbar = styled.div`
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  overflow-y: auto;
+
+  @media screen and (min-width: 900px), screen and (min-width: 1368px) {
+    margin: 0 2px 0 0;
   }
 `;
