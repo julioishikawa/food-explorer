@@ -3,28 +3,29 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-
   height: 100vh;
 
   main {
     width: 100%;
 
-    padding: 3.2rem;
+    padding: 2rem 3.2rem;
+  }
 
-    background: ${({ theme }) => theme.COLORS.DARK_400};
+  .box {
+    margin-top: 5rem;
 
-    .favorites-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-      > h1 {
-        margin-top: 2.8rem;
+    .notfound-img {
+      width: 27.2rem;
+      height: 32.6rem;
+    }
 
-        font-size: 3.2rem;
-        font-weight: 500;
-        line-height: 140%;
-      }
+    h1 {
+      font-size: 2rem;
+      font-weight: 500;
     }
   }
 
@@ -50,6 +51,18 @@ export const Container = styled.div`
       width: 100%;
       padding: 3.2rem 5.2rem;
     }
+
+    .box {
+      .notfound-img {
+        width: 34.4rem;
+        height: 39.6rem;
+      }
+
+      h1 {
+        font-size: 2.4rem;
+        font-weight: 500;
+      }
+    }
   }
 
   @media screen and (min-width: 1368px) {
@@ -57,48 +70,17 @@ export const Container = styled.div`
       width: 100%;
       padding: 3.2rem 12rem;
     }
-  }
-`;
 
-export const FavoritesList = styled.ul`
-  width: 100%;
+    .box {
+      .notfound-img {
+        width: 41.4rem;
+        height: 46.6rem;
+      }
 
-  margin-top: 1.6rem;
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.6rem;
-
-  @media screen and (min-width: 900px), screen and (min-width: 1368px) {
-    justify-content: center;
-    gap: 2.4rem;
-  }
-`;
-
-export const EmptyFavorites = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  gap: 3rem;
-
-  text-align: center;
-
-  img {
-    width: min(100%, 40rem);
-
-    margin-top: 8rem;
-  }
-
-  h2 {
-    color: ${({ theme }) => theme.COLORS.LIGHT_300};
-    font-size: 2.4rem;
-    font-weight: 500;
-
-    span {
-      font-size: 2.4rem;
-      color: ${({ theme }) => theme.COLORS.CAKE_200};
+      h1 {
+        font-size: 3rem;
+        font-weight: 500;
+      }
     }
   }
 `;
