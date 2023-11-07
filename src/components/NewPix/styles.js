@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 export const Container = styled.div`
-  height: 39rem;
+  height: 48rem;
 
   display: flex;
   flex-direction: column;
@@ -24,12 +24,18 @@ export const Container = styled.div`
     height: 17rem;
   }
 
-  @media screen and (min-width: 1368px) {
+  @media screen and (min-width: 900px) {
+    height: 40rem;
+
     gap: 2rem;
 
     img {
       width: 18.4rem;
       height: 18.4rem;
     }
+  }
+
+  @media screen and (min-width: 1368px) {
+    height: 37rem;
   }
 `;

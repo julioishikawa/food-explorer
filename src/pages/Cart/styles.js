@@ -619,6 +619,8 @@ export const Wrapper = styled.div`
   }
 
   @media screen and (min-width: 900px) {
+    padding: 2.4rem;
+
     .payment-methods {
       padding-right: 1rem;
     }
@@ -626,6 +628,8 @@ export const Wrapper = styled.div`
 
   @media screen and (min-width: 1368px) {
     height: 100%;
+
+    padding: 3rem;
 
     button,
     .payment #payment-type div span {
