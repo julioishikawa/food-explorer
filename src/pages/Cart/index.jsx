@@ -168,7 +168,6 @@ export function Cart() {
                                 className="addresses-infos"
                                 onClick={() => handleAddressClick(address)}
                               >
-                                {selectedAddress && (
                                   <a>
                                     <span>
                                       {`R: ${address.street}`}
@@ -178,7 +177,6 @@ export function Cart() {
                                     <br />
                                     <span>{address.neighborhood}</span>
                                   </a>
-                                )}
                               </div>
 
                               <div className="address-options">
