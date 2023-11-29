@@ -34,19 +34,21 @@ O Food Explorer é uma aplicação de um restaurante que foi focada na simplicid
 - ViteJS
 
 ## Instalação 💡
+Crie uma pasta para clonar o projeto e siga os seguintes passos.
 
+Dentro da pasta que você criou, você vai abrir o seu prompt de comando e escolher qual método de clonagem que você irá utilizar:
 ```
-// HTTPS
+// Método HTTPS
+
 $ git clone https://github.com/shuharib0t/food-explorer.git
-$ cd demon-slayer
 $ npm install
 $ npm run dev
 
 ou
 
-// SSH
+// Método SSH
+
 $ git clone git@github.com:shuharib0t/food-explorer.git
-$ cd demon-slayer
 $ npm install
 $ npm run dev
 ```
