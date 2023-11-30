@@ -63,7 +63,9 @@ export function Card({ id, title, description, price, image }) {
           </div>
 
           <div className="meal">
-            <img src={cardImage} alt={`Imagem de ${title}`} role="button" />
+            <Link className="img-link" to={`/details/${id}`}>
+              <img src={cardImage} alt={`Imagem de ${title}`} role="button" />
+            </Link>
 
             <Link to={`/details/${id}`}>
               <h2>{`${title} >`}</h2>

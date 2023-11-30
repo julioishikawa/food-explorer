@@ -91,16 +91,21 @@ export const Content = styled.div`
 
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       gap: 1.2rem;
 
-      img {
+      .img-link {
         width: 8.8rem;
         height: 8.8rem;
 
-        object-fit: cover;
-        border-radius: 50%;
+        img {
+          width: 8.8rem;
+          height: 8.8rem;
+
+          object-fit: cover;
+          border-radius: 50%;
+        }
       }
 
       h2 {
@@ -156,14 +161,19 @@ export const Content = styled.div`
 
       .meal {
         width: 22.6rem;
+        min-height: 30.6rem;
         gap: 1.6rem;
 
-        img {
+        .img-link {
           width: 15.6rem;
           height: 15.6rem;
 
-          object-fit: cover;
-          border-radius: 50%;
+          img {
+            width: 15.6rem;
+            height: 15.6rem;
+            object-fit: cover;
+            border-radius: 50%;
+          }
         }
 
         h2 {
@@ -233,14 +243,20 @@ export const Content = styled.div`
 
       .meal {
         width: 25.6rem;
+        min-height: 33.7rem;
         gap: 1.6rem;
 
-        img {
+        .img-link {
           width: 17.6rem;
           height: 17.6rem;
 
-          object-fit: cover;
-          border-radius: 50%;
+          img {
+            width: 17.6rem;
+            height: 17.6rem;
+
+            object-fit: cover;
+            border-radius: 50%;
+          }
         }
 
         h2 {
