@@ -72,4 +72,4 @@ export const api = axios.create({
 
 Pronto, após ter feito esse passo a passo a aplicação deverá estar funcionando corretamente.
 
-Feito por [shuharib0t](https://www.linkedin.com/in/julio-ishikawa-449417213/) 👋.
+Feito por [Julio Ishikawa](https://www.linkedin.com/in/julio-ishikawa-449417213/) 👋.
