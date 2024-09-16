@@ -40,7 +40,7 @@ Dentro da pasta que você criou, você vai abrir o seu prompt de comando e escol
 ```
 // Método HTTPS
 
-$ git clone https://github.com/shuharib0t/food-explorer.git
+$ git clone https://github.com/julioishikawa/food-explorer.git
 $ npm install
 $ npm run dev
 
@@ -48,7 +48,7 @@ ou
 
 // Método SSH
 
-$ git clone git@github.com:shuharib0t/food-explorer.git
+$ git clone git@github.com:julioishikawa/food-explorer.git
 $ npm install
 $ npm run dev
 ```
@@ -72,4 +72,4 @@ export const api = axios.create({
 
 Pronto, após ter feito esse passo a passo a aplicação deverá estar funcionando corretamente.
 
-Feito por [Julio Ishikawa](https://www.linkedin.com/in/julio-ishikawa/) 👋.
+Feito por [Julio Ishikawa](https://www.linkedin.com/in/julio-ishikawa) 👋.
