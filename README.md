@@ -59,7 +59,7 @@ A aplicação está online para testes: https://food-explorer-test.netlify.app/
 
 Após a criação de um endereço/cartão de crédito, os dados são salvos no usuário logado porém a aplicação crasha, provavelmente por ser um servidor grátis, recomendo você clonar a aplicação para fazer os testes.
 
-Para fazer os testes da aplicação no seu computador você vai precisar baixar a [API](https://github.com/shuharib0t/api-food-explorer) do Food-Explorer e também fazer uma simples configuração no front-end:
+Para fazer os testes da aplicação no seu computador você vai precisar baixar a [API](https://github.com/julioishikawa/api-food-explorer) do Food-Explorer e também fazer uma simples configuração no front-end:
 
 Dentro da pasta 'src' você vai entrar em 'services' e abrir a file 'api.js', após ter feito isso você vai substituir a configuração que vai estar na 'baseURL' por essa:
 
